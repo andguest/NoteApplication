@@ -6,7 +6,7 @@ import entity.User;
  * Interface for the NoteDAO. It consists of methods for
  * both loading and saving a note.
  */
-public interface NoteDataAccessInterface {
+public interface WeatherDataAccessInterface {
 
     /**
      * Saves a note for a given user. This will replace any existing note.
@@ -16,8 +16,8 @@ public interface NoteDataAccessInterface {
      * @return the contents of the note
      * @throws DataAccessException if the user's note can not be saved for any reason
      */
-    String saveNote(User user, String note) throws DataAccessException;
-
+     Weather getWeather(String city) throws IOException;
+     
     /**
      * Returns the note associated with the user. The password
      * is not checked, so anyone can read the information.
