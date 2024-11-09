@@ -15,6 +15,7 @@ In this application, a single note has a name (the "username" in terms of the AP
 can be read by anyone who knows the name — but only edited by someone who
 knows the password for it.
 
+
 You can see the documentation in the various files for more information.
 
 ## User Stories
