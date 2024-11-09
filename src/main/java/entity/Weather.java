@@ -1,69 +1,55 @@
 package entity;
 
 /**
- * The representation of a Weather Information Package.
+ * The representation of a password-protected user for our program.
  */
 public class Weather {
-    private final String city;
-    private final int longitude;
-    private final int latitude;
 
-    private int temperature;
-    private final String looks;
-    private final String alertDescription;
+    private final float temperature;
+    private final String weather;
+    private final String description;
+    private final String icon;
+    private final float windSpeed;
     private final int humidity;
-    private int windSpeed;
+    private final int visibility;
 
-    public Weather(String city, int longitude, int latitude, int temperature, String looks, String alertDescription, int humidity, int windSpeed) {
-        this.city = city;
-        this.longitude = longitude;
-        this.latitude = latitude;
+
+    public Weather(float temperature, String weather, String description, String icon, float windSpeed, int humidity,
+                   int visibility) {
         this.temperature = temperature;
-        this.looks = looks;
-        this.alertDescription = alertDescription;
-        this.humidity = humidity;
+        this.weather = weather;
+        this.description = description;
+        this.icon = icon;
         this.windSpeed = windSpeed;
+        this.humidity = humidity;
+        this.visibility = visibility;
+    }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public float getTemperature() {
+        return temperature;
+    }
+
+    public float getWindSpeed() {
+        return windSpeed;
     }
 
     public int getHumidity() {
         return humidity;
     }
 
-    public int getWindSpeed() {
-        return windSpeed;
+    public int getVisibility() {
+        return visibility;
     }
-
-    public void setWindSpeed(int newSpeed) {
-        windSpeed = newSpeed;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public int getLongitude() {
-        return longitude;
-    }
-
-    public int getLatitude() {
-        return latitude;
-    }
-
-    public int getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(int temperature) {
-        this.temperature = temperature;
-    }
-
-    public String getLooks() {
-        return looks;
-    }
-
-    public String getAlertDescription() {
-        return alertDescription;
-    }
-
 }
