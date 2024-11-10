@@ -1,7 +1,7 @@
 package use_case.note;
 
 import entity.Weather;
-import use_case.note.searchResult.SearchInputData;
+import use_case.note.search_result.SearchResultInputData;
 
 /**
  * The "Use Case Interactor" for our two note-related use cases of refreshing
@@ -30,10 +30,10 @@ public class NoteInteractor implements NoteInputBoundary {
      *
      */
     @Override
-    public void executeRefresh(SearchInputData searchInputData) {
+    public void executeRefresh(SearchResultInputData searchResultInputData) {
         try {
 
-            final String city = searchInputData.getCity();
+            final String city = searchResultInputData.getCity();
             final String note = weatherDataAccessInterface.getWeather(city);
             noteOutputBoundary.prepareSuccessView(note);
         }

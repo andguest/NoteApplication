@@ -15,8 +15,8 @@ import view.NoteView;
  * Builder for the Note Application.
  */
 public class NoteAppBuilder {
-    public static final int HEIGHT = 300;
-    public static final int WIDTH = 400;
+    public static final int HEIGHT = 750;
+    public static final int WIDTH = 1500;
     private WeatherDataAccessInterface noteDAO;
     private NoteViewModel noteViewModel = new NoteViewModel();
     private NoteView noteView;
@@ -79,5 +79,58 @@ public class NoteAppBuilder {
 
         return frame;
 
+    }
+
+    public NoteAppBuilder addSearchResultView() {
+    }
+
+    public NoteAppBuilder addSelectRegionView() {
+        return null;
+    }
+
+    public NoteAppBuilder addNearbyListView() {
+    }
+
+    public NoteAppBuilder addPinWeatherView() {
+    }
+
+    public NoteAppBuilder addAlertPopView() {
+    }
+
+    public NoteAppBuilder addCityBookmarkView() {
+    }
+
+    public NoteAppBuilder addSearchResultUseCase() {
+    }
+
+    public NoteAppBuilder addSearchReturnUseCase() {
+    }
+
+    public NoteAppBuilder addSelectRegionUseCase() {
+    }
+
+    public NoteAppBuilder addNearbyListUseCase() {
+    }
+
+    public NoteAppBuilder addCloseListUseCase() {
+    }
+
+    public NoteAppBuilder addPinWeatherUseCase() {
+    }
+
+    public NoteAppBuilder addClosePinUseCase() {
+    }
+
+    public NoteAppBuilder addAlertPopUseCase() {
+    }
+
+    public NoteAppBuilder addClosePopUseCase() {
+    }
+
+    public NoteAppBuilder addBookmarkReturnCase() {
+    }
+
+    public NoteAppBuilder addCityBookmarkUseCase() {
+        return null;
     }
 }
