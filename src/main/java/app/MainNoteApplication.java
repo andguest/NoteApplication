@@ -1,7 +1,7 @@
 package app;
 
-import data_access.DBNoteDataAccessObject;
-import use_case.note.NoteDataAccessInterface;
+import data_access.WeatherDataAccessObject;
+import use_case.note.WeatherDataAccessInterface;
 
 /**
  * An application where we can view and add to a note stored by a user.
@@ -46,7 +46,7 @@ public class MainNoteApplication {
     public static void main(String[] args) {
 
         // create the data access and inject it into our builder!
-        final NoteDataAccessInterface noteDataAccess = new DBNoteDataAccessObject();
+        final WeatherDataAccessInterface noteDataAccess = new WeatherDataAccessObject();
 
         final NoteAppBuilder builder = new NoteAppBuilder();
         builder.addNoteDAO(noteDataAccess)

@@ -6,7 +6,7 @@ import javax.swing.WindowConstants;
 import interface_adapter.note.NoteController;
 import interface_adapter.note.NotePresenter;
 import interface_adapter.note.NoteViewModel;
-import use_case.note.NoteDataAccessInterface;
+import use_case.note.WeatherDataAccessInterface;
 import use_case.note.NoteInteractor;
 import use_case.note.NoteOutputBoundary;
 import view.NoteView;
@@ -17,18 +17,18 @@ import view.NoteView;
 public class NoteAppBuilder {
     public static final int HEIGHT = 300;
     public static final int WIDTH = 400;
-    private NoteDataAccessInterface noteDAO;
+    private WeatherDataAccessInterface noteDAO;
     private NoteViewModel noteViewModel = new NoteViewModel();
     private NoteView noteView;
     private NoteInteractor noteInteractor;
 
     /**
      * Sets the NoteDAO to be used in this application.
-     * @param noteDataAccess the DAO to use
+     * @param weatherDataAccess the DAO to use
      * @return this builder
      */
-    public NoteAppBuilder addNoteDAO(NoteDataAccessInterface noteDataAccess) {
-        noteDAO = noteDataAccess;
+    public NoteAppBuilder addNoteDAO(WeatherDataAccessInterface weatherDataAccess) {
+        noteDAO = weatherDataAccess;
         return this;
     }
 
