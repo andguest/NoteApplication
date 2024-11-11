@@ -11,9 +11,8 @@ import use_case.note.WeatherDataAccessInterface;
 
 import java.io.IOException;
 
-
 /**
- * This class runs the API and creates a weather DAO.
+ * This class runs the API and creates a weather DAO..
  **/
 
 public class WeatherDataAccessObject implements WeatherDataAccessInterface {
@@ -71,4 +70,3 @@ public class WeatherDataAccessObject implements WeatherDataAccessInterface {
         }
     }
 }
-

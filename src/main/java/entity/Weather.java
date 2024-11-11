@@ -10,13 +10,15 @@ public class Weather {
 
     private final int temperature;
     private final String looks;
+    private final String alertDescription;
 
-    public Weather(String city, int longitude, int latitude, int temperature, String looks) {
+    public Weather(String city, int longitude, int latitude, int temperature, String looks, String alertDescription) {
         this.city = city;
         this.longitude = longitude;
         this.latitude = latitude;
         this.temperature = temperature;
         this.looks = looks;
+        this.alertDescription = alertDescription;
 
     }
 
@@ -38,6 +40,10 @@ public class Weather {
 
     public String getLooks() {
         return looks;
+    }
+
+    public String getAlertDescription() {
+        return alertDescription;
     }
 
 }
