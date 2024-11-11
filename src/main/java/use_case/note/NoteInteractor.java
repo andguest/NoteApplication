@@ -1,6 +1,7 @@
 package use_case.note;
 
-import entity.User;
+import entity.Weather;
+import use_case.note.search_result.SearchResultInputData;
 
 /**
  * The "Use Case Interactor" for our two note-related use cases of refreshing
@@ -9,18 +10,18 @@ import entity.User;
  */
 public class NoteInteractor implements NoteInputBoundary {
 
-    private final NoteDataAccessInterface noteDataAccessInterface;
+    private final WeatherDataAccessInterface weatherDataAccessInterface;
     private final NoteOutputBoundary noteOutputBoundary;
     // Note: this program has it hardcoded which user object it is getting data for;
     // you could change this if you wanted to generalize the code. For example,
     // you might allow a user of the program to create a new note, which you
     // could store as a "user" through the API OR you might maintain all notes
     // in a JSON object stored in one common "user" stored through the API.
-    private final User user = new User("jonathan_calver2", "abc123");
+    private final Weather weather = new Weather("jonathan_calver2", "abc123");
 
-    public NoteInteractor(NoteDataAccessInterface noteDataAccessInterface,
+    public NoteInteractor(WeatherDataAccessInterface weatherDataAccessInterface,
                           NoteOutputBoundary noteOutputBoundary) {
-        this.noteDataAccessInterface = noteDataAccessInterface;
+        this.weatherDataAccessInterface = weatherDataAccessInterface;
         this.noteOutputBoundary = noteOutputBoundary;
     }
 
@@ -29,10 +30,11 @@ public class NoteInteractor implements NoteInputBoundary {
      *
      */
     @Override
-    public void executeRefresh() {
+    public void executeRefresh(SearchResultInputData searchResultInputData) {
         try {
 
-            final String note = noteDataAccessInterface.loadNote(user);
+            final String city = searchResultInputData.getCity();
+            final String note = weatherDataAccessInterface.getWeather(city);
             noteOutputBoundary.prepareSuccessView(note);
         }
         catch (DataAccessException ex) {
