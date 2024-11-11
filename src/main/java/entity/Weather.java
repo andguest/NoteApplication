@@ -20,7 +20,7 @@ public class Weather {
 
     }
 
-    public String getName() {
+    public String getCity() {
         return city;
     }
 
