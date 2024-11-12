@@ -4,5 +4,5 @@ package use_case.note.search_result;
 // search bar.
 public interface SearchResultInputBoundary {
 
-    void execute(SearchResultInputData searchResultInputData)
+    void execute(SearchResultInputData searchResultInputData);
 }
