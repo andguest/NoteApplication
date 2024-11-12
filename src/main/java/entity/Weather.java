@@ -26,6 +26,14 @@ public class Weather {
 
     }
 
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public int getWindSpeed() {
+        return windSpeed;
+    }
+
     public String getCity() {
         return city;
     }
