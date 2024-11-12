@@ -14,10 +14,10 @@ public class LabelTextPanel extends JPanel {
         this.add(textField);
     }
 
-    public LabelTextPanel(JLabel label, String output) {
+    public LabelTextPanel(JLabel label, JLabel info) {
         this.output = null;
         this.add(label);
-        this.add(this.output);
+        this.add(info);
     }
 
     public JLabel getoutput() {
