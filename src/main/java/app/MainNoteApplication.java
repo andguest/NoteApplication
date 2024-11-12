@@ -1,7 +1,7 @@
 package app;
 
-import data_access.DBNoteDataAccessObject;
-import use_case.note.NoteDataAccessInterface;
+import data_access.WeatherDataAccessObject;
+import use_case.note.WeatherDataAccessInterface;
 
 /**
  * An application where we can view and add to a note stored by a user.
@@ -46,11 +46,31 @@ public class MainNoteApplication {
     public static void main(String[] args) {
 
         // create the data access and inject it into our builder!
-        final NoteDataAccessInterface noteDataAccess = new DBNoteDataAccessObject();
+        final WeatherDataAccessInterface noteDataAccess = new WeatherDataAccessObject();
 
         final NoteAppBuilder builder = new NoteAppBuilder();
         builder.addNoteDAO(noteDataAccess)
                .addNoteView()
+               .addSearchResultView()
+               .addSelectRegionView()
+               .addNearbyListView()
+               .addPinWeatherView()
+               .addAlertPopView()
+               .addCityBookmarkView()
+               .addSearchResultUseCase()
+               .addSearchReturnUseCase()
+               .addSelectRegionUseCase()
+               .addNearbyListUseCase()
+               .addCloseListUseCase()
+               .addPinWeatherUseCase()
+               .addClosePinUseCase()
+               .addAlertPopUseCase()
+               .addClosePopUseCase()
+               .addCityBookmarkUseCase()
+               .addBookmarkReturnCase()
                .addNoteUseCase().build().setVisible(true);
+        // Annie: What should I do with the last line? First, I don't know if I need to add setVisible to all methods.
+        // Second, I assume noteView to be default view, and noteUseCase be return to the default view with empty
+        // search bar.
     }
 }
