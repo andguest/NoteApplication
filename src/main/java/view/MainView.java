@@ -12,8 +12,8 @@ public class MainView extends JFrame {
     private final int frameHeight = 1000;
 
     public MainView(WeatherViewModel weatherViewModel) {
-        mapPanelView = new MapPanelView(weatherViewModel);
-        weatherPanelView = new WeatherPanelView();
+        mapPanelView = new MapPanelView();
+        weatherPanelView = new WeatherPanelView(weatherViewModel);
         this.setTitle("Weather Wizard");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(frameWidth, frameHeight);
@@ -26,7 +26,7 @@ public class MainView extends JFrame {
         this.setVisible(true);
 
     }
-    public static void main(String[] args) {
+    public static void man(String[] args) {
         new MainView();
     }
 
