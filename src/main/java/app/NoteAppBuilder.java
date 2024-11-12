@@ -6,7 +6,7 @@ import javax.swing.WindowConstants;
 import interface_adapter.note.NoteController;
 import interface_adapter.note.NotePresenter;
 import interface_adapter.note.NoteViewModel;
-import use_case.note.NoteDataAccessInterface;
+import use_case.note.WeatherDataAccessInterface;
 import use_case.note.NoteInteractor;
 import use_case.note.NoteOutputBoundary;
 import view.NoteView;
@@ -15,20 +15,20 @@ import view.NoteView;
  * Builder for the Note Application.
  */
 public class NoteAppBuilder {
-    public static final int HEIGHT = 300;
-    public static final int WIDTH = 400;
-    private NoteDataAccessInterface noteDAO;
+    public static final int HEIGHT = 750;
+    public static final int WIDTH = 1500;
+    private WeatherDataAccessInterface noteDAO;
     private NoteViewModel noteViewModel = new NoteViewModel();
     private NoteView noteView;
     private NoteInteractor noteInteractor;
 
     /**
      * Sets the NoteDAO to be used in this application.
-     * @param noteDataAccess the DAO to use
+     * @param weatherDataAccess the DAO to use
      * @return this builder
      */
-    public NoteAppBuilder addNoteDAO(NoteDataAccessInterface noteDataAccess) {
-        noteDAO = noteDataAccess;
+    public NoteAppBuilder addNoteDAO(WeatherDataAccessInterface weatherDataAccess) {
+        noteDAO = weatherDataAccess;
         return this;
     }
 
@@ -79,5 +79,58 @@ public class NoteAppBuilder {
 
         return frame;
 
+    }
+
+    public NoteAppBuilder addSearchResultView() {
+    }
+
+    public NoteAppBuilder addSelectRegionView() {
+        return null;
+    }
+
+    public NoteAppBuilder addNearbyListView() {
+    }
+
+    public NoteAppBuilder addPinWeatherView() {
+    }
+
+    public NoteAppBuilder addAlertPopView() {
+    }
+
+    public NoteAppBuilder addCityBookmarkView() {
+    }
+
+    public NoteAppBuilder addSearchResultUseCase() {
+    }
+
+    public NoteAppBuilder addSearchReturnUseCase() {
+    }
+
+    public NoteAppBuilder addSelectRegionUseCase() {
+    }
+
+    public NoteAppBuilder addNearbyListUseCase() {
+    }
+
+    public NoteAppBuilder addCloseListUseCase() {
+    }
+
+    public NoteAppBuilder addPinWeatherUseCase() {
+    }
+
+    public NoteAppBuilder addClosePinUseCase() {
+    }
+
+    public NoteAppBuilder addAlertPopUseCase() {
+    }
+
+    public NoteAppBuilder addClosePopUseCase() {
+    }
+
+    public NoteAppBuilder addBookmarkReturnCase() {
+    }
+
+    public NoteAppBuilder addCityBookmarkUseCase() {
+        return null;
     }
 }

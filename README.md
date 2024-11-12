@@ -15,7 +15,20 @@ In this application, a single note has a name (the "username" in terms of the AP
 can be read by anyone who knows the name — but only edited by someone who
 knows the password for it.
 
+
 You can see the documentation in the various files for more information.
+
+## User Stories
+Person wants to search for a specific location. They type that location in the search bar and the map moves to that location and displays the weather. If they search for a place that doesnt exist, the software displays an error message.
+
+Person wants to view weather alerts in a certain area. They see that displayed somewhere.
+
+Person wants a quick overview of the weather in nearby areas. They can view a list of major nearby locations and select one.
+
+Person wants to compare the weather in 2 different locations. They can pin the weather of a certain place to the ui to make it easier to compare it to the weather in other places.
+
+Person wants to see what the weather was yesterday. They can select any hour from the past 24 hours to see what the weather was then.
+
 
 ## Testing
 
