@@ -2,8 +2,8 @@ package view;
 
 import interface_adapter.note.WeatherViewModel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.GridLayout;
 
 public class MainView extends JFrame {
     private MapPanelView mapPanelView;
