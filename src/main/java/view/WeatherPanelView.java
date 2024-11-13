@@ -33,6 +33,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener {
         this.setSize(weatherpanelwidth, weatherpanelheight);
         weatherfincitypanel = new LabelTextPanel(new JLabel("Weather in"), emptylabel);
         temperaturepanel = new LabelTextPanel(new JLabel("Temperature"), emptylabel);
+        // Note we might want to add a convertor here.
         skyconditionpanel = new LabelTextPanel(new JLabel("Sky"), emptylabel);
         humiditypanel = new LabelTextPanel(new JLabel("Humidity"), emptylabel);
         windspeedpanel = new LabelTextPanel(new JLabel("Wind"), emptylabel);
