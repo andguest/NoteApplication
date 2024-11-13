@@ -10,7 +10,7 @@ import java.util.Observer;
 /*
  * This class responsible for creating the Weather Subpanel of the main. The Weather subpanel itself contains a bunch
  * of LabelTextPanel that displays varies weather information.
- * This part of view will have to change based on the output, so it depends on the view model.
+ * This part of view will have to change based on the output, so it depends on the view model
  */
 public class WeatherPanelView extends JPanel implements PropertyChangeListener {
     private final WeatherViewModel weatherViewModel;
