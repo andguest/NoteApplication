@@ -1,7 +1,14 @@
 package use_case.note.search_return;
 
-// Input is one click on "return."
+/**
+ * The input boundary for the search return use case.
+ */
 public interface SearchReturnInputBoundary {
 
-    void execute(SearchReturnInputData searchReturnInputData)
+    /**
+     * Execute the search return use case.
+     *
+     * @param searchReturnInputData The input data for the search return use case.
+     */
+    void execute(SearchReturnInputData searchReturnInputData);
 }
