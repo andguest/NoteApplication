@@ -39,6 +39,7 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
         scheduler.scheduleAtFixedRate(weatherTask, 0, 1, TimeUnit.HOURS);
     }
 
+
     private void fetchWeatherData() {
         try {
             final String city = SearchResultInputData.getCity();
@@ -51,7 +52,8 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
 
             // Send it to the output boundary
             final SearchResultOutputData outputData =
-                    new SearchResultOutputData(city, weatherData, false);
+                    new SearchResultOutputData(city, historicalWeatherData, false);
+            weatherDataAccess.saveWeather(city, historicalWeatherData)
             outputBoundary.presentSuccessView(outputData);
         }
         catch (IOException exception) {
