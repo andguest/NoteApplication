@@ -7,10 +7,10 @@ import java.util.Map;
 public class SearchResultOutputData {
 
     private final String location;
-    private final Map<String, Weather> weather;
+    private final Weather weather;
     private final boolean useCaseFailed;
 
-    public SearchResultOutputData(String location, Map<String, Weather> weather, boolean useCaseFailed) {
+    public SearchResultOutputData(String location, Weather weather, boolean useCaseFailed) {
         this.location = location;
         this.weather = weather;
         this.useCaseFailed = useCaseFailed;

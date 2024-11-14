@@ -35,16 +35,8 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
 
     @Override
     public void execute(SearchResultInputData searchReturnInputData) {
-        final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-        final Runnable weatherTask = () -> {
-            fetchWeatherData();
-        };
-
-        // Schedule the task to run every hour
-        scheduler.scheduleAtFixedRate(weatherTask, 0, 1, TimeUnit.HOURS);
+        fetchWeatherData();
     }
-
 
     private void fetchWeatherData() {
         try {
@@ -54,12 +46,12 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
 
             // Store it in historical data
             final DateTimeFormatter formatter = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.of("UTC"));
-            final String timestamp1 = formatter.format(Instant.now());
+            final String timestamp = formatter.format(Instant.now());
 
             // Send it to the output boundary
             final SearchResultOutputData outputData =
                     new SearchResultOutputData(city, historicalWeatherData, false);
-            historicalWeatherDataAccessInterface.saveWeather(weatherData, timestamp1);
+            historicalWeatherDataAccessInterface.saveWeather(weatherData, timestamp);
             outputBoundary.presentSuccessView(outputData);
 
         }
