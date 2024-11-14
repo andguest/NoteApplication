@@ -1,9 +1,8 @@
 package use_case.note;
 
-import entity.Weather;
-
 import java.io.IOException;
-import java.util.Map;
+
+import entity.Weather;
 
 /**
  * Interface for the HistoricalWeatherDataAccessObject. It consists of methods for
@@ -13,6 +12,7 @@ public interface HistoricalWeatherDataAccessInterface {
     /**
      * Saves the weather data.
      * @param weather the weather data to save
+     * @param timstamp the timestamp of the weather data
      * @throws IOException if there is an error saving the weather data
      */
     void saveWeather(Weather weather, String timstamp) throws IOException;
