@@ -28,7 +28,7 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
         this.outputBoundary = outputBoundary;
         this.weatherDataAccess = weatherDataAccess;
         this.historicalWeatherData = new HashMap<>();
-        this.historicalWeatherDataAccessInterface = historicalDataInterface
+        this.historicalWeatherDataAccessInterface = historicalDataInterface;
     }
 
     @Override
