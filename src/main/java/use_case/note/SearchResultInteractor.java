@@ -1,6 +1,9 @@
 package use_case.note;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -12,7 +15,6 @@ import use_case.note.search_result.SearchResultInputBoundary;
 import use_case.note.search_result.SearchResultInputData;
 import use_case.note.search_result.SearchResultOutputBoundary;
 import use_case.note.search_result.SearchResultOutputData;
-import use_case.note.HistoricalWeatherDataAccessInterface;
 
 /**
  * The interactor for the search result use case..
@@ -51,12 +53,13 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
             final Weather weatherData = weatherDataAccess.getWeather(city);
 
             // Store it in historical data
-            final String timestamp = String.valueOf(System.currentTimeMillis());;
+            final DateTimeFormatter formatter = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.of("UTC"));
+            final String timestamp1 = formatter.format(Instant.now());
 
             // Send it to the output boundary
             final SearchResultOutputData outputData =
                     new SearchResultOutputData(city, historicalWeatherData, false);
-            historicalWeatherDataAccessInterface.saveWeather(weatherData, timestamp);
+            historicalWeatherDataAccessInterface.saveWeather(weatherData, timestamp1);
             outputBoundary.presentSuccessView(outputData);
 
         }
