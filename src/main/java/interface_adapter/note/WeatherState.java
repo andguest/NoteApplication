@@ -1,19 +1,19 @@
 package interface_adapter.note;
 
 /**
- * The State for a note.
+ * The State for a weather.
  * <p>For this example, a note is simplay a string.</p>
  */
-public class NoteState {
-    private String note = "";
+public class WeatherState {
+    private String weather = "";
     private String error;
 
-    public String getNote() {
-        return note;
+    public String getWeather() {
+        return weather;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setWeather(String weather) {
+        this.weather = weather;
     }
 
     public void setError(String errorMessage) {

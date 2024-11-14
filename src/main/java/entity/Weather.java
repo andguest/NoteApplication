@@ -8,11 +8,11 @@ public class Weather {
     private final int longitude;
     private final int latitude;
 
-    private final int temperature;
+    private int temperature;
     private final String looks;
     private final String alertDescription;
     private final int humidity;
-    private final int windSpeed;
+    private int windSpeed;
 
     public Weather(String city, int longitude, int latitude, int temperature, String looks, String alertDescription, int humidity, int windSpeed) {
         this.city = city;
@@ -34,6 +34,10 @@ public class Weather {
         return windSpeed;
     }
 
+    public void setWindSpeed(int newSpeed) {
+        windSpeed = newSpeed;
+    }
+
     public String getCity() {
         return city;
     }
@@ -48,6 +52,10 @@ public class Weather {
 
     public int getTemperature() {
         return temperature;
+    }
+
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
     }
 
     public String getLooks() {
