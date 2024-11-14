@@ -2,7 +2,6 @@ package use_case.note;
 
 import entity.Weather;
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Interface for the WeatherDAO. It consists of methods for
@@ -18,5 +17,4 @@ public interface WeatherDataAccessInterface {
      */
     Weather getWeather(String city) throws IOException;
 
-    Map saveWeather(String city, Map weather) throws IOException;
 }
