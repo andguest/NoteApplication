@@ -1,8 +1,10 @@
 package view;
 
 import interface_adapter.note.WeatherViewModel;
+import WeatherController;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Observer;
@@ -12,7 +14,7 @@ import java.util.Observer;
  * of LabelTextPanel that displays varies weather information.
  * This part of view will have to change based on the output, so it depends on the view model
  */
-public class WeatherPanelView extends JPanel implements PropertyChangeListener {
+public class WeatherPanelView extends JPanel implements PropertyChangeListener, ActionListener {
     private final WeatherViewModel weatherViewModel;
 
     private final LabelTextPanel weatherfincitypanel;
@@ -25,6 +27,8 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener {
     private final JLabel emptylabel = new JLabel("");
     private final int weatherpanelwidth = 370;
     private final int weatherpanelheight = 400;
+    private final JButton temperatureconverter;
+    private WeatherController weatherController;
 
     public WeatherPanelView(WeatherViewModel weatherViewModel) {
         this.weatherViewModel = weatherViewModel;
@@ -33,7 +37,13 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener {
         this.setSize(weatherpanelwidth, weatherpanelheight);
         weatherfincitypanel = new LabelTextPanel(new JLabel("Weather in"), emptylabel);
         temperaturepanel = new LabelTextPanel(new JLabel("Temperature"), emptylabel);
-        // Note we might want to add a convertor here.
+        // Note we  want to add a convertor here.The button needs an action listenser.
+        this.temperatureconverter = new JButton("Temperature Converter");
+        temperatureconverter.addActionListener(                event -> {
+                    // if the event is coming from cityinput field, execute controller
+                    if (event.getSource() == temperatureconverter) {WeatherController.excute(temperatureconverter.getText());
+                    });
+
         skyconditionpanel = new LabelTextPanel(new JLabel("Sky"), emptylabel);
         humiditypanel = new LabelTextPanel(new JLabel("Humidity"), emptylabel);
         windspeedpanel = new LabelTextPanel(new JLabel("Wind"), emptylabel);
@@ -41,6 +51,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(weatherfincitypanel);
         this.add(temperaturepanel);
+        this.add(temperatureconverter);
         this.add(skyconditionpanel);
         this.add(humiditypanel);
         this.add(windspeedpanel);
