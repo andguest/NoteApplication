@@ -11,15 +11,27 @@ public class Weather {
     private final int temperature;
     private final String looks;
     private final String alertDescription;
+    private final int humidity;
+    private final int windSpeed;
 
-    public Weather(String city, int longitude, int latitude, int temperature, String looks, String alertDescription) {
+    public Weather(String city, int longitude, int latitude, int temperature, String looks, String alertDescription, int humidity, int windSpeed) {
         this.city = city;
         this.longitude = longitude;
         this.latitude = latitude;
         this.temperature = temperature;
         this.looks = looks;
         this.alertDescription = alertDescription;
+        this.humidity = humidity;
+        this.windSpeed = windSpeed;
 
+    }
+
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public int getWindSpeed() {
+        return windSpeed;
     }
 
     public String getCity() {

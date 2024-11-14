@@ -50,6 +50,8 @@ public class WeatherDataAccessObject implements WeatherDataAccessInterface {
                 final int lat = (int) weatherJSON.getJSONObject(MAIN).getDouble("lat");
                 final int lon = (int) weatherJSON.getJSONObject(MAIN).getDouble("lon");
                 final int temp = (int) weatherJSON.getJSONObject(MAIN).getDouble("temp");
+                final int humidity = (int) weatherJSON.getJSONObject(MAIN).getDouble("humidity");
+                final int windspeed = (int) weatherJSON.getJSONObject("wind").getDouble("speed");
                 final String looks = weatherJSON.getJSONObject("weather").getString(MAIN);
                 String alertDescription = "No alerts";
                 if (weatherJSON.has("alerts")) {
@@ -59,7 +61,7 @@ public class WeatherDataAccessObject implements WeatherDataAccessInterface {
                     }
                 }
 
-                return new Weather(city, lon, lat, temp, looks, alertDescription);
+                return new Weather(city, lon, lat, temp, looks, alertDescription, humidity, windspeed);
 
             }
             else {
