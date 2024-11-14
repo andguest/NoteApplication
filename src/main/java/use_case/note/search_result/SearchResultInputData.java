@@ -4,13 +4,19 @@ package use_case.note.search_result;
 // search bar.
 public class SearchResultInputData {
 
-    private static final String city;
+    private String city;
+    private final String date;
 
     public SearchResultInputData(String cityName, String date) {
         this.city = cityName;
+        this.date = date;
     }
 
-    public static String getCity() {
-        return city;
+    public String getCity() {
+        return this.city;
+    }
+
+    public String getDate() {
+        return this.date;
     }
 }
