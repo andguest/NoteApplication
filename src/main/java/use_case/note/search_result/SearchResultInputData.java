@@ -6,7 +6,7 @@ public class SearchResultInputData {
 
     private static final String city;
 
-    public SearchResultInputData(String cityName) {
+    public SearchResultInputData(String cityName, String date) {
         this.city = cityName;
     }
 

@@ -1,6 +1,9 @@
 package use_case.note;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -20,11 +23,14 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
     private final SearchResultOutputBoundary outputBoundary;
     private final WeatherDataAccessInterface weatherDataAccess;
     private final Map<String, Weather> historicalWeatherData;
+    private final HistoricalWeatherDataAccessInterface historicalWeatherDataAccessInterface;
 
-    public SearchResultInteractor(SearchResultOutputBoundary outputBoundary, WeatherDataAccessInterface weatherDataAccess) {
+    public SearchResultInteractor(SearchResultOutputBoundary outputBoundary, WeatherDataAccessInterface weatherDataAccess,
+                                 HistoricalWeatherDataAccessInterface historicalDataInterface ) {
         this.outputBoundary = outputBoundary;
         this.weatherDataAccess = weatherDataAccess;
         this.historicalWeatherData = new HashMap<>();
+        this.historicalWeatherDataAccessInterface = historicalDataInterface;
     }
 
     @Override
@@ -39,6 +45,7 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
         scheduler.scheduleAtFixedRate(weatherTask, 0, 1, TimeUnit.HOURS);
     }
 
+
     private void fetchWeatherData() {
         try {
             final String city = SearchResultInputData.getCity();
@@ -46,13 +53,15 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
             final Weather weatherData = weatherDataAccess.getWeather(city);
 
             // Store it in historical data
-            final String timestamp = String.valueOf(System.currentTimeMillis());
-            historicalWeatherData.put(timestamp, weatherData);
+            final DateTimeFormatter formatter = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.of("UTC"));
+            final String timestamp1 = formatter.format(Instant.now());
 
             // Send it to the output boundary
             final SearchResultOutputData outputData =
-                    new SearchResultOutputData(city, weatherData, false);
+                    new SearchResultOutputData(city, historicalWeatherData, false);
+            historicalWeatherDataAccessInterface.saveWeather(weatherData, timestamp1);
             outputBoundary.presentSuccessView(outputData);
+
         }
         catch (IOException exception) {
             // Handle exception if weather data retrieval fails and send failure view

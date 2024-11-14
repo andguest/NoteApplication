@@ -17,5 +17,4 @@ public interface WeatherDataAccessInterface {
      */
     Weather getWeather(String city) throws IOException;
 
-
 }
