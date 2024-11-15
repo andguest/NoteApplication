@@ -2,6 +2,8 @@ package use_case.note.search_result;
 
 import entity.Weather;
 
+import java.util.Map;
+
 public class SearchResultOutputData {
 
     private final String location;

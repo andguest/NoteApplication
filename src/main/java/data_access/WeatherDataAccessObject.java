@@ -9,6 +9,8 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import use_case.note.WeatherDataAccessInterface;
 
+
+
 import java.io.IOException;
 
 
@@ -16,7 +18,7 @@ import java.io.IOException;
  * This class runs the API and creates a weather DAO.
  **/
 
-public class WeatherDataAccessObject implements WeatherDataAccessInterface {
+public abstract class WeatherDataAccessObject implements WeatherDataAccessInterface {
     private static final String API_KEY = "7cce48d7f1f6785f54c0d08aa117ad83";
     private static final String MAIN = "main";
     private static String city;
@@ -27,14 +29,14 @@ public class WeatherDataAccessObject implements WeatherDataAccessInterface {
     private static final String MESSAGE = "message";
 
     @Override
-    public Weather getWeather(String city) throws IOException {
+    public Weather getWeather(String citySearch) throws IOException {
         // Make an API call to get the user object.
         final OkHttpClient client = new OkHttpClient().newBuilder().build();
 
         // creating file
         final Request request = new Request.Builder()
                 .url(String.format("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid="
-                        + API_KEY + "&units=metric", city))
+                        + API_KEY + "&units=metric", citySearch))
                 .addHeader("Content-Type", CONTENT_TYPE_JSON)
                 .build();
         try {
@@ -61,7 +63,7 @@ public class WeatherDataAccessObject implements WeatherDataAccessInterface {
                     }
                 }
 
-                return new Weather(city, lon, lat, temp, looks, alertDescription, humidity, windspeed);
+                return new Weather(citySearch, lon, lat, temp, looks, alertDescription, humidity, windspeed);
 
             }
             else {
@@ -72,5 +74,6 @@ public class WeatherDataAccessObject implements WeatherDataAccessInterface {
             throw new IOException(ex);
         }
     }
+
 }
 
