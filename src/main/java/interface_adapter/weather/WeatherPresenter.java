@@ -1,11 +1,12 @@
 package interface_adapter.weather;
 
-import use_case.note.NoteOutputBoundary;
+import use_case.note.search_result.SearchResultOutputBoundary;
+import use_case.note.search_result.SearchResultOutputData;
 
 /**
- * The presenter for our Note viewing and editing program.
+ * The presenter for the
  */
-public class WeatherPresenter implements NoteOutputBoundary {
+public class WeatherPresenter implements SearchResultOutputBoundary {
 
     private final WeatherViewModel weatherViewModel;
 
@@ -16,11 +17,11 @@ public class WeatherPresenter implements NoteOutputBoundary {
     /**
      * Prepares the success view for the Weather related Use Cases.
      *
-     * @param weather the output data
+     * @param response the output data
      */
     @Override
-    public void prepareSuccessView(String weather) {
-        weatherViewModel.getState().setWeather(weather);
+    public void presentSuccessView(SearchResultOutputData response) {
+        weatherViewModel.getState().setWeather(response.getWeather());
         weatherViewModel.getState().setError(null);
         weatherViewModel.firePropertyChanged();
     }
@@ -31,7 +32,7 @@ public class WeatherPresenter implements NoteOutputBoundary {
      * @param errorMessage the explanation of the failure
      */
     @Override
-    public void prepareFailView(String errorMessage) {
+    public void presentFailView(String errorMessage) {
         weatherViewModel.getState().setError(errorMessage);
         weatherViewModel.firePropertyChanged();
     }

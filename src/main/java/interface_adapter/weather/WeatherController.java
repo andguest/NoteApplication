@@ -4,7 +4,7 @@ import use_case.note.search_result.SearchResultInputBoundary;
 import use_case.note.search_result.SearchResultInputData;
 
 /**
- * Controller for our Note related Use Cases.
+ * Controller for our weather related Use Cases.
  */
 public class WeatherController {
 

@@ -1,8 +1,7 @@
 package interface_adapter.weather;
 
 /**
- * The State for a weather.
- * <p>For this example, a note is simplay a string.</p>
+ * The state information for the weather view model.
  */
 public class WeatherState {
     private String weather = "";
