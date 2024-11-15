@@ -2,11 +2,13 @@ package view;
 
 import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherState;
+import interface_adapter.weather.WeatherViewModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /*
 * This class responsible for creating the Map Subpanel of the main. The Map subpanel itself contains 2 parts:
