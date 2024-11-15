@@ -3,8 +3,7 @@ package interface_adapter.weather;
 import entity.Weather;
 
 /**
- * The State for a weather.
- * <p>For this example, a note is simplay a string.</p>
+ * The state information for the weather view model.
  */
 public class WeatherState {
     private Weather weather;
