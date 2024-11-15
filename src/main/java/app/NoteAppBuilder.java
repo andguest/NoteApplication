@@ -3,9 +3,9 @@ package app;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import interface_adapter.note.NoteController;
-import interface_adapter.note.NotePresenter;
-import interface_adapter.note.NoteViewModel;
+import interface_adapter.weather.WeatherController;
+import interface_adapter.weather.WeatherPresenter;
+import interface_adapter.weather.WeatherViewModel;
 import use_case.note.WeatherDataAccessInterface;
 import use_case.note.NoteInteractor;
 import use_case.note.NoteOutputBoundary;
@@ -40,11 +40,11 @@ public class NoteAppBuilder {
      * @throws RuntimeException if this method is called before addNoteView
      */
     public NoteAppBuilder addNoteUseCase() {
-        final NoteOutputBoundary noteOutputBoundary = new NotePresenter(noteViewModel);
+        final NoteOutputBoundary noteOutputBoundary = new WeatherPresenter(noteViewModel);
         noteInteractor = new NoteInteractor(
                 noteDAO, noteOutputBoundary);
 
-        final NoteController controller = new NoteController(noteInteractor);
+        final WeatherController controller = new WeatherController(noteInteractor);
         if (noteView == null) {
             throw new RuntimeException("addNoteView must be called before addNoteUseCase");
         }

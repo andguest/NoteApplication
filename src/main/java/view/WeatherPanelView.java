@@ -1,11 +1,10 @@
 package view;
 
-import interface_adapter.note.WeatherViewModel;
+import interface_adapter.weather.WeatherViewModel;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Observer;
 
 /*
  * This class responsible for creating the Weather Subpanel of the main. The Weather subpanel itself contains a bunch
