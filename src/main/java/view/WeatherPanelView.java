@@ -1,6 +1,6 @@
 package view;
 
-import interface_adapter.note.WeatherViewModel;
+import interface_adapter.weather.WeatherViewModel;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
