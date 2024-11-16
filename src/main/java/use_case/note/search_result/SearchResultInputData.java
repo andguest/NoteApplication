@@ -7,7 +7,7 @@ public class SearchResultInputData {
     private String city;
     private final String date;
 
-    public SearchResultInputData(String cityName) {
+    public SearchResultInputData(String cityName, String date) {
         this.city = cityName;
         this.date = date;
     }
