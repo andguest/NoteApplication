@@ -5,12 +5,18 @@ package use_case.note.search_result;
 public class SearchResultInputData {
 
     private String city;
+    private final String date;
 
     public SearchResultInputData(String cityName) {
         this.city = cityName;
+        this.date = date;
     }
 
     public String getCity() {
         return this.city;
+    }
+
+    public String getDate() {
+        return this.date;
     }
 }

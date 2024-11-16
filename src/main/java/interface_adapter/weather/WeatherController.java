@@ -1,16 +1,16 @@
 package interface_adapter.weather;
 
-import use_case.note.search_result.SearchResultInputBoundary;
-import use_case.note.search_result.SearchResultInputData;
+import use_case.note.search_return.SearchReturnInputBoundary;
+import use_case.note.search_return.SearchReturnInputData;
 
 /**
  * Controller for our weather related Use Cases.
  */
 public class WeatherController {
 
-    private final SearchResultInputBoundary searchInteractor;
+    private final SearchReturnInputBoundary searchInteractor;
 
-    public WeatherController(SearchResultInputBoundary searchInteractor) {
+    public WeatherController(SearchReturnInputBoundary searchInteractor) {
         this.searchInteractor = searchInteractor;
     }
 
@@ -19,7 +19,7 @@ public class WeatherController {
      * @param cityName the city to find the weather for
      */
     public void execute(String cityName) {
-        final SearchResultInputData searchInputData = new SearchResultInputData(cityName);
+        final SearchReturnInputData searchInputData = new SearchReturnInputData(cityName);
         searchInteractor.execute(searchInputData);
     }
 }
