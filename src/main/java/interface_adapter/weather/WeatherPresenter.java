@@ -1,12 +1,12 @@
 package interface_adapter.weather;
 
-import use_case.note.search_result.SearchResultOutputBoundary;
-import use_case.note.search_result.SearchResultOutputData;
+import use_case.note.search_return.SearchReturnOutputBoundary;
+import use_case.note.search_return.SearchReturnOutputData;
 
 /**
  * The presenter for the
  */
-public class WeatherPresenter implements SearchResultOutputBoundary {
+public class WeatherPresenter implements SearchReturnOutputBoundary {
 
     private final WeatherViewModel weatherViewModel;
 
@@ -20,7 +20,7 @@ public class WeatherPresenter implements SearchResultOutputBoundary {
      * @param response the output data
      */
     @Override
-    public void presentSuccessView(SearchResultOutputData response) {
+    public void presentSuccessView(SearchReturnOutputData response) {
         weatherViewModel.getState().setWeather(response.getWeather());
         weatherViewModel.getState().setError(null);
         weatherViewModel.firePropertyChanged();
@@ -32,7 +32,7 @@ public class WeatherPresenter implements SearchResultOutputBoundary {
      * @param errorMessage the explanation of the failure
      */
     @Override
-    public void presentFailView(String errorMessage) {
+    public void prepareFailView(String errorMessage) {
         weatherViewModel.getState().setError(errorMessage);
         weatherViewModel.firePropertyChanged();
     }
