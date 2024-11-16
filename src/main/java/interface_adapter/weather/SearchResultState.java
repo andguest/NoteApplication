@@ -1,13 +1,12 @@
-package interface_adapter.weather;
-
-import entity.Weather;
+package interface_adapter.note;
 
 import entity.Weather;
 
 /**
- * The state information for the weather view model.
+ * The State for a search result.
+ * <p>For this example, a note is simplay a string.</p>
  */
-public class WeatherState {
+public class SearchResultState {
     private Weather weather;
     private String error;
 
