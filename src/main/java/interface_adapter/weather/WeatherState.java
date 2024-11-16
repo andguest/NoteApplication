@@ -1,18 +1,19 @@
-package interface_adapter.note;
+package interface_adapter.weather;
+
+import entity.Weather;
 
 /**
- * The State for a weather.
- * <p>For this example, a note is simplay a string.</p>
+ * The state information for the weather view model.
  */
 public class WeatherState {
-    private String weather = "";
+    private Weather weather;
     private String error;
 
-    public String getWeather() {
+    public Weather getWeather() {
         return weather;
     }
 
-    public void setWeather(String weather) {
+    public void setWeather(Weather weather) {
         this.weather = weather;
     }
 

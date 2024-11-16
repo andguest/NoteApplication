@@ -1,9 +1,9 @@
-package interface_adapter.note;
+package interface_adapter.weather;
 
 import interface_adapter.ViewModel;
 
 /**
- * The ViewModel for the NoteView.
+ * The ViewModel for the WeatherView.
  */
 public class WeatherViewModel extends ViewModel<WeatherState> {
     public WeatherViewModel() {

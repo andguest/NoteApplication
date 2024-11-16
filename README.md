@@ -12,7 +12,7 @@ Person wants a quick overview of the weather in nearby areas. They can view a li
 
 Person wants to compare the weather in 2 different locations. They can pin the weather of a certain place to the ui to make it easier to compare it to the weather in other places.
 
-Person wants to see what the weather was yesterday. They can select any hour from the past 24 hours to see what the weather was then.
+Person checks the weather of a certain location often. They can view their search history and select that location to avoid having to repeatedly search for the same city.
 
 ## API
 The OpenWeather 3.0 API is called by city name to recieve weather information regarding temperature, humidity, windspeed & etc. 
