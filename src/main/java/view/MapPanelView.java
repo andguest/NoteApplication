@@ -1,9 +1,8 @@
 package view;
 
-import interface_adapter.note.NoteController;
-import interface_adapter.note.WeatherState;
-import interface_adapter.note.WeatherViewModel;
-import WeatherController;
+import interface_adapter.weather.WeatherController;
+import interface_adapter.weather.WeatherState;
+import interface_adapter.weather.WeatherViewModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -33,7 +32,7 @@ public class MapPanelView extends JPanel implements ActionListener {
         cityinputfield.addActionListener(
                 event -> {
                     // if the event is coming from cityinput field, execute controller
-                    if (event.getSource() == cityinputfield) {WeatherController.excute(cityinputfield.getText());
+                    if (event.getSource() == cityinputfield) {WeatherController.execute(cityinputfield.getText());
                     }
                 }
         );
