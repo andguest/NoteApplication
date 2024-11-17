@@ -17,7 +17,7 @@ import use_case.note.search_result.SearchResultOutputBoundary;
 import use_case.note.search_result.SearchResultOutputData;
 
 /**
- * The interactor for the search result use case..
+ * The interactor for the search result use case.
  */
 public class SearchResultInteractor implements SearchResultInputBoundary {
     private final SearchResultOutputBoundary outputBoundary;

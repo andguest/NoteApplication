@@ -26,6 +26,10 @@ public class MainView extends JFrame {
         this.setVisible(true);
 
     }
+
+    public void firePropertyChanged() {
+
+    }
 //    public static void man(String[] args) {
 //        new MainView();
 //    }
