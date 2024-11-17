@@ -1,4 +1,4 @@
-package interface_adapter;
+package interface_adapter.SearchResult;
 
 import use_case.note.search_result.SearchResultInputBoundary;
 import use_case.note.search_result.SearchResultInputData;
