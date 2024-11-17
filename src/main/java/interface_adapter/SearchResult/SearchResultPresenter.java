@@ -1,5 +1,6 @@
-package interface_adapter.note;
+package interface_adapter.SearchResult;
 
+import interface_adapter.weather.WeatherViewModel;
 import use_case.note.search_result.SearchResultOutputBoundary;
 import use_case.note.search_result.SearchResultOutputData;
 
