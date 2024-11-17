@@ -6,12 +6,13 @@ package entity;
 public class Weather {
 
     private final float temperature;
-    private final String weather;
+    private String weather;
     private final String description;
     private final String icon;
-    private final float windSpeed;
+    private float windSpeed;
     private final int humidity;
     private final int visibility;
+    private boolean metric;
 
 
     public Weather(float temperature, String weather, String description, String icon, float windSpeed, int humidity,
@@ -23,6 +24,7 @@ public class Weather {
         this.windSpeed = windSpeed;
         this.humidity = humidity;
         this.visibility = visibility;
+        this.metric = false;
     }
 
     public String getIcon() {
@@ -31,6 +33,22 @@ public class Weather {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isMetric() {
+        return metric;
+    }
+
+    public void setMetric(boolean metric) {
+        this.metric = metric;
+    }
+
+    public void setWeather(double weather) {
+        this.weather = weather;
+    }
+
+    public void setWindSpeed(float windSpeed) {
+        this.windSpeed = windSpeed;
     }
 
     public String getWeather() {

@@ -19,8 +19,6 @@ public class ConverterPresenter implements ConvertFarenheitOutputBoundary {
 
     @Override
     public void prepareSuccessView(ConvertFarenheitOutputData outputData) {
-        final String weather = viewModel.getState().getWeather();
-        viewModel.getState().setWeather(weather);
         viewModel.getState().setError(null);
         viewModel.firePropertyChanged();
     }
