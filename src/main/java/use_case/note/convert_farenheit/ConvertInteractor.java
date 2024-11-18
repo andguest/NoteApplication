@@ -31,11 +31,13 @@ public class ConvertInteractor implements ConvertFarenheitInputBoundary {
 
         if (cInputData.weather.isMetric()) {
             cInputData.weather.setWindSpeed((int) (cInputData.weather.getWindSpeed() * KILOMETERS_MILE));
-            cInputData.weather.setTemperature((int) ((cInputData.weather.getTemperature() * CELC_FAREN) + FAREN_ADD));
+            cInputData.weather.setTemperature((float) ((cInputData.weather.getTemperature() * CELC_FAREN) + FAREN_ADD));
+            cInputData.weather.setMetric(false);
         }
         else {
             cInputData.weather.setWindSpeed((int) (cInputData.weather.getWindSpeed() / KILOMETERS_MILE));
             cInputData.weather.setTemperature((int) ((cInputData.weather.getTemperature() - FAREN_ADD) / CELC_FAREN));
+            cInputData.weather.setMetric(true);
         }
     }
 
