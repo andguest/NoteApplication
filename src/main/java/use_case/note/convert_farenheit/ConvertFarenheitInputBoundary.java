@@ -1,5 +1,7 @@
 package use_case.note.convert_farenheit;
 
 public interface ConvertFarenheitInputBoundary {
-    void execute(ConvertFarenheitInputData convertFarenheitInputData);
+    void executeConvert(ConvertFarenheitInputData convertFarenheitInputData);
+
+    void convert(ConvertFarenheitInputData convertFarenheitInputData);
 }
