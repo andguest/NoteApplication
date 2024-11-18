@@ -7,7 +7,7 @@ import okhttp3.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
-import use_case.note.WeatherDataAccessInterface;
+import use_case.WeatherDataAccessInterface;
 
 
 

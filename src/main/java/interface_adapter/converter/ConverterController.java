@@ -1,8 +1,8 @@
 package interface_adapter.converter;
 
 import entity.Weather;
-import use_case.note.convert_farenheit.ConvertFarenheitInputBoundary;
-import use_case.note.convert_farenheit.ConvertFarenheitInputData;
+import use_case.convert_farenheit.ConvertFarenheitInputBoundary;
+import use_case.convert_farenheit.ConvertFarenheitInputData;
 
 public class ConverterController {
     private final ConvertFarenheitInputBoundary convertInteractor;

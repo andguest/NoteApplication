@@ -11,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import entity.Weather;
-import use_case.note.HistoricalWeatherDataAccessInterface;
+import use_case.HistoricalWeatherDataAccessInterface;
 
 /**
  * This class provides the service of saving and getting historical weather data.

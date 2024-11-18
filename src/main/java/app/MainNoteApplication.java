@@ -1,7 +1,7 @@
 package app;
 
 import data_access.WeatherDataAccessObject;
-import use_case.note.WeatherDataAccessInterface;
+import use_case.WeatherDataAccessInterface;
 
 /**
  * An application where we can view and add to a note stored by a user.
