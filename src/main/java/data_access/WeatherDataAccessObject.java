@@ -7,18 +7,21 @@ import okhttp3.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
+import use_case.note.CompareCities.CompareCitiesDataAccessInterface;
 import use_case.note.WeatherDataAccessInterface;
 
 
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * This class runs the API and creates a weather DAO.
  **/
 
-public abstract class WeatherDataAccessObject implements WeatherDataAccessInterface {
+public abstract class WeatherDataAccessObject implements WeatherDataAccessInterface, CompareCitiesDataAccessInterface {
     private static final String API_KEY = "7cce48d7f1f6785f54c0d08aa117ad83";
     private static final String MAIN = "main";
     private static String city;
@@ -27,6 +30,7 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
     private static final String STATUS_CODE_LABEL = "cod";
     private static final String WEATHER_LIST = "list";
     private static final String MESSAGE = "message";
+    public final Map<String, Weather> weathers = new HashMap<>();
 
     @Override
     public Weather getWeather(String citySearch) throws IOException {
@@ -75,5 +79,8 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
         }
     }
 
+    public void saveWeather(Weather weather) {
+        weathers.put(weather.getCity(), weather);
+    }
 }
 
