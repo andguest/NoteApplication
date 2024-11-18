@@ -1,8 +1,8 @@
 package view;
 
-import interface_adapter.SearchResultViewModel;
-import interface_adapter.note.WeatherViewModel;
-import WeatherController;
+import interface_adapter.SearchResult.SearchResultViewModel;
+import interface_adapter.weather.WeatherViewModel;
+import interface_adapter.weather.WeatherController;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
