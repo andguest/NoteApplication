@@ -1,8 +1,9 @@
 package view;
 
-import interface_adapter.SearchResultViewModel;
-import interface_adapter.note.WeatherViewModel;
-import WeatherController;
+import interface_adapter.SearchResult.SearchResultViewModel;
+import interface_adapter.weather.WeatherViewModel;
+import interface_adapter.weather.WeatherController;
+import interface_adapter.converter.ConverterController;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -47,7 +48,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         this.temperatureconverter = new JButton("Temperature Converter");
         temperatureconverter.addActionListener(                event -> {
                     // if the event is coming from cityinput field, execute controller
-                    if (event.getSource() == temperatureconverter) {WeatherController.excute(temperatureconverter.getText());
+                    if (event.getSource() == temperatureconverter) {ConverterController.excute(temperatureconverter.getText());
                     });
 
         skyconditionpanel = new LabelTextPanel(new JLabel("Sky"), emptylabel);
