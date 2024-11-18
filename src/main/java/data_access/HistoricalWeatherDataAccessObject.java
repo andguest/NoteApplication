@@ -67,9 +67,9 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
                 // Getting the city from the JSONObject
                 final String cityNameCall = weatherObject.getString("city");
                 // Getting the timestamp from the JSONObject
-                final String timeStamp = weatherObject.getString("timeStamp");
+                final String timeStamp1 = weatherObject.getString("timeStamp");
                 // Checking if the city and timestamp match the input
-                if (cityNameCall.equals(cityNameCall) && timeStamp.equals(timestamp)) {
+                if (cityNameCall.equals(city) && timeStamp1.equals(timestamp)) {
                     // Create weather object
                     final Weather weather = new Weather(
                             cityNameCall,
