@@ -9,6 +9,7 @@ import entity.Weather;
 public class SearchResultState {
     private Weather weather;
     private String error;
+    private String date;
 
     public Weather getWeather() {
         return weather;
@@ -24,5 +25,13 @@ public class SearchResultState {
 
     public String getError() {
         return error;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
     }
 }
