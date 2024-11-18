@@ -1,7 +1,7 @@
 package interface_adapter.weather;
 
-import use_case.search_return.SearchReturnOutputBoundary;
-import use_case.search_return.SearchReturnOutputData;
+import use_case.note.search_return.SearchReturnOutputBoundary;
+import use_case.note.search_return.SearchReturnOutputData;
 
 /**
  * The presenter for the

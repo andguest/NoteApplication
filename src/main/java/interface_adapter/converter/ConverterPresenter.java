@@ -1,8 +1,8 @@
 package interface_adapter.converter;
 
 import interface_adapter.weather.WeatherViewModel;
-import use_case.convert_farenheit.ConvertFarenheitOutputBoundary;
-import use_case.convert_farenheit.ConvertFarenheitOutputData;
+import use_case.note.convert_farenheit.ConvertFarenheitOutputBoundary;
+import use_case.note.convert_farenheit.ConvertFarenheitOutputData;
 
 public class ConverterPresenter implements ConvertFarenheitOutputBoundary {
     private final WeatherViewModel viewModel;

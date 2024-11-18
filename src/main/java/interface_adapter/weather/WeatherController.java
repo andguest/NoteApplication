@@ -1,7 +1,7 @@
 package interface_adapter.weather;
 
-import use_case.search_return.SearchReturnInputBoundary;
-import use_case.search_return.SearchReturnInputData;
+import use_case.note.search_return.SearchReturnInputBoundary;
+import use_case.note.search_return.SearchReturnInputData;
 
 /**
  * Controller for our weather related Use Cases.

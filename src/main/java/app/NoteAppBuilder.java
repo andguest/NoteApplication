@@ -5,7 +5,8 @@ import javax.swing.WindowConstants;
 
 import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherPresenter;
-import use_case.WeatherDataAccessInterface;
+import interface_adapter.weather.WeatherViewModel;
+import use_case.note.WeatherDataAccessInterface;
 import use_case.note.NoteInteractor;
 import use_case.note.NoteOutputBoundary;
 import view.NoteView;

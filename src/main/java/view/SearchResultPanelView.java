@@ -13,9 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import interface_adapter.search_result.SearchResultController;
-import interface_adapter.search_result.SearchResultState;
-import interface_adapter.search_result.SearchResultViewModel;
+import interface_adapter.SearchResult.SearchResultController;
+import interface_adapter.SearchResult.SearchResultState;
+import interface_adapter.SearchResult.SearchResultViewModel;
 
 /**
  * The View for when the user is viewing a note in the program.
