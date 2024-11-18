@@ -1,6 +1,7 @@
 package view;
 
-import interface_adapter.weather.WeatherViewModel;
+import interface_adapter.SearchResultViewModel;
+import interface_adapter.note.WeatherViewModel;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
@@ -14,6 +15,7 @@ import java.util.Observer;
  */
 public class WeatherPanelView extends JPanel implements PropertyChangeListener {
     private final WeatherViewModel weatherViewModel;
+    private final SearchResultViewModel searchResultViewModel;
 
     private final LabelTextPanel weatherfincitypanel;
     private final LabelTextPanel temperaturepanel;
@@ -21,14 +23,18 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener {
     private final LabelTextPanel humiditypanel;
     private final LabelTextPanel windspeedpanel;
     private final LabelTextPanel visibilitypanel;
+    private final LabelTextPanel searchresultpanel;
 
     private final JLabel emptylabel = new JLabel("");
     private final int weatherpanelwidth = 370;
     private final int weatherpanelheight = 400;
 
-    public WeatherPanelView(WeatherViewModel weatherViewModel) {
+    public WeatherPanelView(WeatherViewModel weatherViewModel, SearchResultViewModel searchResultViewModel) {
         this.weatherViewModel = weatherViewModel;
         this.weatherViewModel.addPropertyChangeListener(this);
+        // Users can search for weather at a given time
+        this.searchResultViewModel = searchResultViewModel;
+        this.searchResultViewModel.addPropertyChangeListener(this);
 
         this.setSize(weatherpanelwidth, weatherpanelheight);
         weatherfincitypanel = new LabelTextPanel(new JLabel("Weather in"), emptylabel);
