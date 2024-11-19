@@ -23,7 +23,6 @@ public class NearbyListInteractor implements NearbyListInputBoundary {
             final ArrayList<String> cities = (ArrayList<String>) cityDataAccess.getNearbyCities(latitude, longitude);
             final NearbyListOutputData outputData = new NearbyListOutputData(cities, false);
             outputBoundary.presentSuccessView(outputData);
-
         }
         catch (IOException exception) {
             outputBoundary.prepareFailView("Error: " + exception.getMessage());
