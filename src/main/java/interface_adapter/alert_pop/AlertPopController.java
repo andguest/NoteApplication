@@ -3,11 +3,14 @@ package interface_adapter.alert_pop;
 import use_case.note.alert_pop.AlertPopInputBoundary;
 import use_case.note.alert_pop.AlertPopInputData;
 
+/**
+ * The controller for the Alert Pop Use Case.
+ */
 public class AlertPopController {
-    private final AlertPopInputBoundary alertPopInputInteractor;
+    private final AlertPopInputBoundary alertPopInteractor;
 
-    public alertPopController(AlertPopInputBoundary alertPopInputInteractor) {
-        this.alertPopInputInteractor = alertPopInputInteractor;
+    public AlertPopController(AlertPopInputBoundary alertPopInteractor) {
+        this.alertPopInteractor = alertPopInteractor;
     }
 
     /**
@@ -17,6 +20,6 @@ public class AlertPopController {
     public void execute(String cityName) {
         final AlertPopInputData alertPopInputData = new AlertPopInputData(cityName);
 
-        alertPopInputInteractor.execute(alertPopInputData);
+        alertPopInteractor.execute(alertPopInputData);
     }
 }
