@@ -16,6 +16,7 @@ import java.beans.PropertyChangeListener;
 * to our Input Class.
 *   2. mapimagepanel.getDisplayfield where we display the image of the map using Jlabel format.
  */
+@SuppressWarnings("checkstyle:WriteTag")
 public class MapPanelView extends JPanel implements ActionListener {
     private final LabelTextPanel searchpanel;
     private final MapImagepanel mapimagepanel;
@@ -27,12 +28,12 @@ public class MapPanelView extends JPanel implements ActionListener {
 
     public MapPanelView() {
 
-
         mapimagepanel = new MapImagepanel();
         cityinputfield.addActionListener(
                 event -> {
                     // if the event is coming from cityinput field, execute controller
-                    if (event.getSource() == cityinputfield) {WeatherController.execute(cityinputfield.getText());
+                    if (event.getSource() == cityinputfield) {
+                        WeatherController.execute(cityinputfield.getText());
                     }
                 }
         );
