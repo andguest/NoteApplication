@@ -48,9 +48,10 @@ public class MainNoteApplication {
         // create the data access and inject it into our builder!
         final WeatherDataAccessInterface noteDataAccess = new WeatherDataAccessObject();
 
-        final NoteAppBuilder builder = new NoteAppBuilder();
+        final AppBuilder builder = new AppBuilder();
         builder.addNoteDAO(noteDataAccess)
-               .addNoteView()
+               .addMainView()
+                .addConvertUseCase()
                .addSearchResultView()
                .addSelectRegionView()
                .addNearbyListView()
@@ -67,8 +68,7 @@ public class MainNoteApplication {
                .addAlertPopUseCase()
                .addClosePopUseCase()
                .addCityBookmarkUseCase()
-               .addBookmarkReturnCase()
-               .addNoteUseCase().build().setVisible(true);
+               .addBookmarkReturnCase().build().setVisible(true);
         // Annie: What should I do with the last line? First, I don't know if I need to add setVisible to all methods.
         // Second, I assume noteView to be default view, and noteUseCase be return to the default view with empty
         // search bar.
