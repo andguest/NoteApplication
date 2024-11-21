@@ -80,7 +80,7 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
     }
 
     public void saveWeather(Weather weather) {
-        weathers.put(weather.getCity(), weather);
+        weathers.put(weather.getCityName(), weather);
     }
 }
 
