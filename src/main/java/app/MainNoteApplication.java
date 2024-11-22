@@ -51,24 +51,16 @@ public class MainNoteApplication {
         final AppBuilder builder = new AppBuilder();
         builder.addNoteDAO(noteDataAccess)
                .addMainView()
-                .addConvertUseCase()
+               .addConvertUseCase()
                .addSearchResultView()
-               .addSelectRegionView()
                .addNearbyListView()
                .addPinWeatherView()
                .addAlertPopView()
-               .addCityBookmarkView()
                .addSearchResultUseCase()
                .addSearchReturnUseCase()
-               .addSelectRegionUseCase()
                .addNearbyListUseCase()
-               .addCloseListUseCase()
                .addPinWeatherUseCase()
-               .addClosePinUseCase()
-               .addAlertPopUseCase()
-               .addClosePopUseCase()
-               .addCityBookmarkUseCase()
-               .addBookmarkReturnCase().build().setVisible(true);
+               .addAlertPopUseCase().build().setVisible(true);
         // Annie: What should I do with the last line? First, I don't know if I need to add setVisible to all methods.
         // Second, I assume noteView to be default view, and noteUseCase be return to the default view with empty
         // search bar.
