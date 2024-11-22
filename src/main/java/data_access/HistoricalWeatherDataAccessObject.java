@@ -26,12 +26,12 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
         final StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{\n");
         jsonBuilder.append("  \"timeStamp\": \"" + timeStamp + nextLine);
-        jsonBuilder.append("  \"city\": \"" + weather.getCity() + nextLine);
-        jsonBuilder.append("  \"longitude\": " + weather.getLongitude() + nextLine);
-        jsonBuilder.append("  \"latitude\": ").append(weather.getLatitude()).append(nextLine);
+        jsonBuilder.append("  \"city\": \"" + weather.getCityName() + nextLine);
+        jsonBuilder.append("  \"longitude\": " + weather.getLon() + nextLine);
+        jsonBuilder.append("  \"latitude\": ").append(weather.getLat()).append(nextLine);
         jsonBuilder.append("  \"temperature\": ").append(weather.getTemperature()).append(nextLine);
-        jsonBuilder.append("  \"looks\": \"").append(weather.getLooks()).append(nextLine);
-        jsonBuilder.append("  \"alertDescription\": \"").append(weather.getAlertDescription()).append(nextLine);
+        jsonBuilder.append("  \"looks\": \"").append(weather.getWeather()).append(nextLine);
+        jsonBuilder.append("  \"alertDescription\": \"").append(weather.getDescription()).append(nextLine);
         jsonBuilder.append("  \"humidity\": " + weather.getHumidity() + nextLine);
         jsonBuilder.append("  \"windSpeed\": " + weather.getWindSpeed() + nextLine);
         jsonBuilder.append("}");
@@ -67,19 +67,20 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
                 // Getting the city from the JSONObject
                 final String cityNameCall = weatherObject.getString("city");
                 // Getting the timestamp from the JSONObject
-                final String timeStamp1 = weatherObject.getString("timeStamp");
+                final String timeStamp = weatherObject.getString("timeStamp");
                 // Checking if the city and timestamp match the input
-                if (cityNameCall.equals(city) && timeStamp1.equals(timestamp)) {
+                if (cityNameCall.equals(city) && timeStamp.equals(timestamp)) {
                     // Create weather object
                     final Weather weather = new Weather(
                             cityNameCall,
-                            weatherObject.getInt("longitude"),
-                            weatherObject.getInt("latitude"),
                             weatherObject.getInt("temperature"),
                             weatherObject.getString("looks"),
                             weatherObject.getString("alertDescription"),
+                            weatherObject.getInt("windSpeed"),
+                            weatherObject.getInt("longitude"),
                             weatherObject.getInt("humidity"),
-                            weatherObject.getInt("windSpeed")
+                            weatherObject.getInt("longitude"),
+                            weatherObject.getInt("latitude")
                     );
                     return weather;
                 }

@@ -8,22 +8,54 @@ public class Weather {
     private float temperature;
     private String weather;
     private final String description;
-    private final String icon;
     private float windSpeed;
     private final int humidity;
     private final int visibility;
     private boolean metric;
+    private String cityName;
+    private int lon;
+    private int lat;
 
-    public Weather(float temperature, String weather, String description, String icon, float windSpeed, int humidity,
-                   int visibility) {
+    public Weather(String city, float temperature, String weather, String description,
+                   float windSpeed, int humidity, int visibility, int lon, int lat) {
         this.temperature = temperature;
         this.weather = weather;
         this.description = description;
-        this.icon = icon;
         this.windSpeed = windSpeed;
         this.humidity = humidity;
         this.visibility = visibility;
+        this.cityName = city;
         this.metric = false;
+        this.lon = lon;
+        this.lat = lat;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public int getLat() {
+        return lat;
+    }
+
+    public void setLat(int lat) {
+        this.lat = lat;
+    }
+
+    public int getLon() {
+        return lon;
+    }
+
+    public void setLon(int lon) {
+        this.lon = lon;
     }
 
     public boolean isMetric() {
@@ -38,16 +70,9 @@ public class Weather {
         this.temperature = temperature;
     }
 
-    public String getIcon() {
-        return icon;
-    }
 
     public String getDescription() {
         return description;
-    }
-
-    public void setWeather(String weather) {
-        this.weather = weather;
     }
 
     public void setWindSpeed(float windSpeed) {
