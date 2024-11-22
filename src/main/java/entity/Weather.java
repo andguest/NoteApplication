@@ -46,7 +46,7 @@ public class Weather {
         return description;
     }
 
-    public void setWeather(double weather) {
+    public void setWeather(String weather) {
         this.weather = weather;
     }
 

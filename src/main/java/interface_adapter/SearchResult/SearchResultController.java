@@ -8,11 +8,11 @@ import use_case.note.search_result.SearchResultInputData;
  */
 public class SearchResultController {
 
-    private final SearchResultInputBoundary searchResultInteractor;
+    private final SearchResultInputBoundary searchResultInputBoundary;
 
     // Constructor that injects the use case's input boundary
-    public SearchResultController(SearchResultInputBoundary searchResultInteractor) {
-        this.searchResultInteractor = searchResultInteractor;
+    public SearchResultController(SearchResultInputBoundary searchResultInputBoundary) {
+        this.searchResultInputBoundary = searchResultInputBoundary;
     }
 
     /**
@@ -25,7 +25,7 @@ public class SearchResultController {
         // Create a SearchResultInputData object to encapsulate the input data
         final SearchResultInputData inputData = new SearchResultInputData(cityName, date);
         // Call the use case's execute method with the input data
-        searchResultInteractor.execute(inputData);
+        searchResultInputBoundary.execute(inputData);
     }
 }
 
