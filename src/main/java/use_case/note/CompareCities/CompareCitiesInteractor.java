@@ -31,7 +31,8 @@ public class CompareCitiesInteractor implements CompareCitiesInputBoundary {
             else {
                 final Weather firstweather = compareCitiesDataAccessInterface.getWeather(firstcityname);
                 final Weather secondweather = compareCitiesDataAccessInterface.getWeather(secondcityname);
-                final CompareCitiesOutPutData compareCitiesOutPutData = new CompareCitiesOutPutData(firstweather, secondweather, false);
+                final CompareCitiesOutPutData compareCitiesOutPutData = new CompareCitiesOutPutData(firstcityname,
+                        firstweather, secondcityname, secondweather, false);
                 comparecitiesPresenter.prepareSuccessView(compareCitiesOutPutData);
             }
         }

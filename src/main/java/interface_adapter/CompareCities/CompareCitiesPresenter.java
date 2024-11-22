@@ -1,23 +1,30 @@
 package interface_adapter.CompareCities;
 
-import interface_adapter.weather.WeatherViewModel;
 import use_case.note.CompareCities.CompareCitiesOutPutData;
 import use_case.note.CompareCities.CompareCitiesOutputBoundary;
 
 public class CompareCitiesPresenter implements CompareCitiesOutputBoundary {
-    private final WeatherViewModel viewModel;
-    public CompareCitiesPresenter(WeatherViewModel viewModel) {
+    private final CompareCitiesViewModel viewModel;
+
+    public CompareCitiesPresenter(CompareCitiesViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
     @Override
     public void prepareFailView(String errorMessage) {
+        // viewModel.getState will provide a CompareCitiesState
         viewModel.getState().setError(errorMessage);
         viewModel.firePropertyChanged();
     }
+
     @Override
     public void prepareSuccessView(CompareCitiesOutPutData outputData) {
         viewModel.getState().setError(null);
-        viewModel.firePropertyChanged();
+        viewModel.getState().setFirstCityName(outputData.getFirstCityname());
+        viewModel.getState().setSecondCityName(outputData.getSecondCityname());
+        viewModel.getState().setFirstWeather(outputData.getFirstWeather());
+        viewModel.getState().setSecondWeather(outputData.getSecondWeather());
+        viewModel.firePropertyChanged("City");
     }
 }
+
