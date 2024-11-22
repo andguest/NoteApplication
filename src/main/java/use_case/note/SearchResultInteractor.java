@@ -45,10 +45,12 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
             final DateTimeFormatter formatter = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.of("UTC"));
             final String timestamp = formatter.format(Instant.now());
 
+            final Weather historicalWeather = historicalWeatherDataAccessInterface.getWeather(city, timestamp);
+
             // Send it to the output boundary
             final SearchResultOutputData outputData =
-                    new SearchResultOutputData(city, historicalWeatherData, false);
-            historicalWeatherDataAccessInterface.saveWeather(weatherData, timestamp);
+                    new SearchResultOutputData(city, historicalWeather, false);
+            historicalWeatherDataAccessInterface.saveWeather(weatherData, timestamp, city);
             outputBoundary.presentSuccessView(outputData);
 
         }
