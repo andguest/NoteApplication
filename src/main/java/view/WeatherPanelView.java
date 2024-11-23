@@ -15,6 +15,7 @@ import entity.Weather;
 import interface_adapter.SearchResult.SearchResultViewModel;
 import interface_adapter.converter.ConverterController;
 //import interface_adapter.weather.WeatherController;
+import interface_adapter.weather.WeatherState;
 import interface_adapter.weather.WeatherViewModel;
 
 /**
@@ -32,9 +33,13 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     private LabelTextPanel humiditypanel;
     private LabelTextPanel windspeedpanel;
     private LabelTextPanel visibilitypanel;
-    private LabelTextPanel searchresultpanel;
 
-    private final JLabel emptylabel = new JLabel("");
+    private final JLabel city = new JLabel("");
+    private final JLabel temp = new JLabel("");
+    private final JLabel skycondition = new JLabel("");
+    private final JLabel humidity = new JLabel("");
+    private final JLabel windspeed = new JLabel("");
+    private final JLabel visibility = new JLabel("");
     private final JButton temperatureconverter;
 
     private ConverterController convertorController;
@@ -50,8 +55,8 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         this.searchResultViewModel.addPropertyChangeListener(this);
 
         this.setSize(WEATHER_PANEL_WIDTH, WEATHERPANELHEIGHT);
-        weatherfincitypanel = new LabelTextPanel(new JLabel("Weather in"), emptylabel);
-        temperaturepanel = new LabelTextPanel(new JLabel("Temperature"), emptylabel);
+        weatherfincitypanel = new LabelTextPanel(new JLabel("Weather in"), city);
+        temperaturepanel = new LabelTextPanel(new JLabel("Temperature"), temp);
         // Note we  want to add a convertor that convert the weather information from degree celsius to fahrenheit,
         // or the opposite.The button needs an action listener that pass the change to a ConverterController.
         this.temperatureconverter = new JButton("Temperature Converter");
@@ -65,10 +70,10 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
                 convertorController.execute((Weather) evt.getSource());
             }
 
-            skyconditionpanel = new LabelTextPanel(new JLabel("Sky"), emptylabel);
-            humiditypanel = new LabelTextPanel(new JLabel("Humidity"), emptylabel);
-            windspeedpanel = new LabelTextPanel(new JLabel("Wind"), emptylabel);
-            visibilitypanel = new LabelTextPanel(new JLabel("Visibility"), emptylabel);
+            skyconditionpanel = new LabelTextPanel(new JLabel("Sky"), skycondition);
+            humiditypanel = new LabelTextPanel(new JLabel("Humidity"), humidity);
+            windspeedpanel = new LabelTextPanel(new JLabel("Wind"), windspeed);
+            visibilitypanel = new LabelTextPanel(new JLabel("Visibility"), visibility);
             this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
             this.add(weatherfincitypanel);
             this.add(temperaturepanel);
@@ -86,33 +91,18 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        final String propertyName = evt.getPropertyName();
-        final String newValue = (String) evt.getNewValue();
-
-        SwingUtilities.invokeLater(() -> {
-            switch (propertyName) {
-                case "city":
-                    weatherfincitypanel.setoutput(newValue);
-                    break;
-                case "temperature":
-                    temperaturepanel.setoutput(newValue);
-                    break;
-                case "skyCondition":
-                    skyconditionpanel.setoutput(newValue);
-                    break;
-                case "humidity":
-                    humiditypanel.setoutput(newValue);
-                    break;
-                case "windSpeed":
-                    windspeedpanel.setoutput(newValue);
-                    break;
-                case "visibility":
-                    visibilitypanel.setoutput(newValue);
-                    break;
-            }
-        });
+        final WeatherState weatherState = (WeatherState) evt.getNewValue();
+        setfield(weatherState);
     }
 
+    public void setfield(WeatherState weatherState) {
+        city.setText(weatherState.getWeather().getCityName());
+        temp.setText(String.valueOf(weatherState.getWeather().getTemperature()));
+        skycondition.setText(weatherState.getWeather().getWeather());
+        humidity.setText(String.valueOf(weatherState.getWeather().getHumidity()));
+        windspeed.setText(String.valueOf(weatherState.getWeather().getWindSpeed()));
+        visibility.setText(String.valueOf(weatherState.getWeather().getVisibility()));
+    }
     public void actionPerformed(ActionEvent event) {
         System.out.println("Enter" + event.getActionCommand());
 
