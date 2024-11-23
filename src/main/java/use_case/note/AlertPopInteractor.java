@@ -18,13 +18,13 @@ public class AlertPopInteractor implements AlertPopInputBoundary {
             String cityName = alertPopInputData.getCityName();
             Weather weather = weatherAccess.getWeather(cityName);
             String alert = weather.getAlertDescription();
-            String noAlert = "no alerts";
+            String noAlert = "no weather alert";
 
             if (noAlert.equals(alert)) {
-                AlertPopOutputData outputData = new AlertPopOutputData(noAlert);
+                AlertPopOutputData outputData = new AlertPopOutputData(noAlert, false);
                 outputBoundary.prepareSuccessView(outputData);
             } else {
-                AlertPopOutputData outputData = new AlertPopOutputData(alert);
+                AlertPopOutputData outputData = new AlertPopOutputData(alert, false);
                 outputBoundary.prepareSuccessView(outputData);
             }
         } catch (Exception e) {
