@@ -31,6 +31,7 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
     private static final String STATUS_CODE_LABEL = "cod";
     private static final String WEATHER_LIST = "list";
     private static final String MESSAGE = "message";
+    private boolean cityexist = false;
     public final Map<String, Weather> citytoweather = new HashMap<>();
 
     @Override
@@ -78,12 +79,26 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
         }
     }
 
-    public void saveWeather(Weather weather) {
+    @Override
+    public void saveWeatherinfor(Weather weather) {
         citytoweather.put(weather.getCityName(), weather);
     }
 
-    public Map<String, Weather> getcitytoweather(){
+    @Override
+    public Map<String, Weather> getcitytoweather() {
         return this.citytoweather;
+    }
+
+    /*
+    * This method "clean" the elements inside this.citytoweather we don't want to accumulate pairs.
+    */
+    @Override
+    public void clearcitytoweather() {
+        this.citytoweather.clear();
+    }
+
+    public boolean isCityexist() {
+        return cityexist;
     }
 }
 
