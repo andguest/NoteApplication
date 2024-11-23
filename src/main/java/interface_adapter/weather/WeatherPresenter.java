@@ -4,7 +4,7 @@ import use_case.note.search_return.SearchReturnOutputBoundary;
 import use_case.note.search_return.SearchReturnOutputData;
 
 /**
- * The presenter for the
+ * The presenter for the weather use case.
  */
 public class WeatherPresenter implements SearchReturnOutputBoundary {
 
