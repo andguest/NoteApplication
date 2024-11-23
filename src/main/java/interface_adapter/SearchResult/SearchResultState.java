@@ -10,9 +10,18 @@ public class SearchResultState {
     private Weather weather;
     private String error;
     private String date;
+    private String cityName;
 
     public Weather getWeather() {
         return weather;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public void setWeather(Weather weather) {
