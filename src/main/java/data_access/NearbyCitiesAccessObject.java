@@ -1,8 +1,9 @@
-package use_case.note.nearby_list;
+package data_access;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import use_case.note.nearby_list.NearbyCitiesAccessInterface;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -11,6 +12,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class provides the service of getting nearby cities.
+ */
 public abstract class NearbyCitiesAccessObject implements NearbyCitiesAccessInterface {
     private static final Float LOWER_LAT = -90.0f;
     private static final Float UPPER_LAT = 90.0f;
