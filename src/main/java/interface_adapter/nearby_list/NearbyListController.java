@@ -3,10 +3,12 @@ package interface_adapter.nearby_list;
 import use_case.note.nearby_list.NearbyListInputBoundary;
 import use_case.note.nearby_list.NearbyListInputData;
 
+/**
+ * Controller for the nearby list use case.
+ */
 public class NearbyListController {
     private final NearbyListInputBoundary nearbyListInteractor;
 
-    // Constructor that injects the use case's input boundary
     public NearbyListController(NearbyListInputBoundary nearbyListInteractor) {
         this.nearbyListInteractor = nearbyListInteractor;
     }
@@ -14,8 +16,8 @@ public class NearbyListController {
     /**
      * Executes the find nearby cities use case given the longitude and latitude of the current location.
      *
-     * @param longitude the name of the city to search for
-     * @param latitude the date to search for
+     * @param longitude the current longitude
+     * @param latitude the current latitude
      */
     public void execute(float longitude, float latitude) {
         // Create a NearbyListInputData object to encapsulate the input data

@@ -1,7 +1,7 @@
 package use_case.note.nearby_list;
 
 /**
- * This one only has the input of clicking "open list," whereas the centre of the location is chosen prior to that.
+ * An input is when the map moves.
  */
 public class NearbyListInputData {
     private final float longitude;
