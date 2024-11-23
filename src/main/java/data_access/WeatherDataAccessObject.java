@@ -11,8 +11,6 @@ import org.json.JSONArray;
 import use_case.note.CompareCities.CompareCitiesDataAccessInterface;
 import use_case.note.WeatherDataAccessInterface;
 
-
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

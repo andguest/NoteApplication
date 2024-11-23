@@ -13,10 +13,9 @@ public interface HistoricalWeatherDataAccessInterface {
      * Saves the weather data.
      * @param weather the weather data to save
      * @param timstamp the timestamp of the weather data
-     * @param City the city of the weather data
      * @throws IOException if there is an error saving the weather data
      */
-    void saveWeather(Weather weather, String timstamp, String City) throws IOException;
+    void saveWeather(Weather weather, String timstamp) throws IOException;
 
     /**
      * Gets the weather data.
