@@ -18,7 +18,6 @@ public class CompareCitiesOutPutData {
         this.useCaseFailed = useCaseFailed;
     }
 
-
     public String getFirstCityname() {
         return firstCityname;
     }
