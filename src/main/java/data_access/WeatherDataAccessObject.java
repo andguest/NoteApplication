@@ -31,7 +31,7 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
     private static final String STATUS_CODE_LABEL = "cod";
     private static final String WEATHER_LIST = "list";
     private static final String MESSAGE = "message";
-    public final Map<String, Weather> weathers = new HashMap<>();
+    public final Map<String, Weather> citytoweather = new HashMap<>();
 
     @Override
     public Weather getWeather(String citySearch) throws IOException {
@@ -70,18 +70,20 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
                 }
                 return new Weather(citySearch, temp, looks, alertDescription, windspeed, humidity,
                         visibility, lon, lat);
-            }
-            else {
+            } else {
                 throw new IOException(responseBody.getString(MESSAGE));
             }
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             throw new IOException(ex);
         }
     }
 
     public void saveWeather(Weather weather) {
-        weathers.put(weather.getCityName(), weather);
+        citytoweather.put(weather.getCityName(), weather);
+    }
+
+    public Map<String, Weather> getcitytoweather(){
+        return this.citytoweather;
     }
 }
 
