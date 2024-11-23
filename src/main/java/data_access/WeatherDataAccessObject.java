@@ -1,27 +1,23 @@
 package data_access;
 
-import entity.Weather;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONArray;
-
-import use_case.note.CompareCities.CompareCitiesDataAccessInterface;
-import use_case.note.WeatherDataAccessInterface;
-
-
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import entity.Weather;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import use_case.note.CompareCities.CompareCitiesDataAccessInterface;
+import use_case.note.WeatherDataAccessInterface;
 
 /**
  * This class runs the API and creates a weather DAO.
  **/
-
 public abstract class WeatherDataAccessObject implements WeatherDataAccessInterface, CompareCitiesDataAccessInterface {
     private static final String API_KEY = "7cce48d7f1f6785f54c0d08aa117ad83";
     private static final String MAIN = "main";
@@ -31,7 +27,7 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
     private static final String STATUS_CODE_LABEL = "cod";
     private static final String WEATHER_LIST = "list";
     private static final String MESSAGE = "message";
-    public final Map<String, Weather> weathers = new HashMap<>();
+    private final Map<String, Weather> weathers = new HashMap<>();
 
     @Override
     public Weather getWeather(String citySearch) throws IOException {
@@ -80,6 +76,10 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
         }
     }
 
+    /**
+     * Saves the weather data to the DAO.
+     * @param weather the weather data to save
+     */
     public void saveWeather(Weather weather) {
         weathers.put(weather.getCityName(), weather);
     }
