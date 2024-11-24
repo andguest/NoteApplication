@@ -11,8 +11,6 @@ import org.json.JSONArray;
 import use_case.note.CompareCities.CompareCitiesDataAccessInterface;
 import use_case.note.WeatherDataAccessInterface;
 
-
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +28,9 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
     private static final String CONTENT_TYPE_JSON = "application/json";
     private static final String STATUS_CODE_LABEL = "cod";
     private static final String WEATHER_LIST = "list";
-    private static final String MESSAGE = "message";
-    public final Map<String, Weather> weathers = new HashMap<>();
+    private static final String MESSAGE = "This city is not found";
+    private boolean cityexist;
+    private final Map<String, Weather> citytoweather = new HashMap<>();
 
     @Override
     public Weather getWeather(String citySearch) throws IOException {
@@ -51,7 +50,7 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
 
             if (responseBody.getInt(STATUS_CODE_LABEL) == SUCCESS_CODE) {
                 final JSONObject weatherJSON = responseBody.getJSONArray(WEATHER_LIST).getJSONObject(0);
-
+                this.cityexist = true;
                 // get individual items from the json object
 
                 final int lat = (int) weatherJSON.getJSONObject(MAIN).getDouble("lat");
@@ -70,18 +69,34 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
                 }
                 return new Weather(citySearch, temp, looks, alertDescription, windspeed, humidity,
                         visibility, lon, lat);
-            }
-            else {
+            } else {
                 throw new IOException(responseBody.getString(MESSAGE));
             }
-        }
-        catch (IOException | JSONException ex) {
+        } catch (IOException | JSONException ex) {
             throw new IOException(ex);
         }
     }
 
-    public void saveWeather(Weather weather) {
-        weathers.put(weather.getCityName(), weather);
+    @Override
+    public void saveWeatherinfor(Weather weather) {
+        citytoweather.put(weather.getCityName(), weather);
+    }
+
+    @Override
+    public Map<String, Weather> getcitytoweather() {
+        return this.citytoweather;
+    }
+
+    /*
+    * This method "clean" the elements inside this.citytoweather we don't want to accumulate pairs.
+    */
+    @Override
+    public void clearcitytoweather() {
+        this.citytoweather.clear();
+    }
+
+    public boolean isCityexist() {
+        return cityexist;
     }
 }
 

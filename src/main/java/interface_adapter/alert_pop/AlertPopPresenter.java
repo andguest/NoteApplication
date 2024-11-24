@@ -1,0 +1,21 @@
+package interface_adapter.alert_pop;
+
+import interface_adapter.weather.WeatherViewModel;
+import use_case.note.alert_pop.AlertPopOutputBoundary;
+import use_case.note.alert_pop.AlertPopOutputData;
+
+public class AlertPopPresenter implements AlertPopOutputBoundary {
+    private final WeatherViewModel viewModel;
+
+    public AlertPopPresenter(WeatherViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    @Override
+    public void prepareSuccessView(AlertPopOutputData alertPopOutputData) {
+
+        viewModel.getState().setAlert(alertPopOutputData.getAlert());
+        viewModel.firePropertyChanged();
+    }
+
+}

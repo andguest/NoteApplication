@@ -3,6 +3,7 @@ package use_case.note.CompareCities;
 import entity.Weather;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Interface for the Comparing Cities Use case.
@@ -13,7 +14,7 @@ public interface CompareCitiesDataAccessInterface {
      * @param cityname the weather is displayed for
      * @return if city exists
      */
-    boolean citynotexist(String cityname);
+    boolean isCityexist(String cityname);
 
     /**
      * Creates the Weather.
@@ -25,19 +26,25 @@ public interface CompareCitiesDataAccessInterface {
 
     /**
      * Saves the Weather.
-     * @param cityname the weather is saved
+     * @param weather save weather infor of a city to a map. since there is method getCityname in Weather Object.
+     * this method can work without have cityname as its input.
      */
-    void saveWeather(String cityname);
+    void saveWeatherinfor(Weather weather);
 
     /**
      * Returns the City.
      * @return the city
      * */
-    String getCurrentCity();
+    Map getcitytoweather();
 
     /**
      * Sets city.
-     * @param cityname the weather is for
+     * @param cityname check if the cityname is valid or not
      */
-    void setCurrentCity(String cityname);
+    boolean isCityExist(String cityname);
+
+    /**
+     * This method "clean" the elements inside this.citytoweather we don't want to accumulate pairs.
+     */
+    void clearcitytoweather();
 }

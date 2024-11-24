@@ -7,15 +7,16 @@ import use_case.note.search_result.SearchResultOutputData;
 
 public class SearchResultPresenter implements SearchResultOutputBoundary {
 
-    private final WeatherViewModel viewModel;
+    private final SearchResultViewModel viewModel;
 
-    public SearchResultPresenter(WeatherViewModel viewModel) {
+    public SearchResultPresenter(SearchResultViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
     @Override
     public void presentSuccessView(SearchResultOutputData searchResultOutputData) {
         viewModel.getState().setWeather(searchResultOutputData.getWeather());
+        viewModel.getState().setCityName(searchResultOutputData.getWeather().getCityName());
     }
 
     @Override
