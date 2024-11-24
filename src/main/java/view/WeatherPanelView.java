@@ -9,7 +9,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import entity.Weather;
 import interface_adapter.SearchResult.SearchResultViewModel;
@@ -40,7 +39,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     private final JLabel humidity = new JLabel("");
     private final JLabel windspeed = new JLabel("");
     private final JLabel visibility = new JLabel("");
-    private final JButton temperatureconverter;
+    private final JButton unitconverter;
 
     private ConverterController convertorController;
     private static final int WEATHER_PANEL_WIDTH = 370;
@@ -55,14 +54,14 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         this.searchResultViewModel.addPropertyChangeListener(this);
 
         this.setSize(WEATHER_PANEL_WIDTH, WEATHERPANELHEIGHT);
-        weatherfincitypanel = new LabelTextPanel(new JLabel("Weather in"), city);
+        weatherfincitypanel = new LabelTextPanel(new JLabel("Current Weather in"), city);
         temperaturepanel = new LabelTextPanel(new JLabel("Temperature"), temp);
         // Note we  want to add a convertor that convert the weather information from degree celsius to fahrenheit,
         // or the opposite.The button needs an action listener that pass the change to a ConverterController.
-        this.temperatureconverter = new JButton("Temperature Converter");
-        temperatureconverter.addActionListener(event -> {
+        this.unitconverter = new JButton("Unit Converter");
+        unitconverter.addActionListener(event -> {
             // if the event is coming from temperature converter button, execute convertor controller
-            if (event.getSource() == temperatureconverter) {
+            if (event.getSource() == unitconverter) {
                 // todo: right now evt.getSource() return String "Temperature Converter", which is not a weather. But
                 // the method execute in class ConverterController takes Weather object as input, need fix this.
                 // a potential solution is change evt.getSource() to city name, and in ConverterController, turn
@@ -81,7 +80,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
             this.add(humiditypanel);
             this.add(windspeedpanel);
             this.add(visibilitypanel);
-            this.add(temperatureconverter);
+            this.add(unitconverter);
         });
         /*
          * method listens for changes in the WeatherViewModel and updates each LabelTextPanel based on the new data.
