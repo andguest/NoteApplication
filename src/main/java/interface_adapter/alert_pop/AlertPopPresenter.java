@@ -18,4 +18,10 @@ public class AlertPopPresenter implements AlertPopOutputBoundary {
         viewModel.firePropertyChanged();
     }
 
+    @Override
+    public void prepareFailView(String message) {
+        viewModel.getState().setAlert(message);
+        viewModel.firePropertyChanged();
+    }
+
 }
