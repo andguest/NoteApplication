@@ -31,7 +31,7 @@ public class MainApplication {
         final WeatherDataAccessInterface noteDataAccess = new WeatherDataAccessObject();
 
         final AppBuilder builder = new AppBuilder();
-        builder.addNoteDAO(noteDataAccess)
+        builder.addDAO(noteDataAccess)
                 .addCompareCitiesUseCase()
                 .addConvertUseCase()
                 .addNearbyListUseCase()
