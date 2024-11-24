@@ -1,6 +1,5 @@
 package view;
 
-import interface_adapter.SearchResult.SearchResultController;
 import interface_adapter.SearchResult.SearchResultViewModel;
 import interface_adapter.weather.WeatherViewModel;
 
@@ -32,5 +31,9 @@ public class MainView extends JFrame {
         this.setVisible(true);
 
     }
+
+//    public static void man(String[] args) {
+//        new MainView();
+//    }
 
 }
