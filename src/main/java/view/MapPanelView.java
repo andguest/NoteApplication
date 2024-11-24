@@ -1,54 +1,66 @@
 package view;
 
+import interface_adapter.CompareCities.CompareCitiesController;
 import interface_adapter.SearchResult.SearchResultController;
 import interface_adapter.weather.WeatherController;
-import interface_adapter.weather.WeatherState;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
 
 /*
-* This class responsible for creating the Map Subpanel of the main. The Map subpanel itself contains 3 parts:
+* This class responsible for creating the Map Subpanel of the main. The Map subpanel itself contains 4 parts:
 *   1. city input panel where user can type the city name. This is connected to an Action Lisenter, which pass infor
 * to our weatherContoller Class.
 *   2. date input panel
+*   4. compare to button
 *   3. mapimagepanel.getDisplayfield where we display the image of the map using Jlabel format.
  */
 @SuppressWarnings("checkstyle:WriteTag")
 public class MapPanelView extends JPanel implements ActionListener {
     private final LabelTextPanel cityinputpanel;
     private final LabelTextPanel dateinputpanel;
+    private final LabelTextPanel comparetopanel;
     private final MapImagepanel mapimagepanel;
 
-    private final JTextField cityinputfield = new JTextField(15);
+    private final JTextField cityinputfield1 = new JTextField(15);
     private final JTextField dateinputfield = new JTextField(15);
+    private final JTextField cityinputfield2 = new JTextField(15);
     private final int mappanelwidth = 370;
-    private final int mappanelheight = 400;
+    private final int mappanelheight = 500;
 
     private SearchResultController searchResultController;
     private WeatherController weatherController;
+    private CompareCitiesController compareCitiesController;
 
     public MapPanelView() {
 
         mapimagepanel = new MapImagepanel();
 
-        cityinputfield.addActionListener(
+        cityinputfield1.addActionListener(
                 event -> {
                     // if the event is coming from cityinput field, execute weather controller
-                    if (event.getSource() == cityinputfield) {
-                        weatherController.execute(cityinputfield.getText());
+                    if (event.getSource() == cityinputfield1) {
+                        weatherController.execute(cityinputfield1.getText());
                     }
                 }
         );
-        cityinputpanel = new LabelTextPanel(new JLabel("search bar"), cityinputfield);
+        cityinputfield2.addActionListener(
+                event -> {
+                    if (event.getSource() == cityinputfield2) {
+                        compareCitiesController.execute(cityinputfield1.getText(), cityinputfield2.getText());
+                    }
+                }
+        )
+        cityinputpanel = new LabelTextPanel(new JLabel("search city"), cityinputfield1);
         dateinputpanel = new LabelTextPanel(new JLabel("date"), dateinputfield);
+        comparetopanel = new LabelTextPanel(new JLabel("Compare To"), cityinputfield2);
+
         dateinputfield.addActionListener(
                 // if this event is coming from dateinput field, execute searchresult contoller
                 event -> {
                     if (event.getSource() == dateinputfield) {
-                        searchResultController.execute(cityinputfield.getText(), dateinputfield.getText());
+                        searchResultController.execute(cityinputfield1.getText(), dateinputfield.getText());
                     }
                 });
 //        this.setSize(mappanelwidth, mappanelheight);
@@ -87,6 +99,11 @@ public class MapPanelView extends JPanel implements ActionListener {
     }
 
     public void setSearchResultController(SearchResultController searchresultcontroller) {
-        this.searchResultController = searchresultcontroller; }
+        this.searchResultController = searchresultcontroller;
+    }
+
+    public void setCompareCitiesController(CompareCitiesController compareCitiesController) {
+        this.compareCitiesController = compareCitiesController;
+    }
 }
 
