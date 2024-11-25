@@ -60,7 +60,7 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
                 final int windspeed = (int) weatherJSON.getJSONObject("wind").getDouble("speed");
                 final String looks = weatherJSON.getJSONObject("weather").getString(MAIN);
                 final int visibility = weatherJSON.getInt("visibility");
-                String alertDescription = weatherJSON.getJSONObject("weather").getString("description");
+                String alertDescription = "no weather alert";
                 if (weatherJSON.has("alerts")) {
                     final JSONArray alertsArray = weatherJSON.getJSONArray("alerts");
                     if (alertsArray.length() > 0) {

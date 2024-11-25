@@ -1,7 +1,6 @@
 package app;
 
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import data_access.WeatherDataAccessObject;
 import entity.Weather;
@@ -44,10 +43,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Builder for the Note Application.
  */
 public class AppBuilder {
+
     public static final int HEIGHT = 750;
     public static final int WIDTH = 1500;
     private WeatherDataAccessInterface weatherDAO;
@@ -63,7 +64,7 @@ public class AppBuilder {
      * @param weatherDataAccess the DAO to use
      * @return this builder
      */
-    public AppBuilder addNoteDAO(WeatherDataAccessInterface weatherDataAccess) {
+    public AppBuilder addDAO(WeatherDataAccessInterface weatherDataAccess) {
         weatherDAO = weatherDataAccess;
         return this;
     }
@@ -75,7 +76,7 @@ public class AppBuilder {
     public JFrame build() {
         final JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Note Application");
+        frame.setTitle("Weather Wizard");
         frame.setSize(WIDTH, HEIGHT);
 
         frame.add(mainView);
@@ -110,6 +111,7 @@ public class AppBuilder {
         return this;
     }
 
+
     public AppBuilder addCompareCitiesUseCase() {
         final CompareCitiesOutputBoundary outputBoundary = new CompareCitiesPresenter(compareCitiesViewModel);
         final CompareCitiesDataAccessInterface dai = new CompareCitiesDataAccessInterface() {
@@ -117,7 +119,6 @@ public class AppBuilder {
             public boolean isCityexist(String cityname) {
                 return false;
             }
-
             @Override
             public Weather getWeather(String cityname) throws IOException {
                 return null;
