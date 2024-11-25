@@ -19,7 +19,7 @@ import java.util.Map;
  * This class runs the API and creates a weather DAO.
  **/
 
-public abstract class WeatherDataAccessObject implements WeatherDataAccessInterface, CompareCitiesDataAccessInterface {
+public abstract class WeatherDataAccessObject implements WeatherDataAccessInterface, CompareCitiesDataAccessInterface{
     private static final String API_KEY = "7cce48d7f1f6785f54c0d08aa117ad83";
     private static final String MAIN = "main";
     private static String city;
@@ -59,6 +59,7 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
                 final int windspeed = (int) weatherJSON.getJSONObject("wind").getDouble("speed");
                 final String looks = weatherJSON.getJSONObject("weather").getString(MAIN);
                 final int visibility = weatherJSON.getInt("visibility");
+                final String description = weatherJSON.getJSONObject("weather").getString("description");
                 String alertDescription = "no weather alert";
                 if (weatherJSON.has("alerts")) {
                     final JSONArray alertsArray = weatherJSON.getJSONArray("alerts");
@@ -66,10 +67,10 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
                         alertDescription = alertsArray.getJSONObject(0).getString("description");
                     }
                 }
-                return new Weather(citySearch, temp, looks, alertDescription, windspeed, humidity,
-                        visibility, lon, lat);
-            }
-            else {
+
+                return new Weather(citySearch, temp, looks, description, windspeed, humidity,
+                        visibility, lon, lat, alertDescription);
+            } else {
                 throw new IOException(responseBody.getString(MESSAGE));
             }
         }

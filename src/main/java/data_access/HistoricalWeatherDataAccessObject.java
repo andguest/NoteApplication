@@ -71,16 +71,19 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
                 // Checking if the city and timestamp match the input
                 if (cityNameCall.equals(city) && timeStamp.equals(timestamp)) {
                     // Create weather object
+                    //TODO: Changed weather declaration, uncertain if it there is key "description" and
+                    // "alertDescription" for historical weather. If no we need to change Weather class.
                     final Weather weather = new Weather(
                             cityNameCall,
                             weatherObject.getInt("temperature"),
                             weatherObject.getString("looks"),
-                            weatherObject.getString("alertDescription"),
+                            weatherObject.getString("description"),
                             weatherObject.getInt("windSpeed"),
                             weatherObject.getInt("longitude"),
                             weatherObject.getInt("humidity"),
                             weatherObject.getInt("longitude"),
-                            weatherObject.getInt("latitude")
+                            weatherObject.getInt("latitude"),
+                            weatherObject.getString("alertDescription")
                     );
                     return weather;
                 }
