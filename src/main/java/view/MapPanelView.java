@@ -23,9 +23,11 @@ public class MapPanelView extends JPanel implements ActionListener {
     private final LabelTextPanel comparetopanel;
     private final MapImagepanel mapimagepanel;
 
+
     private final JTextField cityinputfield1 = new JTextField(15);
     private final JTextField dateinputfield = new JTextField(15);
     private final JTextField cityinputfield2 = new JTextField(15);
+
     private final int mappanelwidth = 370;
     private final int mappanelheight = 500;
 

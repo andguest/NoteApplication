@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * This class runs the API and creates a weather DAO.
  **/
@@ -60,7 +59,7 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
                 final int windspeed = (int) weatherJSON.getJSONObject("wind").getDouble("speed");
                 final String looks = weatherJSON.getJSONObject("weather").getString(MAIN);
                 final int visibility = weatherJSON.getInt("visibility");
-                String alertDescription = weatherJSON.getJSONObject("weather").getString("description");
+                String alertDescription = "no weather alert";
                 if (weatherJSON.has("alerts")) {
                     final JSONArray alertsArray = weatherJSON.getJSONArray("alerts");
                     if (alertsArray.length() > 0) {
@@ -69,10 +68,12 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
                 }
                 return new Weather(citySearch, temp, looks, alertDescription, windspeed, humidity,
                         visibility, lon, lat);
-            } else {
+            }
+            else {
                 throw new IOException(responseBody.getString(MESSAGE));
             }
-        } catch (IOException | JSONException ex) {
+        }
+        catch (IOException | JSONException ex) {
             throw new IOException(ex);
         }
     }

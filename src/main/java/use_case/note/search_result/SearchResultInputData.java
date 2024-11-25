@@ -12,7 +12,7 @@ public class SearchResultInputData {
         this.date = date;
     }
 
-    public static String getCity() {
+    public String getCity() {
         return this.city;
     }
 
