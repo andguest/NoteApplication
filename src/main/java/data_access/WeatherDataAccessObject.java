@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * This class runs the API and creates a weather DAO.
  **/
@@ -68,12 +67,14 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
                         alertDescription = alertsArray.getJSONObject(0).getString("description");
                     }
                 }
+
                 return new Weather(citySearch, temp, looks, description, windspeed, humidity,
                         visibility, lon, lat, alertDescription);
             } else {
                 throw new IOException(responseBody.getString(MESSAGE));
             }
-        } catch (IOException | JSONException ex) {
+        }
+        catch (IOException | JSONException ex) {
             throw new IOException(ex);
         }
     }

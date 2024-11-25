@@ -78,6 +78,7 @@ public class Weather {
 
     public String getAlertDescription() {
         return alertDescription;
+
     }
 
     public void setWindSpeed(float windSpeed) {

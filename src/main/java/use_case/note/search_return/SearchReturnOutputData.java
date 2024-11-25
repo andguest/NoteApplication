@@ -2,14 +2,17 @@ package use_case.note.search_return;
 
 import entity.Weather;
 
+/**
+ * Output data for the search return use case.
+ */
 public class SearchReturnOutputData {
 
     private final String location;
     private final Weather weather;
     private final boolean useCaseFailed;
 
-    public SearchReturnOutputData(String location, Weather weather, boolean useCaseFailed) {
-        this.location = location;
+    public SearchReturnOutputData(Weather weather, boolean useCaseFailed) {
+        this.location = weather.getCityName();
         this.weather = weather;
         this.useCaseFailed = useCaseFailed;
     }
@@ -18,7 +21,9 @@ public class SearchReturnOutputData {
         return location;
     }
 
-    public Weather getWeather() {return weather;}
+    public Weather getWeather() {
+        return weather;
+    }
 
     public boolean isUseCaseFailed() {
         return useCaseFailed;

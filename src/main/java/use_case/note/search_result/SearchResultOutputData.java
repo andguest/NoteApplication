@@ -2,22 +2,14 @@ package use_case.note.search_result;
 
 import entity.Weather;
 
-import java.util.Map;
-
 public class SearchResultOutputData {
 
-    private final String location;
     private final Weather weather;
     private final boolean useCaseFailed;
 
-    public SearchResultOutputData(String location, Weather weather, boolean useCaseFailed) {
-        this.location = location;
+    public SearchResultOutputData(Weather weather, boolean useCaseFailed) {
         this.weather = weather;
         this.useCaseFailed = useCaseFailed;
-    }
-
-    public String getLocation() {
-        return location;
     }
 
     public Weather getWeather() {

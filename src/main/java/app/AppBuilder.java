@@ -19,6 +19,7 @@ import interface_adapter.nearby_list.NearbyListPresenter;
 import interface_adapter.nearby_list.NearbyListViewModel;
 import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherPresenter;
+import interface_adapter.weather.WeatherState;
 import interface_adapter.weather.WeatherViewModel;
 import use_case.note.CompareCities.CompareCitiesDataAccessInterface;
 import use_case.note.CompareCities.CompareCitiesInteractor;
@@ -39,6 +40,7 @@ import use_case.note.search_return.SearchReturnInputBoundary;
 import use_case.note.search_return.SearchReturnOutputBoundary;
 import view.MainView;
 
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +60,7 @@ public class AppBuilder {
     private CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
     private NearbyListViewModel nearbyListViewModel = new NearbyListViewModel();
     private MainView mainView;
+    private PropertyChangeEvent evt;
 
     /**
      * Sets the DAO to be used in this application.
@@ -100,6 +103,7 @@ public class AppBuilder {
             public Weather getWeather(String city) throws IOException {
                 return WeatherDataAccessObject.getWeather(city);
             }
+
         };
 
         final AlertPopInteractor interactor = new AlertPopInteractor(accessInterface, outputBoundary);
@@ -181,9 +185,18 @@ public class AppBuilder {
         }
         return this;
     }
+
     public AppBuilder addSearchReturnUseCase() {
-       // can someone complete this its comfusing me.
+        final SearchReturnOutputBoundary outputBoundary = new WeatherPresenter(weatherViewModel);
+        final SearchReturnInteractor interactor = new SearchReturnInteractor(outputBoundary, weatherDAO);
+
+        final WeatherController controller = new WeatherController(interactor);
+        if (mainView == null) {
+            throw new RuntimeException("Error");
+        }
+        return this;
     }
+
     public AppBuilder addSearchResultUseCase() {
         final SearchResultOutputBoundary outputBoundary = new SearchResultPresenter(searchResultViewModel);
         final SearchResultInteractor interactor = new SearchResultInteractor(outputBoundary, weatherDAO, historyDAO);
@@ -198,7 +211,9 @@ public class AppBuilder {
     // add stuff for all the views
     public AppBuilder addMainView() {
         weatherViewModel = new WeatherViewModel();
-        mainView = new MainView(weatherViewModel);
+        searchResultViewModel = new SearchResultViewModel();
+        evt = new PropertyChangeEvent(weatherViewModel,"Weather", null, new WeatherState());
+        mainView = new MainView(weatherViewModel, searchResultViewModel, evt);
         return this;
     }
 }
