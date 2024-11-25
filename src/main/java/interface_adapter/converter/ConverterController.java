@@ -15,7 +15,7 @@ public class ConverterController {
      * Executes the convert case.
      * @param weather the note to be recorded
      */
-    public void execute(Weather weather) {
+    public static void execute(Weather weather) {
         final ConvertFarenheitInputData inputData = new ConvertFarenheitInputData(weather);
         convertInteractor.executeConvert(inputData);
     }
