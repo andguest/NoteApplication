@@ -7,7 +7,7 @@ public class Weather {
 
     private float temperature;
     private String weather;
-    private final String alertDescription;
+    private final String description;
     private float windSpeed;
     private final int humidity;
     private final int visibility;
@@ -15,12 +15,13 @@ public class Weather {
     private String cityName;
     private int lon;
     private int lat;
+    private final String alertDescription;
 
-    public Weather(String city, float temperature, String weather, String alertDescription,
-                   float windSpeed, int humidity, int visibility, int lon, int lat) {
+    public Weather(String city, float temperature, String weather, String description, float windSpeed,
+                   int humidity, int visibility, int lon, int lat, String alertDescription) {
         this.temperature = temperature;
         this.weather = weather;
-        this.alertDescription = alertDescription;
+        this.description = description;
         this.windSpeed = windSpeed;
         this.humidity = humidity;
         this.visibility = visibility;
@@ -28,6 +29,7 @@ public class Weather {
         this.metric = false;
         this.lon = lon;
         this.lat = lat;
+        this.alertDescription = alertDescription;
     }
 
     public void setWeather(String weather) {
@@ -70,6 +72,9 @@ public class Weather {
         this.temperature = temperature;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
     public String getAlertDescription() {
         return alertDescription;
