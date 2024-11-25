@@ -30,6 +30,7 @@ public class MainView extends JFrame {
     public void firePropertyChanged() {
 
     }
+
 //    public static void man(String[] args) {
 //        new MainView();
 //    }

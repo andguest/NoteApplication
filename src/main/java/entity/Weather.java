@@ -98,5 +98,4 @@ public class Weather {
     public int getVisibility() {
         return visibility;
     }
-    }
 }

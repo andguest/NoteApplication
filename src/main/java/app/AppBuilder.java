@@ -1,25 +1,31 @@
 package app;
 
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import interface_adapter.SearchResult.SearchResultController;
 import interface_adapter.SearchResult.SearchResultPresenter;
+import interface_adapter.alert_pop.AlertPopController;
+import interface_adapter.alert_pop.AlertPopPresenter;
 import interface_adapter.converter.ConverterController;
 import interface_adapter.converter.ConverterPresenter;
 import interface_adapter.weather.WeatherViewModel;
 import use_case.note.HistoricalWeatherDataAccessInterface;
 import use_case.note.SearchResultInteractor;
 import use_case.note.WeatherDataAccessInterface;
+import use_case.note.alert_pop.AlertPopInteractor;
+import use_case.note.alert_pop.AlertPopOutputBoundary;
 import use_case.note.convert_farenheit.ConvertFarenheitOutputBoundary;
 import use_case.note.convert_farenheit.ConvertInteractor;
 import use_case.note.search_result.SearchResultOutputBoundary;
 import view.MainView;
 
+import java.awt.*;
+
 /**
  * Builder for the Note Application.
  */
 public class AppBuilder {
+
     public static final int HEIGHT = 750;
     public static final int WIDTH = 1500;
     private WeatherDataAccessInterface weatherDAO;
@@ -45,7 +51,7 @@ public class AppBuilder {
     public JFrame build() {
         final JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Note Application");
+        frame.setTitle("Weather Wizard");
         frame.setSize(WIDTH, HEIGHT);
 
         frame.add(mainView);
@@ -79,7 +85,15 @@ public class AppBuilder {
     }
 
     public AppBuilder addAlertPopUseCase() {
-        // no presenter
+        final AlertPopOutputBoundary alertPopOutputBoundary = new AlertPopPresenter(weatherViewModel);
+        final AlertPopInteractor alertPopInteractor = new AlertPopInteractor(weatherDAO, alertPopOutputBoundary);
+
+        final AlertPopController controller = new AlertPopController(alertPopInteractor);
+        if (mainView == null) {
+            throw new RuntimeException("addNoteView must be called before addSearchResultUseCase");
+        }
+        mainView.setAlertPopController(controller);
+        return this;
     }
 
     public AppBuilder addSearchReturnUseCase() {
