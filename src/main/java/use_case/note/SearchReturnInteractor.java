@@ -1,7 +1,6 @@
 package use_case.note;
 
 import entity.Weather;
-import use_case.note.WeatherDataAccessInterface;
 import use_case.note.search_return.SearchReturnInputBoundary;
 import use_case.note.search_return.SearchReturnInputData;
 import use_case.note.search_return.SearchReturnOutputBoundary;
@@ -9,14 +8,8 @@ import use_case.note.search_return.SearchReturnOutputData;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The interactor for the search return use case.
