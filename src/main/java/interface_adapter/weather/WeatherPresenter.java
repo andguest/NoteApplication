@@ -23,7 +23,7 @@ public class WeatherPresenter implements SearchReturnOutputBoundary {
     public void presentSuccessView(SearchReturnOutputData response) {
         weatherViewModel.getState().setWeather(response.getWeather());
         weatherViewModel.getState().setError(null);
-        weatherViewModel.firePropertyChanged();
+        weatherViewModel.firePropertyChanged("Weather");
     }
 
     /**

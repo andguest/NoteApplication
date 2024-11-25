@@ -24,7 +24,8 @@ public class CompareCitiesPresenter implements CompareCitiesOutputBoundary {
         viewModel.getState().setSecondCityName(outputData.getSecondCityname());
         viewModel.getState().setFirstWeather(outputData.getFirstWeather());
         viewModel.getState().setSecondWeather(outputData.getSecondWeather());
-        viewModel.firePropertyChanged("City");
+
+        viewModel.firePropertyChanged("CompareCity");
     }
 }
 
