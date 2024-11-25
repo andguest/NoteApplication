@@ -22,6 +22,7 @@ import interface_adapter.weather.WeatherPresenter;
 import interface_adapter.weather.WeatherState;
 import interface_adapter.weather.WeatherViewModel;
 import use_case.note.CompareCities.CompareCitiesDataAccessInterface;
+import use_case.note.CompareCities.CompareCitiesInputBoundary;
 import use_case.note.CompareCities.CompareCitiesInteractor;
 import use_case.note.CompareCities.CompareCitiesOutputBoundary;
 import use_case.note.HistoricalWeatherDataAccessInterface;
@@ -35,6 +36,7 @@ import use_case.note.convert_farenheit.ConvertInteractor;
 import use_case.note.nearby_list.NearbyCitiesAccessInterface;
 import use_case.note.nearby_list.NearbyListInteractor;
 import use_case.note.nearby_list.NearbyListOutputBoundary;
+import use_case.note.search_result.SearchResultInputBoundary;
 import use_case.note.search_result.SearchResultOutputBoundary;
 import use_case.note.search_return.SearchReturnOutputBoundary;
 import view.MainView;
@@ -61,6 +63,10 @@ public class AppBuilder {
     private MainView mainView;
     private PropertyChangeEvent evt;
 
+    private SearchResultInputBoundary searchResultInputBoundary;
+    private CompareCitiesInputBoundary compareCitiesInputBoundary;
+    private SearchReturnInputBoundary searchReturnInputBoundary;
+
     /**
      * Sets the DAO to be used in this application.
      * @param weatherDataAccess the DAO to use
@@ -71,21 +77,21 @@ public class AppBuilder {
         return this;
     }
 
-    /**
-     * Builds the application.
-     * @return the JFrame for the application
-     */
-    public JFrame build() {
-        final JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Weather Wizard");
-        frame.setSize(WIDTH, HEIGHT);
-
-        frame.add(mainView);
-
-        return frame;
-
-    }
+//    /**
+//     * Builds the application.
+//     * @return the JFrame for the application
+//     */
+//    public JFrame build() {
+//        final JFrame frame = new JFrame();
+//        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        frame.setTitle("Weather Wizard");
+//        frame.setSize(WIDTH, HEIGHT);
+//
+//        frame.add(mainView);
+//
+//        return frame;
+//
+//    }
 
     /**
      * Creates the objects for the Note Use Case and connects the NoteView to its
@@ -213,6 +219,9 @@ public class AppBuilder {
         searchResultViewModel = new SearchResultViewModel();
         evt = new PropertyChangeEvent(weatherViewModel,"Weather", null, new WeatherState());
         mainView = new MainView(weatherViewModel, searchResultViewModel, evt);
+        mainView.mapPanelView.setSearchResultController(new SearchResultController(searchResultInputBoundary));
+        mainView.mapPanelView.setWeatherController(new WeatherController(searchReturnInputBoundary));
+        mainView.mapPanelView.setCompareCitiesController(new CompareCitiesController(compareCitiesInputBoundary));
         return this;
     }
 }
