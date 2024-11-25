@@ -10,9 +10,14 @@ import entity.Weather;
 public class WeatherState {
     private Weather weather;
     private String error;
+    private String alert;
 
     public Weather getWeather() {
         return weather;
+    }
+
+    public String getAlert() {
+        return alert;
     }
 
     public void setWeather(Weather weather) {
@@ -21,6 +26,10 @@ public class WeatherState {
 
     public void setError(String errorMessage) {
         this.error = errorMessage;
+    }
+
+    public void setAlert(String alert) {
+        this.alert = alert;
     }
 
     public String getError() {
