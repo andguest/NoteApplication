@@ -77,21 +77,21 @@ public class AppBuilder {
         return this;
     }
 
-//    /**
-//     * Builds the application.
-//     * @return the JFrame for the application
-//     */
-//    public JFrame build() {
-//        final JFrame frame = new JFrame();
-//        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        frame.setTitle("Weather Wizard");
-//        frame.setSize(WIDTH, HEIGHT);
-//
-//        frame.add(mainView);
-//
-//        return frame;
-//
-//    }
+    /**
+     * Builds the application.
+     * @return the JFrame for the application
+     */
+    public JFrame build() {
+        final JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setTitle("Weather Wizard");
+        frame.setSize(WIDTH, HEIGHT);
+
+        frame.add(mainView);
+
+        return frame;
+
+    }
 
     /**
      * Creates the objects for the Note Use Case and connects the NoteView to its
@@ -122,6 +122,7 @@ public class AppBuilder {
 
 
     public AppBuilder addCompareCitiesUseCase() {
+        // outputBoundary refers to the presenter.
         final CompareCitiesOutputBoundary outputBoundary = new CompareCitiesPresenter(compareCitiesViewModel);
         final CompareCitiesDataAccessInterface dai = new CompareCitiesDataAccessInterface() {
             @Override
@@ -157,6 +158,7 @@ public class AppBuilder {
         final CompareCitiesInteractor interactor = new CompareCitiesInteractor(dai, outputBoundary);
 
         final CompareCitiesController controller = new CompareCitiesController(interactor);
+        mainView.mapPanelView.setCompareCitiesController(controller);
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
@@ -196,6 +198,7 @@ public class AppBuilder {
         final SearchReturnInteractor interactor = new SearchReturnInteractor(outputBoundary, weatherDAO);
 
         final WeatherController controller = new WeatherController(interactor);
+        mainView.mapPanelView.setWeatherController(controller);
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
@@ -207,6 +210,7 @@ public class AppBuilder {
         final SearchResultInteractor interactor = new SearchResultInteractor(outputBoundary, weatherDAO, historyDAO);
 
         final SearchResultController controller = new SearchResultController(interactor);
+        mainView.mapPanelView.setSearchResultController(controller);
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
@@ -219,9 +223,9 @@ public class AppBuilder {
         searchResultViewModel = new SearchResultViewModel();
         evt = new PropertyChangeEvent(weatherViewModel,"Weather", null, new WeatherState());
         mainView = new MainView(weatherViewModel, searchResultViewModel, evt);
-        mainView.mapPanelView.setSearchResultController(new SearchResultController(searchResultInputBoundary));
-        mainView.mapPanelView.setWeatherController(new WeatherController(searchReturnInputBoundary));
-        mainView.mapPanelView.setCompareCitiesController(new CompareCitiesController(compareCitiesInputBoundary));
+//        mainView.mapPanelView.setSearchResultController(new SearchResultController(searchResultInputBoundary));
+//        mainView.mapPanelView.setWeatherController(new WeatherController(searchReturnInputBoundary));
+//        mainView.mapPanelView.setCompareCitiesController(new CompareCitiesController(compareCitiesInputBoundary));
         return this;
     }
 }

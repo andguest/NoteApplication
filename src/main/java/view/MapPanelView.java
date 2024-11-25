@@ -32,10 +32,12 @@ public class MapPanelView extends JPanel implements ActionListener {
     private SearchResultController searchResultController;
     private WeatherController weatherController;
     private CompareCitiesController compareCitiesController;
+    private final float torontoLatitude = 43.6532;
+    private final float torontoLongitude = -79.3832;
 
     public MapPanelView() {
 
-        mapimagepanel = new MapImagepanel();
+        mapimagepanel = new MapImagepanel(torontoLatitude, torontoLongitude);
 
         cityinputfield1.addActionListener(
                 event -> {
