@@ -98,6 +98,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         windspeed.setText(String.valueOf(weatherState.getWeather().getWindSpeed()));
         visibility.setText(String.valueOf(weatherState.getWeather().getVisibility()));
     }
+
     public void actionPerformed(ActionEvent event) {
         System.out.println("Enter" + event.getActionCommand());
 
