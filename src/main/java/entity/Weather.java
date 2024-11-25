@@ -70,7 +70,6 @@ public class Weather {
         this.temperature = temperature;
     }
 
-
     public String getDescription() {
         return description;
     }

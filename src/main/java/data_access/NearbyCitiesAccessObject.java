@@ -24,7 +24,8 @@ public abstract class NearbyCitiesAccessObject implements NearbyCitiesAccessInte
 
     @Override
     public List<String> getNearbyCities(Float latitude, Float longitude) throws IOException {
-        if (latitude == null || longitude == null || latitude < LOWER_LAT || latitude > UPPER_LAT || longitude < LOWER_LON || longitude > UPPER_LON) {
+        if (latitude == null || longitude == null || latitude < LOWER_LAT
+                || latitude > UPPER_LAT || longitude < LOWER_LON || longitude > UPPER_LON) {
             throw new IOException();
         }
         try {

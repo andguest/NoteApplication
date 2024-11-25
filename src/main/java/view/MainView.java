@@ -1,9 +1,12 @@
 package view;
 
+import interface_adapter.SearchResult.SearchResultController;
+import interface_adapter.SearchResult.SearchResultViewModel;
 import interface_adapter.weather.WeatherViewModel;
 
 import javax.swing.JFrame;
 import java.awt.GridLayout;
+import java.beans.PropertyChangeEvent;
 
 public class MainView extends JFrame {
     private MapPanelView mapPanelView;
@@ -11,9 +14,9 @@ public class MainView extends JFrame {
     private final int frameWidth = 1200;
     private final int frameHeight = 1000;
 
-    public MainView(WeatherViewModel weatherViewModel) {
+    public MainView(WeatherViewModel weatherViewModel, SearchResultViewModel searchResultViewModel, PropertyChangeEvent evt) {
         mapPanelView = new MapPanelView();
-        weatherPanelView = new WeatherPanelView(weatherViewModel);
+        weatherPanelView = new WeatherPanelView(weatherViewModel, searchResultViewModel, evt);
         this.setTitle("Weather Wizard");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(frameWidth, frameHeight);
@@ -26,12 +29,5 @@ public class MainView extends JFrame {
         this.setVisible(true);
 
     }
-
-    public void firePropertyChanged() {
-
-    }
-//    public static void man(String[] args) {
-//        new MainView();
-//    }
 
 }
