@@ -70,9 +70,8 @@ public class Weather {
         this.temperature = temperature;
     }
 
-
-    public String getAlertDescription() {
-        return alertDescription;
+    public String getDescription() {
+        return description;
     }
 
     public void setWindSpeed(float windSpeed) {
