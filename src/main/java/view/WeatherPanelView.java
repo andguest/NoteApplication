@@ -26,7 +26,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     private final WeatherViewModel weatherViewModel;
     private SearchResultViewModel searchResultViewModel;
 
-    private final LabelTextPanel weatherfincitypanel;
+    private final LabelTextPanel weatherincitypanel;
     private final LabelTextPanel temperaturepanel;
     private LabelTextPanel skyconditionpanel;
     private LabelTextPanel humiditypanel;
@@ -54,7 +54,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         this.searchResultViewModel.addPropertyChangeListener(this);
 
         this.setSize(WEATHER_PANEL_WIDTH, WEATHERPANELHEIGHT);
-        weatherfincitypanel = new LabelTextPanel(new JLabel("Current Weather in"), city);
+        weatherincitypanel = new LabelTextPanel(new JLabel("Current Weather in"), city);
         temperaturepanel = new LabelTextPanel(new JLabel("Temperature"), temp);
         // Note we  want to add a convertor that convert the weather information from degree celsius to fahrenheit,
         // or the opposite.The button needs an action listener that pass the change to a ConverterController.
@@ -68,24 +68,20 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
                 // cityname into Weather(call DAO).
                 convertorController.execute((Weather) evt.getSource());
             }
-
-            skyconditionpanel = new LabelTextPanel(new JLabel("Sky"), skycondition);
-            humiditypanel = new LabelTextPanel(new JLabel("Humidity"), humidity);
-            windspeedpanel = new LabelTextPanel(new JLabel("Wind"), windspeed);
-            visibilitypanel = new LabelTextPanel(new JLabel("Visibility"), visibility);
-            this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-            this.add(weatherfincitypanel);
-            this.add(temperaturepanel);
-            this.add(skyconditionpanel);
-            this.add(humiditypanel);
-            this.add(windspeedpanel);
-            this.add(visibilitypanel);
-            this.add(unitconverter);
         });
-        /*
-         * method listens for changes in the WeatherViewModel and updates each LabelTextPanel based on the new data.
-         */
 
+        skyconditionpanel = new LabelTextPanel(new JLabel("Sky"), skycondition);
+        humiditypanel = new LabelTextPanel(new JLabel("Humidity"), humidity);
+        windspeedpanel = new LabelTextPanel(new JLabel("Wind"), windspeed);
+        visibilitypanel = new LabelTextPanel(new JLabel("Visibility"), visibility);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(weatherincitypanel);
+        this.add(temperaturepanel);
+        this.add(skyconditionpanel);
+        this.add(humiditypanel);
+        this.add(windspeedpanel);
+        this.add(visibilitypanel);
+        this.add(unitconverter);
     }
 
     @Override
