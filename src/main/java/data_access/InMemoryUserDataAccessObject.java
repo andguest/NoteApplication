@@ -14,19 +14,21 @@ public class InMemoryUserDataAccessObject implements CompareCitiesDataAccessInte
     private final Map<String, Weather> weathers = new HashMap<>();
 
     @Override
-    public boolean isCityexist(String identifier) {
+    public boolean isCityExist(String identifier) {
         return weathers.containsKey(identifier);
     }
 
     @Override
     public Weather getWeather(String identifier) {
-        if (isCityexist(identifier)) {
+        if (isCityExist(identifier)) {
             if ("Toronto".equalsIgnoreCase(identifier)) {
-                final Weather torontoweather = new Weather("Toronto", 10.5, "rain", null, 0);
+                final Weather torontoweather = new Weather("Toronto", 10.5, "rain",
+                        null, 0, 1, 1, 1, 1, null);
                 return torontoweather;
             }
             else {
-                final Weather tokyoweather = new Weather("Tokyo",1.0, "cloud", null, 1 );
+                final Weather tokyoweather = new Weather("Tokyo", 1.0, "cloud", null,
+                        2, 2, 2, 2, 2, null);
                 return tokyoweather;
             }
         }

@@ -5,20 +5,20 @@ package entity;
  */
 public class Weather {
 
-    private float temperature;
+    private double temperature;
     private String weather;
     private final String description;
-    private float windSpeed;
+    private double windSpeed;
     private final int humidity;
     private final int visibility;
     private boolean metric;
     private String cityName;
-    private int lon;
-    private int lat;
+    private double lon;
+    private double lat;
     private final String alertDescription;
 
-    public Weather(String city, float temperature, String weather, String description, float windSpeed,
-                   int humidity, int visibility, int lon, int lat, String alertDescription) {
+    public Weather(String city, double temperature, String weather, String description, double windSpeed,
+                   int humidity, int visibility, double lon, double lat, String alertDescription) {
         this.temperature = temperature;
         this.weather = weather;
         this.description = description;
@@ -44,7 +44,7 @@ public class Weather {
         this.cityName = cityName;
     }
 
-    public int getLat() {
+    public double getLat() {
         return lat;
     }
 
@@ -52,7 +52,7 @@ public class Weather {
         this.lat = lat;
     }
 
-    public int getLon() {
+    public double getLon() {
         return lon;
     }
 
@@ -89,11 +89,11 @@ public class Weather {
         return weather;
     }
 
-    public float getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
-    public float getWindSpeed() {
+    public double getWindSpeed() {
         return windSpeed;
     }
 

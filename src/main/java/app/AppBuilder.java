@@ -27,6 +27,7 @@ import use_case.note.CompareCities.CompareCitiesInteractor;
 import use_case.note.CompareCities.CompareCitiesOutputBoundary;
 import use_case.note.HistoricalWeatherDataAccessInterface;
 import use_case.note.search_result.SearchResultInteractor;
+import use_case.note.search_return.SearchReturnInputBoundary;
 import use_case.note.search_return.SearchReturnInteractor;
 import use_case.note.WeatherDataAccessInterface;
 import use_case.note.alert_pop.AlertPopInteractor;
@@ -60,7 +61,7 @@ public class AppBuilder {
     private SearchResultViewModel searchResultViewModel = new SearchResultViewModel();
     private CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
     private NearbyListViewModel nearbyListViewModel = new NearbyListViewModel();
-    private MainView mainView;
+    private MainView mainView = new MainView(weatherViewModel, searchResultViewModel, new PropertyChangeEvent(weatherViewModel,"Weather", null, new WeatherState()));
     private PropertyChangeEvent evt;
 
     private SearchResultInputBoundary searchResultInputBoundary;
@@ -106,7 +107,7 @@ public class AppBuilder {
         final WeatherDataAccessInterface accessInterface = new WeatherDataAccessInterface() {
             @Override
             public Weather getWeather(String city) throws IOException {
-                return WeatherDataAccessObject.getWeather(city);
+                return weatherDAO.getWeather(city);
             }
 
         };
@@ -120,40 +121,10 @@ public class AppBuilder {
         return this;
     }
 
-
     public AppBuilder addCompareCitiesUseCase() {
         // outputBoundary refers to the presenter.
         final CompareCitiesOutputBoundary outputBoundary = new CompareCitiesPresenter(compareCitiesViewModel);
-        final CompareCitiesDataAccessInterface dai = new CompareCitiesDataAccessInterface() {
-            @Override
-            public boolean isCityexist(String cityname) {
-                return false;
-            }
-            @Override
-            public Weather getWeather(String cityname) throws IOException {
-                return null;
-            }
-
-            @Override
-            public void saveWeatherinfor(Weather weather) {
-
-            }
-
-            @Override
-            public Map getcitytoweather() {
-                return Map.of();
-            }
-
-            @Override
-            public boolean isCityExist(String cityname) {
-                return false;
-            }
-
-            @Override
-            public void clearcitytoweather() {
-
-            }
-        };
+        final CompareCitiesDataAccessInterface dai = new WeatherDataAccessObject();
 
         final CompareCitiesInteractor interactor = new CompareCitiesInteractor(dai, outputBoundary);
 
@@ -162,6 +133,7 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
+        mainView.mapPanelView.setCompareCitiesController(controller);
         return this;
     }
 
@@ -195,7 +167,7 @@ public class AppBuilder {
 
     public AppBuilder addSearchReturnUseCase() {
         final SearchReturnOutputBoundary outputBoundary = new WeatherPresenter(weatherViewModel);
-        final SearchReturnInteractor interactor = new SearchReturnInteractor(outputBoundary, weatherDAO);
+        final SearchReturnInteractor interactor = new SearchReturnInteractor(outputBoundary, weatherDAO, historyDAO);
 
         final WeatherController controller = new WeatherController(interactor);
         mainView.mapPanelView.setWeatherController(controller);

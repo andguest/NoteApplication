@@ -8,7 +8,7 @@ import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
 
 public class MainView extends JFrame {
-    private MapPanelView mapPanelView;
+    public MapPanelView mapPanelView;
     private WeatherPanelView weatherPanelView;
     private HistoricalSearchedWeatherView searchResultPanelView;
 

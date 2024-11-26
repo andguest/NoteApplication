@@ -29,8 +29,8 @@ public class CompareCitiesInteractor implements CompareCitiesInputBoundary {
             comparecitiesPresenter.prepareFailView("Cannot compare the same city");
         }
         else {
-            if (!compareCitiesDataAccessInterface.isCityexist(firstcityname)
-                || !compareCitiesDataAccessInterface.isCityexist(secondcityname)) {
+            if (!compareCitiesDataAccessInterface.isCityExist(firstcityname)
+                || !compareCitiesDataAccessInterface.isCityExist(secondcityname)) {
                 comparecitiesPresenter.prepareFailView("city not found");
             }
             else {
