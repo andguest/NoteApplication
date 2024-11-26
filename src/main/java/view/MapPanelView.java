@@ -53,7 +53,7 @@ public class MapPanelView extends JPanel implements ActionListener {
                         compareCitiesController.execute(cityinputfield1.getText(), cityinputfield2.getText());
                     }
                 }
-        )
+        );
         cityinputpanel = new LabelTextPanel(new JLabel("search city"), cityinputfield1);
         dateinputpanel = new LabelTextPanel(new JLabel("date"), dateinputfield);
         comparetopanel = new LabelTextPanel(new JLabel("Compare To"), cityinputfield2);

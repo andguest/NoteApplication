@@ -11,7 +11,7 @@ import java.beans.PropertyChangeEvent;
 public class MainView extends JFrame {
     private MapPanelView mapPanelView;
     private WeatherPanelView weatherPanelView;
-    private SearchResultPanelView searchResultPanelView;
+    private HistoricalSearchedWeatherView searchResultPanelView;
 
     private final int frameWidth = 1500;
     private final int frameHeight = 1000;

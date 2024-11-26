@@ -1,15 +1,10 @@
-package use_case.note;
+package use_case.note.search_result;
 
 import java.io.IOException;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 
 import entity.Weather;
-import use_case.note.search_result.SearchResultInputBoundary;
-import use_case.note.search_result.SearchResultInputData;
-import use_case.note.search_result.SearchResultOutputBoundary;
-import use_case.note.search_result.SearchResultOutputData;
+import use_case.note.HistoricalWeatherDataAccessInterface;
+import use_case.note.WeatherDataAccessInterface;
 
 /**
  * The interactor for the search result use case.

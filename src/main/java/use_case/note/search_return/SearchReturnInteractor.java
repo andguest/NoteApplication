@@ -1,10 +1,8 @@
-package use_case.note;
+package use_case.note.search_return;
 
 import entity.Weather;
-import use_case.note.search_return.SearchReturnInputBoundary;
-import use_case.note.search_return.SearchReturnInputData;
-import use_case.note.search_return.SearchReturnOutputBoundary;
-import use_case.note.search_return.SearchReturnOutputData;
+import use_case.note.HistoricalWeatherDataAccessInterface;
+import use_case.note.WeatherDataAccessInterface;
 
 import java.io.IOException;
 import java.time.Instant;
