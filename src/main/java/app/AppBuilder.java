@@ -25,8 +25,8 @@ import use_case.note.CompareCities.CompareCitiesDataAccessInterface;
 import use_case.note.CompareCities.CompareCitiesInteractor;
 import use_case.note.CompareCities.CompareCitiesOutputBoundary;
 import use_case.note.HistoricalWeatherDataAccessInterface;
-import use_case.note.SearchResultInteractor;
-import use_case.note.SearchReturnInteractor;
+import use_case.note.search_result.SearchResultInteractor;
+import use_case.note.search_return.SearchReturnInteractor;
 import use_case.note.WeatherDataAccessInterface;
 import use_case.note.alert_pop.AlertPopInteractor;
 import use_case.note.alert_pop.AlertPopOutputBoundary;
@@ -36,7 +36,6 @@ import use_case.note.nearby_list.NearbyCitiesAccessInterface;
 import use_case.note.nearby_list.NearbyListInteractor;
 import use_case.note.nearby_list.NearbyListOutputBoundary;
 import use_case.note.search_result.SearchResultOutputBoundary;
-import use_case.note.search_return.SearchReturnInputBoundary;
 import use_case.note.search_return.SearchReturnOutputBoundary;
 import view.MainView;
 
