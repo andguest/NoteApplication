@@ -23,34 +23,41 @@ public class MapPanelView extends JPanel implements ActionListener {
     private final LabelTextPanel comparetopanel;
     private final MapImagepanel mapimagepanel;
 
-    private final JTextField cityinputfield1 = new JTextField(15);
-    private final JTextField dateinputfield = new JTextField(15);
-    private final JTextField cityinputfield2 = new JTextField(15);
+    private final JTextField cityinputfield1 = new JTextField(20);
+    private final JTextField dateinputfield = new JTextField(20);
+    private final JTextField cityinputfield2 = new JTextField(20);
     private final int mappanelwidth = 370;
     private final int mappanelheight = 500;
 
     private SearchResultController searchResultController;
     private WeatherController weatherController;
     private CompareCitiesController compareCitiesController;
-    private final float torontoLatitude = 43.6532;
-    private final float torontoLongitude = -79.3832;
+    private final double torontoLatitude = 43.6532;
+    private final double torontoLongitude = -79.3832;
 
     public MapPanelView() {
-
+        // by default set the map center be Toronto.
         mapimagepanel = new MapImagepanel(torontoLatitude, torontoLongitude);
-
+        // when we get one city name -> weather contoller
         cityinputfield1.addActionListener(
                 event -> {
-                    // if the event is coming from cityinput field, execute weather controller
-                    if (event.getSource() == cityinputfield1) {
+                    // if the event is coming from cityinput field, execute weather controller, check if empty
+                    if (event.getSource() == cityinputfield1 && cityinputfield1.getText().length() > 0) {
                         weatherController.execute(cityinputfield1.getText());
+                    }
+                    else {
+                        cityinputfield1.setText("can not return empty");
                     }
                 }
         );
+        // if Compare to another city -> CompareCityController
         cityinputfield2.addActionListener(
                 event -> {
-                    if (event.getSource() == cityinputfield2) {
+                    if (event.getSource() == cityinputfield2 && cityinputfield2.getText().length() > 0) {
                         compareCitiesController.execute(cityinputfield1.getText(), cityinputfield2.getText());
+                    }
+                    else {
+                        cityinputfield2.setText("can not return empty");
                     }
                 }
         );
