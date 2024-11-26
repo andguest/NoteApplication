@@ -23,14 +23,14 @@ public class MapImagepanel extends JPanel {
         this.coords = new double[] {latitude, longitude};
         this.mapViewer = new JXMapViewer();
 
-        TileFactoryInfo info = new OSMTileFactoryInfo();
-        DefaultTileFactory tileFactory = new DefaultTileFactory(info);
+        final TileFactoryInfo info = new OSMTileFactoryInfo();
+        final DefaultTileFactory tileFactory = new DefaultTileFactory(info);
 
         this.mapViewer.setTileFactory(tileFactory);
 
         tileFactory.setThreadPoolSize(NUM_THREADS);
 
-        GeoPosition position = new GeoPosition(this.coords);
+        final GeoPosition position = new GeoPosition(this.coords);
 
         this.mapViewer.setZoom(ZOOM_VALUE);
         mapViewer.setAddressLocation(position);
