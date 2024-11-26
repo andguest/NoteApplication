@@ -78,7 +78,7 @@ public class HistoricalSearchedWeatherView extends JPanel implements PropertyCha
                 weatherfincitypanel.setoutput(searchedWeather.getCityName());
                 break;
             case "temperature":
-                final float temperature = searchedWeather.getTemperature();
+                final double temperature = searchedWeather.getTemperature();
                 final String temperatureString = String.valueOf(temperature);
                 temperaturepanel.setoutput(temperatureString);
                 break;
@@ -91,7 +91,7 @@ public class HistoricalSearchedWeatherView extends JPanel implements PropertyCha
                 humiditypanel.setoutput(humidityString);
                 break;
             case "windSpeed":
-                final float windSpeed = searchedWeather.getWindSpeed();
+                final double windSpeed = searchedWeather.getWindSpeed();
                 final String windSpeedString = String.valueOf(windSpeed);
                 windspeedpanel.setoutput(windSpeedString);
                 break;
