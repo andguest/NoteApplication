@@ -86,6 +86,7 @@ public class WeatherDataAccessObject implements WeatherDataAccessInterface, Comp
                 final JSONObject coordJSON = responseBody.getJSONObject("city").getJSONObject("coord");
                 final double lon = coordJSON.getDouble("lon");
                 final double lat = coordJSON.getDouble("lat");
+
                 final int temp = (int) weatherJSON.getJSONObject(MAIN).getDouble("temp");
                 final int humidity = (int) weatherJSON.getJSONObject(MAIN).getDouble("humidity");
                 final int windspeed = (int) weatherJSON.getJSONObject("wind").getDouble("speed");

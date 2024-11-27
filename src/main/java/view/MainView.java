@@ -9,7 +9,7 @@ import java.beans.PropertyChangeEvent;
 
 public class MainView extends JFrame {
     public MapPanelView mapPanelView;
-    private WeatherPanelView weatherPanelView;
+    public WeatherPanelView weatherPanelView;
     private HistoricalSearchedWeatherView historicalSearchedWeatherView;
 
     private final int frameWidth = 1500;

@@ -14,8 +14,9 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
     private final WeatherDataAccessInterface weatherDataAccess;
     private final HistoricalWeatherDataAccessInterface historicalWeatherDataAccessInterface;
 
-    public SearchResultInteractor(SearchResultOutputBoundary outputBoundary, WeatherDataAccessInterface weatherDataAccess,
-                                 HistoricalWeatherDataAccessInterface historicalDataInterface ) {
+    public SearchResultInteractor(SearchResultOutputBoundary outputBoundary,
+                                  WeatherDataAccessInterface weatherDataAccess, HistoricalWeatherDataAccessInterface
+                                          historicalDataInterface) {
         this.outputBoundary = outputBoundary;
         this.weatherDataAccess = weatherDataAccess;
         this.historicalWeatherDataAccessInterface = historicalDataInterface;
