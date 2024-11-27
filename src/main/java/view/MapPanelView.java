@@ -3,6 +3,9 @@ package view;
 import interface_adapter.CompareCities.CompareCitiesController;
 import interface_adapter.CompareCities.CompareCitiesViewModel;
 import interface_adapter.SearchResult.SearchResultController;
+import interface_adapter.alert_pop.AlertPopController;
+import interface_adapter.converter.ConverterController;
+import interface_adapter.nearby_list.NearbyListController;
 import interface_adapter.weather.WeatherController;
 
 import javax.swing.*;
@@ -33,6 +36,8 @@ public class MapPanelView extends JPanel implements ActionListener {
     private SearchResultController searchResultController;
     private WeatherController weatherController;
     private CompareCitiesController compareCitiesController;
+    private NearbyListController nearbyListController;
+    private AlertPopController alertPopController;
     private final double torontoLatitude = 43.6532;
     private final double torontoLongitude = -79.3832;
 
@@ -113,6 +118,14 @@ public class MapPanelView extends JPanel implements ActionListener {
 
     public void setSearchResultController(SearchResultController searchresultcontroller) {
         this.searchResultController = searchresultcontroller;
+    }
+
+    public void setNearbyListController(NearbyListController nearbyListController) {
+        this.nearbyListController = nearbyListController;
+    }
+
+    public void setAlertPopController(AlertPopController alertPopController) {
+        this.alertPopController = alertPopController;
     }
 
     public void setCompareCitiesController(CompareCitiesController compareCitiesController) {
