@@ -33,8 +33,6 @@ public class MainApplication {
         final AppBuilder builder = new AppBuilder();
         builder.addDAO(noteDataAccess)
                 .addMainView()
-                .addMapPanelView()
-                .addWeatherPanelView()
                 .addSearchReturnUseCase()
                 .addSearchResultUseCase()
                 .addCompareCitiesUseCase()
