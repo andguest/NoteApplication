@@ -82,8 +82,8 @@ public class WeatherDataAccessObject implements WeatherDataAccessInterface, Comp
                 this.cityexist = true;
                 // get individual items from the json object
 
-                final int lat = (int) weatherJSON.getJSONObject(MAIN).getDouble("lat");
-                final int lon = (int) weatherJSON.getJSONObject(MAIN).getDouble("lon");
+                final double lat = (int) responseBody.getJSONObject("city").getJSONObject("coord").getDouble("lat");
+                final double lon = (int) responseBody.getJSONObject("city").getJSONObject("coord").getDouble("lon");;
                 final int temp = (int) weatherJSON.getJSONObject(MAIN).getDouble("temp");
                 final int humidity = (int) weatherJSON.getJSONObject(MAIN).getDouble("humidity");
                 final int windspeed = (int) weatherJSON.getJSONObject("wind").getDouble("speed");
@@ -100,10 +100,12 @@ public class WeatherDataAccessObject implements WeatherDataAccessInterface, Comp
 
                 return new Weather(citySearch, temp, looks, description, windspeed, humidity,
                         visibility, lon, lat, alertDescription);
-            } else {
+            }
+            else {
                 throw new IOException(responseBody.getString(MESSAGE));
             }
-        } catch (IOException | JSONException ex) {
+        }
+        catch (IOException | JSONException ex) {
             throw new IOException(ex);
         }
     }

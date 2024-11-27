@@ -13,8 +13,8 @@ public class Weather {
     private final int visibility;
     private boolean metric;
     private String cityName;
-    private double lon;
-    private double lat;
+    private final double lon;
+    private final double lat;
     private final String alertDescription;
 
     public Weather(String city, double temperature, String weather, String description, double windSpeed,
@@ -40,24 +40,12 @@ public class Weather {
         return cityName;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
     public double getLat() {
         return lat;
     }
 
-    public void setLat(int lat) {
-        this.lat = lat;
-    }
-
     public double getLon() {
         return lon;
-    }
-
-    public void setLon(int lon) {
-        this.lon = lon;
     }
 
     public boolean isMetric() {
