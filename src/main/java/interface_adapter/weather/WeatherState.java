@@ -2,8 +2,6 @@ package interface_adapter.weather;
 
 import entity.Weather;
 
-import entity.Weather;
-
 /**
  * The state information for the weather view model.
  */

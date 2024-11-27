@@ -14,7 +14,6 @@ import javax.swing.SwingUtilities;
 import entity.Weather;
 import interface_adapter.SearchResult.SearchResultViewModel;
 import interface_adapter.converter.ConverterController;
-//import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherViewModel;
 
 /**
@@ -23,6 +22,9 @@ import interface_adapter.weather.WeatherViewModel;
  * This part of view will have to change based on the output, so it depends on the view model
  **/
 public class WeatherPanelView extends JPanel implements PropertyChangeListener, ActionListener {
+    private static final int WEATHER_PANEL_WIDTH = 370;
+    private static final int WEATHERPANELHEIGHT = 400;
+
     private final WeatherViewModel weatherViewModel;
     private SearchResultViewModel searchResultViewModel;
 
@@ -38,8 +40,6 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     private final JButton temperatureconverter;
 
     private ConverterController convertorController;
-    private static final int WEATHER_PANEL_WIDTH = 370;
-    public static final int WEATHERPANELHEIGHT = 400;
 
     public WeatherPanelView(WeatherViewModel weatherViewModel, SearchResultViewModel searchResultViewModel,
                             PropertyChangeEvent evt) {
@@ -62,7 +62,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
                 // the method execute in class ConverterController takes Weather object as input, need fix this.
                 // a potential solution is change evt.getSource() to city name, and in ConverterController, turn
                 // cityname into Weather(call DAO).
-                convertorController.execute((Weather) evt.getSource());
+                convertorController.execute((Weather) evt.getOldValue());
             }
 
             skyconditionpanel = new LabelTextPanel(new JLabel("Sky"), emptylabel);

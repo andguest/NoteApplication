@@ -38,12 +38,6 @@ public interface CompareCitiesDataAccessInterface {
     Map getcitytoweather();
 
     /**
-     * Sets city.
-     * @param cityname check if the cityname is valid or not
-     */
-    boolean isCityExist(String cityname);
-
-    /**
      * This method "clean" the elements inside this.citytoweather we don't want to accumulate pairs.
      */
     void clearcitytoweather();

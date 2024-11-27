@@ -21,6 +21,7 @@ public interface HistoricalWeatherDataAccessInterface {
      * Gets the weather data.
      * @param city the city to get the weather data for
      * @param timestamp the timestamp of the weather data
+     * @return Weather object if no error.
      * @throws IOException if there is an error getting the weather data
      */
     Weather getWeather(String city, String timestamp) throws IOException;

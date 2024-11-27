@@ -3,6 +3,9 @@ package interface_adapter.CompareCities;
 import use_case.note.CompareCities.CompareCitiesOutPutData;
 import use_case.note.CompareCities.CompareCitiesOutputBoundary;
 
+/**
+ * The Presenter for the Compare Cities Use case.
+ */
 public class CompareCitiesPresenter implements CompareCitiesOutputBoundary {
     private final CompareCitiesViewModel viewModel;
 

@@ -1,9 +1,6 @@
 package use_case.note;
 
 import java.io.IOException;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 
 import entity.Weather;
 import use_case.note.search_result.SearchResultInputBoundary;
@@ -19,8 +16,9 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
     private final WeatherDataAccessInterface weatherDataAccess;
     private final HistoricalWeatherDataAccessInterface historicalWeatherDataAccessInterface;
 
-    public SearchResultInteractor(SearchResultOutputBoundary outputBoundary, WeatherDataAccessInterface weatherDataAccess,
-                                 HistoricalWeatherDataAccessInterface historicalDataInterface ) {
+    public SearchResultInteractor(SearchResultOutputBoundary outputBoundary,
+                                  WeatherDataAccessInterface weatherDataAccess, HistoricalWeatherDataAccessInterface
+                                          historicalDataInterface) {
         this.outputBoundary = outputBoundary;
         this.weatherDataAccess = weatherDataAccess;
         this.historicalWeatherDataAccessInterface = historicalDataInterface;

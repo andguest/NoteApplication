@@ -1,6 +1,10 @@
 package view;
 
+import interface_adapter.CompareCities.CompareCitiesController;
 import interface_adapter.SearchResult.SearchResultController;
+import interface_adapter.alert_pop.AlertPopController;
+import interface_adapter.converter.ConverterController;
+import interface_adapter.nearby_list.NearbyListController;
 import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherState;
 
@@ -23,14 +27,19 @@ public class MapPanelView extends JPanel implements ActionListener {
     private final MapImagepanel mapimagepanel;
 
     private final JTextField cityinputfield = new JTextField(15);
-    private final JButton alert;
+    private final JButton alert = new JButton("Alert");
     private final JTextField dateinputfield = new JTextField(15);
-    private final JButton search;
+    private final JButton search = new JButton("Search");
     private final int mappanelwidth = 370;
     private final int mappanelheight = 400;
 
     private SearchResultController searchResultController;
     private WeatherController weatherController;
+    private CompareCitiesController compareCitiesController;
+
+    private NearbyListController nearbyListController;
+    private ConverterController converterController;
+    private AlertPopController alertPopController;
 
     public MapPanelView() {
 
@@ -40,6 +49,7 @@ public class MapPanelView extends JPanel implements ActionListener {
                 event -> {
                     // if the event is coming from cityinput field, execute weather controller
                     if (event.getSource() == cityinputfield) {
+                        System.out.println(weatherController);
                         weatherController.execute(cityinputfield.getText());
                     }
                 }
@@ -85,10 +95,30 @@ public class MapPanelView extends JPanel implements ActionListener {
 //    }
 
     public void setWeatherController(WeatherController weathercontroller) {
+
         this.weatherController = weathercontroller;
+        System.out.println(this.weatherController);
+
     }
 
     public void setSearchResultController(SearchResultController searchresultcontroller) {
-        this.searchResultController = searchresultcontroller; }
+        this.searchResultController = searchresultcontroller;
+    }
+
+    public void setCompareCitiesController(CompareCitiesController compareCitiesController) {
+        this.compareCitiesController = compareCitiesController;
+    }
+
+    public void setAlertPopController(AlertPopController alertPopController) {
+        this.alertPopController = alertPopController;
+    }
+
+    public void setConverterController(ConverterController converterController) {
+        this.converterController = converterController;
+    }
+
+    public void setNearbyListController(NearbyListController nearbyListController) {
+        this.nearbyListController = nearbyListController;
+    }
 }
 

@@ -4,11 +4,15 @@ import entity.Weather;
 import use_case.note.convert_farenheit.ConvertFarenheitInputBoundary;
 import use_case.note.convert_farenheit.ConvertFarenheitInputData;
 
+/**
+ * The Controller for the Convert Units Use case.
+ */
+
 public class ConverterController {
-    private final ConvertFarenheitInputBoundary convertInteractor;
+    private static ConvertFarenheitInputBoundary convertInteractor;
 
     public ConverterController(ConvertFarenheitInputBoundary cInteractor) {
-        this.convertInteractor = cInteractor;
+        convertInteractor = cInteractor;
     }
 
     /**

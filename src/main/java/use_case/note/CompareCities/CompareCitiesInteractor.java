@@ -2,6 +2,8 @@ package use_case.note.CompareCities;
 
 import entity.Weather;
 
+import java.io.IOException;
+
 /*
 * The Comparecities Interactor.
  */
@@ -32,15 +34,21 @@ public class CompareCitiesInteractor implements CompareCitiesInputBoundary {
                 comparecitiesPresenter.prepareFailView("city not found");
             }
             else {
-                final Weather firstweather = compareCitiesDataAccessInterface.getWeather(firstcityname);
-                final Weather secondweather = compareCitiesDataAccessInterface.getWeather(secondcityname);
-                compareCitiesDataAccessInterface.saveWeatherinfor(firstweather);
-                compareCitiesDataAccessInterface.saveWeatherinfor(secondweather);
-                final CompareCitiesOutPutData compareCitiesOutPutData = new CompareCitiesOutPutData(firstcityname,
-                        firstweather, secondcityname, secondweather, false);
-                comparecitiesPresenter.prepareSuccessView(compareCitiesOutPutData);
-                // After each round of execution, clear map in DAO.
-                compareCitiesDataAccessInterface.clearcitytoweather();
+                final Weather firstweather;
+                try {
+                    firstweather = compareCitiesDataAccessInterface.getWeather(firstcityname);
+                    final Weather secondweather = compareCitiesDataAccessInterface.getWeather(secondcityname);
+                    compareCitiesDataAccessInterface.saveWeatherinfor(firstweather);
+                    compareCitiesDataAccessInterface.saveWeatherinfor(secondweather);
+                    final CompareCitiesOutPutData compareCitiesOutPutData = new CompareCitiesOutPutData(firstcityname,
+                            firstweather, secondcityname, secondweather, false);
+                    comparecitiesPresenter.prepareSuccessView(compareCitiesOutPutData);
+                    // After each round of execution, clear map in DAO.
+                    compareCitiesDataAccessInterface.clearcitytoweather();
+                } catch (IOException e) {
+                    System.out.println(e.getMessage());
+                }
+
             }
         }
     }

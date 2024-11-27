@@ -19,7 +19,7 @@ import java.util.Map;
  * This class runs the API and creates a weather DAO.
  **/
 
-public abstract class WeatherDataAccessObject implements WeatherDataAccessInterface, CompareCitiesDataAccessInterface {
+public class WeatherDataAccessObject implements WeatherDataAccessInterface, CompareCitiesDataAccessInterface {
     private static final String API_KEY = "7cce48d7f1f6785f54c0d08aa117ad83";
     private static final String MAIN = "main";
     private static String city;
@@ -31,7 +31,8 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
     private boolean cityexist;
     private final Map<String, Weather> citytoweather = new HashMap<>();
 
-    @Override
+
+
     public Weather getWeather(String citySearch) throws IOException {
         // Make an API call to get the user object.
         final OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -52,8 +53,8 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
                 this.cityexist = true;
                 // get individual items from the json object
 
-                final int lat = (int) weatherJSON.getJSONObject(MAIN).getDouble("lat");
-                final int lon = (int) weatherJSON.getJSONObject(MAIN).getDouble("lon");
+                final double lat = (double) weatherJSON.getJSONObject(MAIN).getDouble("lat");
+                final double lon = (double) weatherJSON.getJSONObject(MAIN).getDouble("lon");
                 final int temp = (int) weatherJSON.getJSONObject(MAIN).getDouble("temp");
                 final int humidity = (int) weatherJSON.getJSONObject(MAIN).getDouble("humidity");
                 final int windspeed = (int) weatherJSON.getJSONObject("wind").getDouble("speed");
@@ -96,8 +97,10 @@ public abstract class WeatherDataAccessObject implements WeatherDataAccessInterf
         this.citytoweather.clear();
     }
 
-    public boolean isCityexist() {
+    @Override
+    public boolean isCityexist(String cityname) {
         return cityexist;
     }
+
 }
 

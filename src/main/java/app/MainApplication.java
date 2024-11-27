@@ -32,13 +32,16 @@ public class MainApplication {
 
         final AppBuilder builder = new AppBuilder();
         builder.addDAO(noteDataAccess)
+                .addMainView()
+                .addMapPanelView()
+                .addWeatherPanelView()
+                .addSearchReturnUseCase()
+                .addSearchResultUseCase()
                 .addCompareCitiesUseCase()
                 .addConvertUseCase()
                 .addNearbyListUseCase()
-                .addSearchReturnUseCase()
-                .addSearchResultUseCase()
                 .addAlertPopUseCase()
-                .addMainView().build().setVisible(true);
+                .build().setVisible(true);
 
     }
 }

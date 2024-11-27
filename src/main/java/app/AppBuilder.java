@@ -36,15 +36,15 @@ import use_case.note.nearby_list.NearbyCitiesAccessInterface;
 import use_case.note.nearby_list.NearbyListInteractor;
 import use_case.note.nearby_list.NearbyListOutputBoundary;
 import use_case.note.search_result.SearchResultOutputBoundary;
-import use_case.note.search_return.SearchReturnInputBoundary;
 import use_case.note.search_return.SearchReturnOutputBoundary;
 import view.MainView;
+import view.MapPanelView;
+import view.WeatherPanelView;
 
 import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
 
 /**
  * Builder for the Note Application.
@@ -60,6 +60,8 @@ public class AppBuilder {
     private CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
     private NearbyListViewModel nearbyListViewModel = new NearbyListViewModel();
     private MainView mainView;
+    private MapPanelView mapPanelView;
+    private WeatherPanelView weatherPanelView;
     private PropertyChangeEvent evt;
 
     /**
@@ -79,7 +81,7 @@ public class AppBuilder {
     public JFrame build() {
         final JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Weather Wizard");
+        frame.setTitle("Weather L");
         frame.setSize(WIDTH, HEIGHT);
 
         frame.add(mainView);
@@ -94,14 +96,12 @@ public class AppBuilder {
      * <p>This method must be called after addNoteView!</p>
      * @return this builder
      * @throws RuntimeException if this method is called before addNoteView
-
      **/
     public AppBuilder addAlertPopUseCase() {
         final AlertPopOutputBoundary outputBoundary = new AlertPopPresenter(weatherViewModel);
         final WeatherDataAccessInterface accessInterface = new WeatherDataAccessInterface() {
-            @Override
             public Weather getWeather(String city) throws IOException {
-                return WeatherDataAccessObject.getWeather(city);
+                return new WeatherDataAccessObject().getWeather(city);
             }
 
         };
@@ -112,9 +112,9 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
+        mapPanelView.setAlertPopController(controller);
         return this;
     }
-
 
     public AppBuilder addCompareCitiesUseCase() {
         final CompareCitiesOutputBoundary outputBoundary = new CompareCitiesPresenter(compareCitiesViewModel);
@@ -123,7 +123,7 @@ public class AppBuilder {
             public boolean isCityexist(String cityname) {
                 return false;
             }
-            @Override
+
             public Weather getWeather(String cityname) throws IOException {
                 return null;
             }
@@ -139,11 +139,6 @@ public class AppBuilder {
             }
 
             @Override
-            public boolean isCityExist(String cityname) {
-                return false;
-            }
-
-            @Override
             public void clearcitytoweather() {
 
             }
@@ -155,6 +150,8 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
+
+        mapPanelView.setCompareCitiesController(controller);
         return this;
     }
 
@@ -166,8 +163,10 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
+        mapPanelView.setConverterController(controller);
         return this;
     }
+
     public AppBuilder addNearbyListUseCase() {
         final NearbyListOutputBoundary outputBoundary = new NearbyListPresenter(nearbyListViewModel);
         final NearbyCitiesAccessInterface dai = new NearbyCitiesAccessInterface() {
@@ -183,17 +182,19 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
+        mapPanelView.setNearbyListController(controller);
         return this;
     }
 
     public AppBuilder addSearchReturnUseCase() {
         final SearchReturnOutputBoundary outputBoundary = new WeatherPresenter(weatherViewModel);
-        final SearchReturnInteractor interactor = new SearchReturnInteractor(outputBoundary, weatherDAO);
+        final SearchReturnInteractor interactor = new SearchReturnInteractor(outputBoundary, weatherDAO, historyDAO);
 
         final WeatherController controller = new WeatherController(interactor);
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
+        mapPanelView.setWeatherController(controller);
         return this;
     }
 
@@ -205,15 +206,30 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
+        mapPanelView.setSearchResultController(controller);
         return this;
+
     }
 
     // add stuff for all the views
     public AppBuilder addMainView() {
         weatherViewModel = new WeatherViewModel();
         searchResultViewModel = new SearchResultViewModel();
-        evt = new PropertyChangeEvent(weatherViewModel,"Weather", null, new WeatherState());
+        evt = new PropertyChangeEvent(weatherViewModel, "Weather", null, new WeatherState());
         mainView = new MainView(weatherViewModel, searchResultViewModel, evt);
+        System.out.println(mainView);
         return this;
     }
+
+    public AppBuilder addMapPanelView() {
+        mapPanelView = new MapPanelView();
+        System.out.println(mapPanelView);
+        return this;
+    }
+
+    public AppBuilder addWeatherPanelView() {
+        weatherPanelView = new WeatherPanelView(weatherViewModel, searchResultViewModel, evt);
+        return this;
+    }
+
 }

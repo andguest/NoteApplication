@@ -1,7 +1,7 @@
 package entity;
 
 /**
- * The representation of a password-protected user for our program.
+ * The representation of a Weather object.
  */
 public class Weather {
 
@@ -13,11 +13,11 @@ public class Weather {
     private final int visibility;
     private boolean metric;
     private String cityName;
-    private int lon;
-    private int lat;
+    private final double lon;
+    private final double lat;
 
     public Weather(String city, float temperature, String weather, String alertDescription,
-                   float windSpeed, int humidity, int visibility, int lon, int lat) {
+                   float windSpeed, int humidity, int visibility, double lon, double lat) {
         this.temperature = temperature;
         this.weather = weather;
         this.alertDescription = alertDescription;
@@ -38,24 +38,12 @@ public class Weather {
         return cityName;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
-    public int getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setLat(int lat) {
-        this.lat = lat;
-    }
-
-    public int getLon() {
+    public double getLon() {
         return lon;
-    }
-
-    public void setLon(int lon) {
-        this.lon = lon;
     }
 
     public boolean isMetric() {
@@ -71,7 +59,7 @@ public class Weather {
     }
 
     public String getDescription() {
-        return description;
+        return alertDescription;
     }
 
     public void setWindSpeed(float windSpeed) {
