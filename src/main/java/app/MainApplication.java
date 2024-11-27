@@ -37,8 +37,7 @@ public class MainApplication {
                 .addNearbyListUseCase()
                 .addSearchReturnUseCase()
                 .addSearchResultUseCase()
-                .addAlertPopUseCase()
-                .addMainView().build().setVisible(true);
+                .addAlertPopUseCase().build().setVisible(true);
 
     }
 }

@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.CompareCities.CompareCitiesController;
+import interface_adapter.CompareCities.CompareCitiesViewModel;
 import interface_adapter.SearchResult.SearchResultController;
 import interface_adapter.weather.WeatherController;
 
@@ -53,8 +54,10 @@ public class MapPanelView extends JPanel implements ActionListener {
         // if Compare to another city -> CompareCityController
         cityinputfield2.addActionListener(
                 event -> {
-                    if (event.getSource() == cityinputfield2 && cityinputfield2.getText().length() > 0) {
+                    if (cityinputfield1.getText().length() > 0 && cityinputfield2.getText().length() > 0) {
                         compareCitiesController.execute(cityinputfield1.getText(), cityinputfield2.getText());
+                        final CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
+                        new CompareCitiesView(compareCitiesViewModel);
                     }
                     else {
                         cityinputfield2.setText("can not return empty");
@@ -77,6 +80,7 @@ public class MapPanelView extends JPanel implements ActionListener {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(cityinputpanel);
         this.add(dateinputpanel);
+        this.add(comparetopanel);
         // adding a Jlabel
         this.add(mapimagepanel.getDisplayfield());
 
