@@ -11,10 +11,11 @@ import java.util.Map;
 public interface CompareCitiesDataAccessInterface {
     /**
      * Check if City exists.
-     * @param cityname the weather is displayed for
-     * @return if city exists
+     * @param cityName the weather is displayed for
+     * @return true if city exists
+     * @throws IOException if the city does not exist or oi.
      */
-    boolean isCityexist(String cityname);
+    boolean isCityExist(String cityName);
 
     /**
      * Creates the Weather.

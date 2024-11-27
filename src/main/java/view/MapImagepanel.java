@@ -1,46 +1,42 @@
 package view;
 
+import org.jxmapviewer.JXMapViewer;
+import org.jxmapviewer.OSMTileFactoryInfo;
+import org.jxmapviewer.viewer.DefaultTileFactory;
+import org.jxmapviewer.viewer.GeoPosition;
+import org.jxmapviewer.viewer.TileFactoryInfo;
+
 import javax.swing.*;
-import java.awt.*;
 
 /*
 * the MapImagePanel is responsible for displaying the map file.
  */
 public class MapImagepanel extends JPanel {
-    private ImageIcon imagemap;
-    private String filename;
-    private JLabel displayfield;
+    private static final int ZOOM_VALUE = 7;
+    private static final int NUM_THREADS = 8;
 
-    // if no arg given, use the example MapImage.png
-    public MapImagepanel() {
-        // this is a local image
-        this.filename = "/Users/sophie/IdeaProjects/WeatherWizard/src/main/java/view/MapImage.png";
-        try {
-            imagemap = new ImageIcon(this.filename);
-            displayfield = new JLabel(imagemap);
-            this.add(displayfield);
-            this.setPreferredSize(new Dimension(imagemap.getIconWidth(), imagemap.getIconHeight()));
+    private double[] coords;
+    private JXMapViewer mapViewer;
 
-        } catch (Exception e) {
-            System.out.println("image cannot be found");
-        }
+    // Generates a JXMapViewer object given latitude and longitude
+    public MapImagepanel(double latitude, double longitude) {
+        this.coords = new double[] {latitude, longitude};
+        this.mapViewer = new JXMapViewer();
+
+        final TileFactoryInfo info = new OSMTileFactoryInfo();
+        final DefaultTileFactory tileFactory = new DefaultTileFactory(info);
+
+        this.mapViewer.setTileFactory(tileFactory);
+
+        tileFactory.setThreadPoolSize(NUM_THREADS);
+
+        final GeoPosition position = new GeoPosition(this.coords);
+
+        this.mapViewer.setZoom(ZOOM_VALUE);
+        mapViewer.setAddressLocation(position);
     }
 
-    // or pass a filename as an argument
-    public MapImagepanel(String filename) {
-        this.filename = filename;
-        try {
-            imagemap = new ImageIcon(this.filename);
-            displayfield = new JLabel(imagemap);
-            this.add(displayfield);
-            this.setPreferredSize(new Dimension(imagemap.getIconWidth(), imagemap.getIconHeight()));
-
-        } catch (Exception e) {
-            System.out.println("image cannot be found");
-        }
-    }
-
-    public JLabel getDisplayfield() {
-        return displayfield;
+    public JXMapViewer getDisplayfield() {
+        return this.mapViewer;
     }
 }

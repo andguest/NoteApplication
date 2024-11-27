@@ -29,26 +29,35 @@ public class CompareCitiesInteractor implements CompareCitiesInputBoundary {
             comparecitiesPresenter.prepareFailView("Cannot compare the same city");
         }
         else {
-            if (!compareCitiesDataAccessInterface.isCityexist(firstcityname)
-                || !compareCitiesDataAccessInterface.isCityexist(secondcityname)) {
+            if (!compareCitiesDataAccessInterface.isCityExist(firstcityname)
+                || !compareCitiesDataAccessInterface.isCityExist(secondcityname)) {
                 comparecitiesPresenter.prepareFailView("city not found");
             }
             else {
-                final Weather firstweather;
+                // THE try-catch statement below is to check firstcityname, secondcityname have corresponding weathers.
                 try {
-                    firstweather = compareCitiesDataAccessInterface.getWeather(firstcityname);
-                    final Weather secondweather = compareCitiesDataAccessInterface.getWeather(secondcityname);
+                    final Weather firstweather = compareCitiesDataAccessInterface.getWeather(firstcityname);
                     compareCitiesDataAccessInterface.saveWeatherinfor(firstweather);
-                    compareCitiesDataAccessInterface.saveWeatherinfor(secondweather);
-                    final CompareCitiesOutPutData compareCitiesOutPutData = new CompareCitiesOutPutData(firstcityname,
-                            firstweather, secondcityname, secondweather, false);
-                    comparecitiesPresenter.prepareSuccessView(compareCitiesOutPutData);
-                    // After each round of execution, clear map in DAO.
-                    compareCitiesDataAccessInterface.clearcitytoweather();
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
+                }
+                catch (IOException ioException) {
+                    comparecitiesPresenter.prepareFailView(ioException.getMessage());
                 }
 
+                try {
+                    final Weather secondweather = compareCitiesDataAccessInterface.getWeather(secondcityname);
+                    compareCitiesDataAccessInterface.saveWeatherinfor(secondweather);
+                }
+                catch (IOException ioException) {
+                    comparecitiesPresenter.prepareFailView(ioException.getMessage());
+                }
+
+                final CompareCitiesOutPutData compareCitiesOutPutData = new CompareCitiesOutPutData(firstcityname,
+                        (Weather) compareCitiesDataAccessInterface.getcitytoweather().get(firstcityname),
+                        secondcityname,
+                        (Weather) compareCitiesDataAccessInterface.getcitytoweather().get(secondcityname), false);
+                comparecitiesPresenter.prepareSuccessView(compareCitiesOutPutData);
+                // After each round of execution, clear map in DAO.
+                compareCitiesDataAccessInterface.clearcitytoweather();
             }
         }
     }

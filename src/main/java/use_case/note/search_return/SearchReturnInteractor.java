@@ -1,13 +1,10 @@
-package use_case.note;
+package use_case.note.search_return;
 
 import entity.Weather;
+import use_case.note.HistoricalWeatherDataAccessInterface;
+import use_case.note.WeatherDataAccessInterface;
+
 import java.io.IOException;
-
-import use_case.note.search_return.SearchReturnInputBoundary;
-import use_case.note.search_return.SearchReturnInputData;
-import use_case.note.search_return.SearchReturnOutputBoundary;
-import use_case.note.search_return.SearchReturnOutputData;
-
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -45,8 +42,7 @@ public class SearchReturnInteractor implements SearchReturnInputBoundary {
                     new SearchReturnOutputData(weatherData, false);
             outputBoundary.presentSuccessView(outputData);
 
-        }
-        catch (IOException exception) {
+        } catch (IOException exception) {
             // Handle exception if weather data retrieval fails and send failure view
             outputBoundary.prepareFailView("Failed to retrieve weather data: " + exception.getMessage());
         }

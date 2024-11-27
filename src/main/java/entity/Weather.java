@@ -1,26 +1,27 @@
 package entity;
 
 /**
- * The representation of a Weather object.
+ * The representation of a password-protected user for our program.
  */
 public class Weather {
 
-    private float temperature;
+    private double temperature;
     private String weather;
-    private final String alertDescription;
-    private float windSpeed;
+    private final String description;
+    private double windSpeed;
     private final int humidity;
     private final int visibility;
     private boolean metric;
     private String cityName;
-    private final double lon;
-    private final double lat;
+    private double lon;
+    private double lat;
+    private final String alertDescription;
 
-    public Weather(String city, float temperature, String weather, String alertDescription,
-                   float windSpeed, int humidity, int visibility, double lon, double lat) {
+    public Weather(String city, double temperature, String weather, String description, double windSpeed,
+                   int humidity, int visibility, double lon, double lat, String alertDescription) {
         this.temperature = temperature;
         this.weather = weather;
-        this.alertDescription = alertDescription;
+        this.description = description;
         this.windSpeed = windSpeed;
         this.humidity = humidity;
         this.visibility = visibility;
@@ -28,6 +29,7 @@ public class Weather {
         this.metric = false;
         this.lon = lon;
         this.lat = lat;
+        this.alertDescription = alertDescription;
     }
 
     public void setWeather(String weather) {
@@ -38,12 +40,24 @@ public class Weather {
         return cityName;
     }
 
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
     public double getLat() {
         return lat;
     }
 
+    public void setLat(int lat) {
+        this.lat = lat;
+    }
+
     public double getLon() {
         return lon;
+    }
+
+    public void setLon(int lon) {
+        this.lon = lon;
     }
 
     public boolean isMetric() {
@@ -59,7 +73,12 @@ public class Weather {
     }
 
     public String getDescription() {
+        return description;
+    }
+
+    public String getAlertDescription() {
         return alertDescription;
+
     }
 
     public void setWindSpeed(float windSpeed) {
@@ -70,11 +89,11 @@ public class Weather {
         return weather;
     }
 
-    public float getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
-    public float getWindSpeed() {
+    public double getWindSpeed() {
         return windSpeed;
     }
 

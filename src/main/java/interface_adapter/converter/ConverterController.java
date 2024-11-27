@@ -5,21 +5,20 @@ import use_case.note.convert_farenheit.ConvertFarenheitInputBoundary;
 import use_case.note.convert_farenheit.ConvertFarenheitInputData;
 
 /**
- * The Controller for the Convert Units Use case.
+ * Controller for the convert case.
  */
-
 public class ConverterController {
-    private static ConvertFarenheitInputBoundary convertInteractor;
+    private final ConvertFarenheitInputBoundary convertInteractor;
 
     public ConverterController(ConvertFarenheitInputBoundary cInteractor) {
-        convertInteractor = cInteractor;
+        this.convertInteractor = cInteractor;
     }
 
     /**
      * Executes the convert case.
      * @param weather the note to be recorded
      */
-    public static void execute(Weather weather) {
+    public void execute(Weather weather) {
         final ConvertFarenheitInputData inputData = new ConvertFarenheitInputData(weather);
         convertInteractor.executeConvert(inputData);
     }

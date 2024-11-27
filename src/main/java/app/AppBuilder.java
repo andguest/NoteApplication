@@ -22,11 +22,13 @@ import interface_adapter.weather.WeatherPresenter;
 import interface_adapter.weather.WeatherState;
 import interface_adapter.weather.WeatherViewModel;
 import use_case.note.CompareCities.CompareCitiesDataAccessInterface;
+import use_case.note.CompareCities.CompareCitiesInputBoundary;
 import use_case.note.CompareCities.CompareCitiesInteractor;
 import use_case.note.CompareCities.CompareCitiesOutputBoundary;
 import use_case.note.HistoricalWeatherDataAccessInterface;
-import use_case.note.SearchResultInteractor;
-import use_case.note.SearchReturnInteractor;
+import use_case.note.search_result.SearchResultInteractor;
+import use_case.note.search_return.SearchReturnInputBoundary;
+import use_case.note.search_return.SearchReturnInteractor;
 import use_case.note.WeatherDataAccessInterface;
 import use_case.note.alert_pop.AlertPopInteractor;
 import use_case.note.alert_pop.AlertPopOutputBoundary;
@@ -35,16 +37,16 @@ import use_case.note.convert_farenheit.ConvertInteractor;
 import use_case.note.nearby_list.NearbyCitiesAccessInterface;
 import use_case.note.nearby_list.NearbyListInteractor;
 import use_case.note.nearby_list.NearbyListOutputBoundary;
+import use_case.note.search_result.SearchResultInputBoundary;
 import use_case.note.search_result.SearchResultOutputBoundary;
 import use_case.note.search_return.SearchReturnOutputBoundary;
 import view.MainView;
-import view.MapPanelView;
-import view.WeatherPanelView;
 
 import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * Builder for the Note Application.
@@ -59,10 +61,12 @@ public class AppBuilder {
     private SearchResultViewModel searchResultViewModel = new SearchResultViewModel();
     private CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
     private NearbyListViewModel nearbyListViewModel = new NearbyListViewModel();
-    private MainView mainView;
-    private MapPanelView mapPanelView;
-    private WeatherPanelView weatherPanelView;
+    private MainView mainView = new MainView(weatherViewModel, searchResultViewModel, new PropertyChangeEvent(weatherViewModel,"Weather", null, new WeatherState()));
     private PropertyChangeEvent evt;
+
+    private SearchResultInputBoundary searchResultInputBoundary;
+    private CompareCitiesInputBoundary compareCitiesInputBoundary;
+    private SearchReturnInputBoundary searchReturnInputBoundary;
 
     /**
      * Sets the DAO to be used in this application.
@@ -81,7 +85,7 @@ public class AppBuilder {
     public JFrame build() {
         final JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setTitle("Weather L");
+        frame.setTitle("Weather Wizard");
         frame.setSize(WIDTH, HEIGHT);
 
         frame.add(mainView);
@@ -96,12 +100,14 @@ public class AppBuilder {
      * <p>This method must be called after addNoteView!</p>
      * @return this builder
      * @throws RuntimeException if this method is called before addNoteView
+
      **/
     public AppBuilder addAlertPopUseCase() {
         final AlertPopOutputBoundary outputBoundary = new AlertPopPresenter(weatherViewModel);
         final WeatherDataAccessInterface accessInterface = new WeatherDataAccessInterface() {
+            @Override
             public Weather getWeather(String city) throws IOException {
-                return new WeatherDataAccessObject().getWeather(city);
+                return weatherDAO.getWeather(city);
             }
 
         };
@@ -112,46 +118,22 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
-        mapPanelView.setAlertPopController(controller);
         return this;
     }
 
     public AppBuilder addCompareCitiesUseCase() {
+        // outputBoundary refers to the presenter.
         final CompareCitiesOutputBoundary outputBoundary = new CompareCitiesPresenter(compareCitiesViewModel);
-        final CompareCitiesDataAccessInterface dai = new CompareCitiesDataAccessInterface() {
-            @Override
-            public boolean isCityexist(String cityname) {
-                return false;
-            }
-
-            public Weather getWeather(String cityname) throws IOException {
-                return null;
-            }
-
-            @Override
-            public void saveWeatherinfor(Weather weather) {
-
-            }
-
-            @Override
-            public Map getcitytoweather() {
-                return Map.of();
-            }
-
-            @Override
-            public void clearcitytoweather() {
-
-            }
-        };
+        final CompareCitiesDataAccessInterface dai = new WeatherDataAccessObject();
 
         final CompareCitiesInteractor interactor = new CompareCitiesInteractor(dai, outputBoundary);
 
         final CompareCitiesController controller = new CompareCitiesController(interactor);
+        mainView.mapPanelView.setCompareCitiesController(controller);
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
-
-        mapPanelView.setCompareCitiesController(controller);
+        mainView.mapPanelView.setCompareCitiesController(controller);
         return this;
     }
 
@@ -163,10 +145,8 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
-        mapPanelView.setConverterController(controller);
         return this;
     }
-
     public AppBuilder addNearbyListUseCase() {
         final NearbyListOutputBoundary outputBoundary = new NearbyListPresenter(nearbyListViewModel);
         final NearbyCitiesAccessInterface dai = new NearbyCitiesAccessInterface() {
@@ -182,7 +162,6 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
-        mapPanelView.setNearbyListController(controller);
         return this;
     }
 
@@ -191,10 +170,10 @@ public class AppBuilder {
         final SearchReturnInteractor interactor = new SearchReturnInteractor(outputBoundary, weatherDAO, historyDAO);
 
         final WeatherController controller = new WeatherController(interactor);
+        mainView.mapPanelView.setWeatherController(controller);
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
-        mapPanelView.setWeatherController(controller);
         return this;
     }
 
@@ -203,33 +182,22 @@ public class AppBuilder {
         final SearchResultInteractor interactor = new SearchResultInteractor(outputBoundary, weatherDAO, historyDAO);
 
         final SearchResultController controller = new SearchResultController(interactor);
+        mainView.mapPanelView.setSearchResultController(controller);
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
-        mapPanelView.setSearchResultController(controller);
         return this;
-
     }
 
     // add stuff for all the views
     public AppBuilder addMainView() {
         weatherViewModel = new WeatherViewModel();
         searchResultViewModel = new SearchResultViewModel();
-        evt = new PropertyChangeEvent(weatherViewModel, "Weather", null, new WeatherState());
+        evt = new PropertyChangeEvent(weatherViewModel,"Weather", null, new WeatherState());
         mainView = new MainView(weatherViewModel, searchResultViewModel, evt);
-        System.out.println(mainView);
+//        mainView.mapPanelView.setSearchResultController(new SearchResultController(searchResultInputBoundary));
+//        mainView.mapPanelView.setWeatherController(new WeatherController(searchReturnInputBoundary));
+//        mainView.mapPanelView.setCompareCitiesController(new CompareCitiesController(compareCitiesInputBoundary));
         return this;
     }
-
-    public AppBuilder addMapPanelView() {
-        mapPanelView = new MapPanelView();
-        System.out.println(mapPanelView);
-        return this;
-    }
-
-    public AppBuilder addWeatherPanelView() {
-        weatherPanelView = new WeatherPanelView(weatherViewModel, searchResultViewModel, evt);
-        return this;
-    }
-
 }
