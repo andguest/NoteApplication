@@ -38,8 +38,10 @@ public class MainApplication {
                 .addCompareCitiesUseCase()
                 .addConvertUseCase()
                 .addNearbyListUseCase()
-                .addAlertPopUseCase()
-                .build().setVisible(true);
+                .addSearchReturnUseCase()
+                .addSearchResultUseCase()
+                .addAlertPopUseCase().build().setVisible(true);
+
 
     }
 }

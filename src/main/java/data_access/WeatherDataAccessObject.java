@@ -51,11 +51,13 @@ public class WeatherDataAccessObject implements WeatherDataAccessInterface, Comp
             if (responseBody.getInt(STATUS_CODE_LABEL) == SUCCESS_CODE) {
                 // City exists, as the API returned successful data
                 return true;
-            } else {
+            }
+            else {
                 // City doesn't exist (API returned a different code or error message)
                 return false;
             }
-        } catch (IOException | JSONException ex) {
+        }
+        catch (IOException | JSONException ex) {
             // If there was an error with the API call (e.g., network error, parsing error), assume city doesn't exist
             return false;
         }
@@ -81,15 +83,19 @@ public class WeatherDataAccessObject implements WeatherDataAccessInterface, Comp
                 final JSONObject weatherJSON = responseBody.getJSONArray(WEATHER_LIST).getJSONObject(0);
                 this.cityexist = true;
                 // get individual items from the json object
+                final JSONObject coordJSON = responseBody.getJSONObject("city").getJSONObject("coord");
+                final double lon = coordJSON.getDouble("lon");
+                final double lat = coordJSON.getDouble("lat");
 
-                final double lat = (int) responseBody.getJSONObject("city").getJSONObject("coord").getDouble("lat");
-                final double lon = (int) responseBody.getJSONObject("city").getJSONObject("coord").getDouble("lon");;
                 final int temp = (int) weatherJSON.getJSONObject(MAIN).getDouble("temp");
                 final int humidity = (int) weatherJSON.getJSONObject(MAIN).getDouble("humidity");
                 final int windspeed = (int) weatherJSON.getJSONObject("wind").getDouble("speed");
-                final String looks = weatherJSON.getJSONObject("weather").getString(MAIN);
+
+                // final String looks = weatherJSON.getJSONObject("weather").getString(MAIN);
+                final String looks = weatherJSON.getJSONArray("weather").getJSONObject(0).getString(MAIN);
                 final int visibility = weatherJSON.getInt("visibility");
-                final String description = weatherJSON.getJSONObject("weather").getString("description");
+                // final String description = weatherJSON.getJSONObject("weather").getString("description");
+                final String description = weatherJSON.getJSONArray("weather").getJSONObject(0).getString("description");
                 String alertDescription = "no weather alert";
                 if (weatherJSON.has("alerts")) {
                     final JSONArray alertsArray = weatherJSON.getJSONArray("alerts");
