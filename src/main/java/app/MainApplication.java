@@ -27,7 +27,7 @@ public class MainApplication {
      */
     public static void main(String[] args) {
 
-        // create the data access and inject it into our builder!
+        // create the data access and inject it into our builder
         final WeatherDataAccessInterface noteDataAccess = new WeatherDataAccessObject();
 
         final AppBuilder builder = new AppBuilder();
