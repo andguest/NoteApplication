@@ -15,6 +15,6 @@ public interface WeatherDataAccessInterface {
      * @return the weather information
      * @throws IOException if the city does not exist or oi.
      */
-    Weather getWeather(String city) throws IOException;
+     public Weather getWeather(String city) throws IOException;
 
 }

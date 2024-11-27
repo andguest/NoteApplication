@@ -17,7 +17,7 @@ public class AlertPopInteractor implements AlertPopInputBoundary {
         try {
             String cityName = alertPopInputData.getCityName();
             Weather weather = weatherAccess.getWeather(cityName);
-            String alert = weather.getAlertDescription();
+            String alert = weather.getDescription();
             String noAlert = "no weather alert";
 
             if (noAlert.equals(alert)) {

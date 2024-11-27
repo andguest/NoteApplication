@@ -1,6 +1,9 @@
 package interface_adapter.CompareCities;
 
 import entity.Weather;
+/**
+ * The State for the Compare Cities Use case.
+ */
 
 public class CompareCitiesState {
     private String error;
