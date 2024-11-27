@@ -88,9 +88,11 @@ public class CompareCitiesView extends JFrame implements PropertyChangeListener 
         humidityA.setText(String.valueOf(compareCitiesState.getFirstWeather().getHumidity()));
         windspeedA.setText(String.valueOf(compareCitiesState.getFirstWeather().getWindSpeed()));
         visibilityA.setText(String.valueOf(compareCitiesState.getFirstWeather().getVisibility()));
-    }
-    public void actionPerformed(ActionEvent event) {
-        System.out.println("Enter" + event.getActionCommand());
-
+        cityB.setText(compareCitiesState.getSecondWeather().getCityName());
+        tempB.setText(String.valueOf(compareCitiesState.getSecondWeather().getTemperature()));
+        skyconditionB.setText(compareCitiesState.getSecondWeather().getWeather());
+        humidityB.setText(String.valueOf(compareCitiesState.getSecondWeather().getHumidity()));
+        windspeedB.setText(String.valueOf(compareCitiesState.getSecondWeather().getWindSpeed()));
+        visibilityB.setText(String.valueOf(compareCitiesState.getSecondWeather().getVisibility()));
     }
 }
