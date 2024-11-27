@@ -32,16 +32,11 @@ public class MainApplication {
 
         final AppBuilder builder = new AppBuilder();
         builder.addDAO(noteDataAccess)
-                .addMainView()
                 .addSearchReturnUseCase()
                 .addSearchResultUseCase()
                 .addCompareCitiesUseCase()
                 .addConvertUseCase()
                 .addNearbyListUseCase()
-                .addSearchReturnUseCase()
-                .addSearchResultUseCase()
                 .addAlertPopUseCase().build().setVisible(true);
-
-
     }
 }
