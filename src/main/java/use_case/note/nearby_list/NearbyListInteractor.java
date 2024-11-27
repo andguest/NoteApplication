@@ -18,8 +18,8 @@ public class NearbyListInteractor implements NearbyListInputBoundary {
     @Override
     public void execute(NearbyListInputData nearbyListInputData) {
         try {
-            final Float latitude = nearbyListInputData.getLatitude();
-            final Float longitude = nearbyListInputData.getLongitude();
+            final double latitude = nearbyListInputData.getLatitude();
+            final double longitude = nearbyListInputData.getLongitude();
             final ArrayList<String> cities = (ArrayList<String>) cityDataAccess.getNearbyCities(latitude, longitude);
             final NearbyListOutputData outputData = new NearbyListOutputData(cities, false);
             outputBoundary.presentSuccessView(outputData);
