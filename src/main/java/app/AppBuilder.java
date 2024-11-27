@@ -41,12 +41,11 @@ import use_case.note.search_result.SearchResultInputBoundary;
 import use_case.note.search_result.SearchResultOutputBoundary;
 import use_case.note.search_return.SearchReturnOutputBoundary;
 import view.MainView;
+import view.MapPanelView;
 
 import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
 
 /**
  * Builder for the Note Application.
@@ -61,7 +60,9 @@ public class AppBuilder {
     private SearchResultViewModel searchResultViewModel = new SearchResultViewModel();
     private CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
     private NearbyListViewModel nearbyListViewModel = new NearbyListViewModel();
-    private MainView mainView = new MainView(weatherViewModel, searchResultViewModel, new PropertyChangeEvent(weatherViewModel,"Weather", null, new WeatherState()));
+    private MapPanelView mapPanelView = new MapPanelView();
+    private MainView mainView = new MainView(weatherViewModel, searchResultViewModel,
+            new PropertyChangeEvent(weatherViewModel, "Weather", null, new WeatherState()));
     private PropertyChangeEvent evt;
 
     private SearchResultInputBoundary searchResultInputBoundary;
@@ -100,8 +101,8 @@ public class AppBuilder {
      * <p>This method must be called after addNoteView!</p>
      * @return this builder
      * @throws RuntimeException if this method is called before addNoteView
-
      **/
+
     public AppBuilder addAlertPopUseCase() {
         final AlertPopOutputBoundary outputBoundary = new AlertPopPresenter(weatherViewModel);
         final WeatherDataAccessInterface accessInterface = new WeatherDataAccessInterface() {
@@ -147,6 +148,7 @@ public class AppBuilder {
         }
         return this;
     }
+
     public AppBuilder addNearbyListUseCase() {
         final NearbyListOutputBoundary outputBoundary = new NearbyListPresenter(nearbyListViewModel);
         final NearbyCitiesAccessInterface dai = new NearbyCitiesAccessInterface() {
@@ -163,6 +165,7 @@ public class AppBuilder {
             throw new RuntimeException("Error");
         }
         return this;
+
     }
 
     public AppBuilder addSearchReturnUseCase() {
@@ -196,8 +199,9 @@ public class AppBuilder {
         evt = new PropertyChangeEvent(weatherViewModel,"Weather", null, new WeatherState());
         mainView = new MainView(weatherViewModel, searchResultViewModel, evt);
 //        mainView.mapPanelView.setSearchResultController(new SearchResultController(searchResultInputBoundary));
-//        mainView.mapPanelView.setWeatherController(new WeatherController(searchReturnInputBoundary));
+//        mainView.mapPanealView.setWeatherController(new WeatherController(searchReturnInputBoundary));
 //        mainView.mapPanelView.setCompareCitiesController(new CompareCitiesController(compareCitiesInputBoundary));
         return this;
     }
+
 }
