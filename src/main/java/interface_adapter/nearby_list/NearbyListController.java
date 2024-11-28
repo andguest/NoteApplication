@@ -19,7 +19,7 @@ public class NearbyListController {
      * @param longitude the current longitude
      * @param latitude the current latitude
      */
-    public void execute(float longitude, float latitude) {
+    public void execute(double longitude, double latitude) {
         // Create a NearbyListInputData object to encapsulate the input data
         final NearbyListInputData inputData = new NearbyListInputData(longitude, latitude);
         // Call the use case's execute method with the input data
