@@ -7,6 +7,7 @@ import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
 
 import javax.swing.*;
+import java.awt.*;
 
 /*
 * the MapImagePanel is responsible for displaying the map file.
@@ -34,6 +35,7 @@ public class MapImagepanel extends JPanel {
 
         this.mapViewer.setZoom(ZOOM_VALUE);
         mapViewer.setAddressLocation(position);
+        mapViewer.setPreferredSize(new Dimension(600, 600));
     }
 
     public JXMapViewer getDisplayfield() {
