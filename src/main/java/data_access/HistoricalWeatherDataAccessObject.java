@@ -1,5 +1,10 @@
 package data_access;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,7 +23,7 @@ import use_case.note.HistoricalWeatherDataAccessInterface;
  */
 public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataAccessInterface {
     @Override
-    public void saveWeather(Weather weather, String timeStamp) {
+    public void saveWeather(Weather weather, String timeStamp) throws IOException {
 
         // Save the weather data to the database
         // Convert the Weather object to JSON
@@ -40,11 +45,18 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
         final String weatherJson = jsonBuilder.toString();
 
         // Write JSON to a file
-        try (FileWriter fileWriter = new FileWriter("weather.json")) {
+//        final String weatherJson = jsonBuilder.toString();
+
+        File file = new File("weather.json");
+//        File file = new File("weather.json");
+        try (FileWriter fileWriter = new FileWriter(file, true)) {
+            if (file.length() != 0) {
+                // Add a new line before appending a new object if the file is not empty
+                fileWriter.write(System.lineSeparator());
+            }
             fileWriter.write(weatherJson);
-            System.out.println("Successfully wrote weather data to weather.json");
-        }
-        catch (IOException excep) {
+            System.out.println("Successfully appended weather data to weather.json");
+        } catch (IOException excep) {
             excep.printStackTrace();
         }
     }
