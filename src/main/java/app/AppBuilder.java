@@ -128,6 +128,7 @@ public class AppBuilder {
      **/
 
     public AppBuilder addCompareCitiesUseCase() {
+        mainView.mapPanelView.setCompareCitiesViewModel(compareCitiesViewModel);
         // outputBoundary refers to the presenter.
         final CompareCitiesOutputBoundary outputBoundary = new CompareCitiesPresenter(compareCitiesViewModel);
         final CompareCitiesDataAccessInterface dai = new WeatherDataAccessObject();
