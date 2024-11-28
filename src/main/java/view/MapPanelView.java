@@ -9,6 +9,7 @@ import interface_adapter.alert_pop.AlertPopController;
 import interface_adapter.converter.ConverterController;
 import interface_adapter.nearby_list.NearbyListController;
 import interface_adapter.weather.WeatherController;
+import interface_adapter.weather.WeatherViewModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -46,9 +47,9 @@ public class MapPanelView extends JPanel implements ActionListener {
 
     private CompareCitiesViewModel compareCitiesViewModel;
 
-    public MapPanelView() {
+    public MapPanelView(WeatherViewModel weatherViewModel) {
         // by default set the map center be Toronto.
-        mapimagepanel = new MapImagepanel(torontoLatitude, torontoLongitude);
+        mapimagepanel = new MapImagepanel(weatherViewModel, torontoLatitude, torontoLongitude);
         // when we get one city name -> weather contoller
         cityinputfield1.addActionListener(
                 event -> {
