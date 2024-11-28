@@ -1,6 +1,8 @@
 package view;
 
+import app.MainApplication;
 import interface_adapter.CompareCities.CompareCitiesController;
+import interface_adapter.CompareCities.CompareCitiesState;
 import interface_adapter.CompareCities.CompareCitiesViewModel;
 import interface_adapter.SearchResult.SearchResultController;
 import interface_adapter.alert_pop.AlertPopController;
@@ -11,6 +13,7 @@ import interface_adapter.weather.WeatherController;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 
 /*
 * This class responsible for creating the Map Subpanel of the main. The Map subpanel itself contains 4 parts:
@@ -41,6 +44,8 @@ public class MapPanelView extends JPanel implements ActionListener {
     private final double torontoLatitude = 43.6532;
     private final double torontoLongitude = -79.3832;
 
+    private CompareCitiesViewModel compareCitiesViewModel;
+
     public MapPanelView() {
         // by default set the map center be Toronto.
         mapimagepanel = new MapImagepanel(torontoLatitude, torontoLongitude);
@@ -60,9 +65,11 @@ public class MapPanelView extends JPanel implements ActionListener {
         cityinputfield2.addActionListener(
                 event -> {
                     if (cityinputfield1.getText().length() > 0 && cityinputfield2.getText().length() > 0) {
+
+                        // some how the view model doesn't get update
                         compareCitiesController.execute(cityinputfield1.getText(), cityinputfield2.getText());
-                        final CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
-                        new CompareCitiesView(compareCitiesViewModel);
+
+                        new CompareCitiesView(this.compareCitiesViewModel);
                     }
                     else {
                         cityinputfield2.setText("can not return empty");
@@ -98,6 +105,10 @@ public class MapPanelView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         System.out.println("Enter" + event.getActionCommand());
 
+    }
+
+    public void setCompareCitiesViewModel(CompareCitiesViewModel compareCitiesViewModel) {
+        this.compareCitiesViewModel = compareCitiesViewModel;
     }
 //    public void propertyChange(PropertyChangeEvent evt) {
 //        final WeatherState state = (WeatherState) evt.getNewValue();
