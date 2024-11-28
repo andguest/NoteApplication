@@ -38,6 +38,8 @@ public class CompareCitiesView extends JFrame implements PropertyChangeListener 
     private final JLabel humidityB = new JLabel("");
     private final JLabel windspeedB = new JLabel("");
     private final JLabel visibilityB = new JLabel("");
+    private final int frameheight = 800;
+    private final int framewidth = 1000;
 
     private CompareCitiesViewModel compareCitiesViewModel;
 
@@ -72,6 +74,7 @@ public class CompareCitiesView extends JFrame implements PropertyChangeListener 
         this.add(windspeedpanelB, BorderLayout.EAST);
         this.add(visibilitypanelB, BorderLayout.EAST);
 
+        this.setSize(framewidth, frameheight);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
