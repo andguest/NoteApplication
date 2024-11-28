@@ -2,6 +2,7 @@ package app;
 
 import javax.swing.*;
 
+import data_access.HistoricalWeatherDataAccessObject;
 import data_access.WeatherDataAccessObject;
 import entity.Weather;
 import interface_adapter.CompareCities.CompareCitiesController;
@@ -55,7 +56,7 @@ public class AppBuilder {
     public static final int WIDTH = 1500;
     private static final String ERROR = "Error";
     private WeatherDataAccessInterface weatherDAO;
-    private HistoricalWeatherDataAccessInterface historyDAO;
+    private HistoricalWeatherDataAccessInterface historyDAO = new HistoricalWeatherDataAccessObject();
     private WeatherViewModel weatherViewModel = new WeatherViewModel();
     private SearchResultViewModel searchResultViewModel = new SearchResultViewModel();
     private CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
@@ -84,12 +85,10 @@ public class AppBuilder {
      * @throws RuntimeException becais.
      **/
     public JFrame build() {
-        final JFrame frame = new JFrame();
+        final JFrame frame = mainView;
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setTitle("Weather Wizard");
         frame.setSize(WIDTH, HEIGHT);
-
-        frame.add(mainView);
 
         return frame;
 

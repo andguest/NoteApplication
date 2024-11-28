@@ -42,7 +42,8 @@ public class SearchReturnInteractor implements SearchReturnInputBoundary {
                     new SearchReturnOutputData(weatherData, false);
             outputBoundary.presentSuccessView(outputData);
 
-        } catch (IOException exception) {
+        }
+        catch (IOException exception) {
             // Handle exception if weather data retrieval fails and send failure view
             outputBoundary.prepareFailView("Failed to retrieve weather data: " + exception.getMessage());
         }

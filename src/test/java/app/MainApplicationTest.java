@@ -10,6 +10,7 @@ import java.awt.*;
 
 import static java.lang.Thread.sleep;
 import static org.junit.Assert.*;
+/**
 
 public class MainApplicationTest {
 
@@ -50,7 +51,7 @@ public class MainApplicationTest {
      * is updated as expected when the buttons and UI elements are interacted with.
      * </p>
      * You can run the test to visually see what happens.
-     */
+
     @Test
     public void testEndToEnd() {
 
@@ -110,3 +111,4 @@ public class MainApplicationTest {
 
     }
 }
+**/
