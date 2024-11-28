@@ -1,7 +1,5 @@
 package view;
 
-import interface_adapter.weather.WeatherState;
-import interface_adapter.weather.WeatherViewModel;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.viewer.DefaultTileFactory;
@@ -10,28 +8,20 @@ import org.jxmapviewer.viewer.TileFactoryInfo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.time.Instant;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 
 /*
 * the MapImagePanel is responsible for displaying the map file.
  */
-public class MapImagepanel extends JPanel implements PropertyChangeListener {
-    private static final int ZOOM_VALUE = 13;
+public class MapImagepanel extends JPanel {
+    private static final int ZOOM_VALUE = 7;
     private static final int NUM_THREADS = 8;
 
-    private final WeatherViewModel weatherViewModel;
-    private GeoPosition position;
+    private double[] coords;
     private JXMapViewer mapViewer;
 
     // Generates a JXMapViewer object given latitude and longitude
-    public MapImagepanel(WeatherViewModel weatherViewModel, double latitude, double longitude) {
-        this.weatherViewModel = weatherViewModel;
-        this.weatherViewModel.addPropertyChangeListener(this);
-
+    public MapImagepanel(double latitude, double longitude) {
+        this.coords = new double[] {latitude, longitude};
         this.mapViewer = new JXMapViewer();
 
         final TileFactoryInfo info = new OSMTileFactoryInfo();
@@ -41,23 +31,11 @@ public class MapImagepanel extends JPanel implements PropertyChangeListener {
 
         tileFactory.setThreadPoolSize(NUM_THREADS);
 
-        this.position = new GeoPosition(latitude, longitude);
+        final GeoPosition position = new GeoPosition(this.coords);
 
         this.mapViewer.setZoom(ZOOM_VALUE);
         mapViewer.setAddressLocation(position);
         mapViewer.setPreferredSize(new Dimension(600, 600));
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        final WeatherState weatherState = (WeatherState) evt.getNewValue();
-        setPosition(weatherState.getWeather().getLat(), weatherState.getWeather().getLon());
-
-    }
-
-    private void setPosition(double latitude, double longitude) {
-        this.position = new GeoPosition(latitude, longitude);
-        this.mapViewer.setAddressLocation(position);
     }
 
     public JXMapViewer getDisplayfield() {
