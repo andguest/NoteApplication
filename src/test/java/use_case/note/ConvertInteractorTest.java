@@ -23,7 +23,8 @@ public class ConvertInteractorTest {
         WeatherDataAccessInterface Dao = new WeatherDataAccessInterface() {
             @Override
             public Weather getWeather(String city) throws IOException {
-                return WeatherDataAccessObject.getWeather(city);
+
+                return new WeatherDataAccessObject().getWeather(city);
             }
         };
         ConvertFarenheitOutputBoundary boundary = new ConvertFarenheitOutputBoundary() {

@@ -103,4 +103,8 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         System.out.println("Enter" + event.getActionCommand());
 
     }
+
+    public void setConverterController(ConverterController converterController) {
+        this.convertorController = converterController;
+    }
 }

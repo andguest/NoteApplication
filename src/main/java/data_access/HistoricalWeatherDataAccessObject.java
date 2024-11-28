@@ -1,8 +1,12 @@
 package data_access;
 
+import java.io.*;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
@@ -18,7 +22,7 @@ import use_case.note.HistoricalWeatherDataAccessInterface;
  */
 public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataAccessInterface {
     @Override
-    public void saveWeather(Weather weather, String timeStamp) {
+    public void saveWeather(Weather weather, String timeStamp) throws IOException {
 
         // Save the weather data to the database
         // Convert the Weather object to JSON
@@ -40,12 +44,25 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
         final String weatherJson = jsonBuilder.toString();
 
         // Write JSON to a file
-        try (FileWriter fileWriter = new FileWriter("weather.json")) {
+//        final String weatherJson = jsonBuilder.toString();
+
+        String relativePath = "src/main/resources/weather.json";
+        File file = new File(relativePath);
+
+        // Convert StringBuilder to String (JSON data to write)
+//        final String weatherJson = jsonBuilder.toString();
+
+        try (FileWriter fileWriter = new FileWriter(file, true)) {
+            if (file.length() != 0) {
+                // Add a new line before appending a new object if the file is not empty
+                fileWriter.write(System.lineSeparator());
+            }
+            // Write JSON data to the file
             fileWriter.write(weatherJson);
-            System.out.println("Successfully wrote weather data to weather.json");
-        }
-        catch (IOException excep) {
+            System.out.println("Successfully appended weather data to weather.json");
+        } catch (IOException excep) {
             excep.printStackTrace();
+            System.out.println("Failed to append weather data to weather.json");
         }
     }
 
@@ -55,12 +72,17 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
         // Read the JSON from the file
         final String filePath = "weather.json";
         try {
-            // Reading the content of the JSON file into a String
-            final String jsonString = Files.readString(Paths.get(Objects.requireNonNull(getClass().getClassLoader()
-                    .getResource(filePath)).toURI()));
-            // Converting the JSON String to a JSONArray
+            URL resource = getClass().getClassLoader().getResource("weather.json");
+            if (resource == null) {
+                throw new FileNotFoundException("File not found: src/main/resources/weather.json");
+            }
+
+            // Read the content of the JSON file as a String
+            final String jsonString = Files.readString(Paths.get(resource.toURI()), StandardCharsets.UTF_8);
             final JSONArray weatherArray = new JSONArray(jsonString);
-            // Iterating over the JSONArray
+
+//            final JSONArray weatherArray = weatherObject1.getJSONArray("weatherData");
+
             for (int i = 0; i < weatherArray.length(); i++) {
                 // Getting the JSONObject at the index i
                 final JSONObject weatherObject = weatherArray.getJSONObject(i);

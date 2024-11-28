@@ -3,6 +3,7 @@ package data_access;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import use_case.note.nearby_list.NearbyCitiesAccessInterface;
 
 import java.io.IOException;

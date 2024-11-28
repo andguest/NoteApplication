@@ -2,6 +2,7 @@ package app;
 
 import javax.swing.*;
 
+import data_access.HistoricalWeatherDataAccessObject;
 import data_access.WeatherDataAccessObject;
 import entity.Weather;
 import interface_adapter.CompareCities.CompareCitiesController;
@@ -45,8 +46,6 @@ import view.MainView;
 import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
 
 /**
  * Builder for the Note Application.
@@ -55,13 +54,15 @@ public class AppBuilder {
 
     public static final int HEIGHT = 750;
     public static final int WIDTH = 1500;
+    private static final String ERROR = "Error";
     private WeatherDataAccessInterface weatherDAO;
-    private HistoricalWeatherDataAccessInterface historyDAO;
+    private HistoricalWeatherDataAccessInterface historyDAO = new HistoricalWeatherDataAccessObject();
     private WeatherViewModel weatherViewModel = new WeatherViewModel();
     private SearchResultViewModel searchResultViewModel = new SearchResultViewModel();
     private CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
     private NearbyListViewModel nearbyListViewModel = new NearbyListViewModel();
-    private MainView mainView = new MainView(weatherViewModel, searchResultViewModel, new PropertyChangeEvent(weatherViewModel,"Weather", null, new WeatherState()));
+    private MainView mainView = new MainView(weatherViewModel, searchResultViewModel,
+            new PropertyChangeEvent(weatherViewModel, "Weather", null, new WeatherState()));
     private PropertyChangeEvent evt;
 
     private SearchResultInputBoundary searchResultInputBoundary;
@@ -79,29 +80,26 @@ public class AppBuilder {
     }
 
     /**
-     * Builds the application.
-     * @return the JFrame for the application
-     */
+     * USE case.
+     * @return sjsjnk.
+     * @throws RuntimeException becais.
+     **/
     public JFrame build() {
-        final JFrame frame = new JFrame();
+        final JFrame frame = mainView;
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setTitle("Weather Wizard");
         frame.setSize(WIDTH, HEIGHT);
-
-        frame.add(mainView);
 
         return frame;
 
     }
 
     /**
-     * Creates the objects for the Note Use Case and connects the NoteView to its
-     * controller.
-     * <p>This method must be called after addNoteView!</p>
-     * @return this builder
-     * @throws RuntimeException if this method is called before addNoteView
-
+     * USE case.
+     * @return sjsjnk.
+     * @throws RuntimeException becais.
      **/
+
     public AppBuilder addAlertPopUseCase() {
         final AlertPopOutputBoundary outputBoundary = new AlertPopPresenter(weatherViewModel);
         final WeatherDataAccessInterface accessInterface = new WeatherDataAccessInterface() {
@@ -116,10 +114,17 @@ public class AppBuilder {
 
         final AlertPopController controller = new AlertPopController(interactor);
         if (mainView == null) {
-            throw new RuntimeException("Error");
+            throw new RuntimeException(ERROR);
         }
+        mainView.mapPanelView.setAlertPopController(controller);
         return this;
     }
+
+    /**
+     * USE case.
+     * @return sjsjnk.
+     * @throws RuntimeException becais.
+     **/
 
     public AppBuilder addCompareCitiesUseCase() {
         // outputBoundary refers to the presenter.
@@ -136,6 +141,11 @@ public class AppBuilder {
         mainView.mapPanelView.setCompareCitiesController(controller);
         return this;
     }
+    /**
+     * USE case.
+     * @return sjsjnk.
+     * @throws RuntimeException becais.
+     **/
 
     public AppBuilder addConvertUseCase() {
         final ConvertFarenheitOutputBoundary outputBoundary = new ConverterPresenter(weatherViewModel);
@@ -145,8 +155,16 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
+
+        mainView.weatherPanelView.setConverterController(controller);
         return this;
     }
+    /**
+     * USE case.
+     * @return sjsjnk.
+     * @throws RuntimeException becais.
+     **/
+
     public AppBuilder addNearbyListUseCase() {
         final NearbyListOutputBoundary outputBoundary = new NearbyListPresenter(nearbyListViewModel);
         final NearbyCitiesAccessInterface dai = new NearbyCitiesAccessInterface() {
@@ -162,8 +180,15 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
+
+        mainView.mapPanelView.setNearbyListController(controller);
         return this;
     }
+    /**
+     * USE case.
+     * @return sjsjnk.
+     * @throws RuntimeException becais.
+     **/
 
     public AppBuilder addSearchReturnUseCase() {
         final SearchReturnOutputBoundary outputBoundary = new WeatherPresenter(weatherViewModel);
@@ -174,8 +199,14 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
+        mainView.mapPanelView.setWeatherController(controller);
         return this;
     }
+    /**
+     * USE case.
+     * @return sjsjnk.
+     * @throws RuntimeException becais.
+     **/
 
     public AppBuilder addSearchResultUseCase() {
         final SearchResultOutputBoundary outputBoundary = new SearchResultPresenter(searchResultViewModel);
@@ -186,18 +217,25 @@ public class AppBuilder {
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
+        mainView.mapPanelView.setSearchResultController(controller);
         return this;
     }
+    /**
+     * USE case.
+     * @return sjsjnk.
+     * @throws RuntimeException becais.
+     **/
 
     // add stuff for all the views
     public AppBuilder addMainView() {
         weatherViewModel = new WeatherViewModel();
         searchResultViewModel = new SearchResultViewModel();
-        evt = new PropertyChangeEvent(weatherViewModel,"Weather", null, new WeatherState());
+        evt = new PropertyChangeEvent(weatherViewModel, "Weather", null, new WeatherState());
         mainView = new MainView(weatherViewModel, searchResultViewModel, evt);
-//        mainView.mapPanelView.setSearchResultController(new SearchResultController(searchResultInputBoundary));
-//        mainView.mapPanelView.setWeatherController(new WeatherController(searchReturnInputBoundary));
-//        mainView.mapPanelView.setCompareCitiesController(new CompareCitiesController(compareCitiesInputBoundary));
+        //  mainView.mapPanelView.setSearchResultController(new SearchResultController(searchResultInputBoundary));
+        //    mainView.mapPanealView.setWeatherController(new WeatherController(searchReturnInputBoundary));
+        //    mainView.mapPanelView.setCompareCitiesController(new CompareCitiesController(compareCitiesInputBoundary));
         return this;
     }
+
 }

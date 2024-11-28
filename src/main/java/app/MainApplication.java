@@ -27,18 +27,16 @@ public class MainApplication {
      */
     public static void main(String[] args) {
 
-        // create the data access and inject it into our builder!
+        // create the data access and inject it into our builder
         final WeatherDataAccessInterface noteDataAccess = new WeatherDataAccessObject();
 
         final AppBuilder builder = new AppBuilder();
         builder.addDAO(noteDataAccess)
+                .addSearchReturnUseCase()
+                .addSearchResultUseCase()
                 .addCompareCitiesUseCase()
                 .addConvertUseCase()
                 .addNearbyListUseCase()
-                .addSearchReturnUseCase()
-                .addSearchResultUseCase()
-                .addAlertPopUseCase()
-                .addMainView().build().setVisible(true);
-
+                .addAlertPopUseCase().build().setVisible(true);
     }
 }

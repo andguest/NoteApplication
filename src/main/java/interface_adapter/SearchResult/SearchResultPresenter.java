@@ -1,9 +1,10 @@
 package interface_adapter.SearchResult;
 
-import interface_adapter.weather.WeatherViewModel;
 import use_case.note.search_result.SearchResultOutputBoundary;
 import use_case.note.search_result.SearchResultOutputData;
-
+/**
+ * Presenter for the Search Result use case.
+ */
 
 public class SearchResultPresenter implements SearchResultOutputBoundary {
 
