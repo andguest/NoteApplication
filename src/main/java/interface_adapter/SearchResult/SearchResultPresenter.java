@@ -19,7 +19,7 @@ public class SearchResultPresenter implements SearchResultOutputBoundary {
         final SearchResultState state = new SearchResultState();
         state.setWeather(searchResultOutputData.getWeather());
         viewModel.setState(state);
-        viewModel.firePropertyChanged();
+        viewModel.firePropertyChanged("searchResult");
     }
 
     @Override

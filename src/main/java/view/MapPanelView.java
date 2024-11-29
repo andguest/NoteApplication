@@ -81,7 +81,6 @@ public class MapPanelView extends JPanel implements ActionListener {
                         searchResultController.execute(cityinputfield1.getText(), dateinputfield.getText());
                     }
                 });
-//        this.setSize(mappanelwidth, mappanelheight);
         this.setPreferredSize(new java.awt.Dimension(mappanelwidth, mappanelheight));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(cityinputpanel);

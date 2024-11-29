@@ -87,8 +87,10 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("Weather")){
         final WeatherState weatherState = (WeatherState) evt.getNewValue();
         setfield(weatherState);
+        }
     }
 
     public void setfield(WeatherState weatherState) {
