@@ -6,11 +6,8 @@ import interface_adapter.nearby_list.NearbyListViewModel;
 import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherState;
 import interface_adapter.weather.WeatherViewModel;
-import org.jxmapviewer.viewer.DefaultTileFactory;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
