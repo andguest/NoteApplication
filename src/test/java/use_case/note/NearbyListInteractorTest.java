@@ -12,7 +12,7 @@ public class NearbyListInteractorTest {
     public void testOutput() {
         NearbyCitiesAccessInterface cityDAO = new NearbyCitiesAccessInterface() {
             @Override
-            public List<String> getNearbyCities(Float latitude, Float longitude) throws IOException {
+            public List<String> getNearbyCities(double latitude, double longitude) throws IOException {
                 return List.of();
             }
         };
@@ -30,7 +30,7 @@ public class NearbyListInteractorTest {
         };
 
         NearbyListInteractor cityInteractor = new NearbyListInteractor(cityOB, cityDAO);
-        NearbyListInputData input = new NearbyListInputData(0.0f, 0.0f);
+        NearbyListInputData input = new NearbyListInputData(0.0, 0.0);
         cityInteractor.execute(input);
     }
 }

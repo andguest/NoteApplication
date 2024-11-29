@@ -4,19 +4,19 @@ package use_case.note.nearby_list;
  * An input is when the map moves.
  */
 public class NearbyListInputData {
-    private final float longitude;
-    private final float latitude;
+    private final double longitude;
+    private final double latitude;
 
-    public NearbyListInputData(float longitude, float latitude) {
+    public NearbyListInputData(double longitude, double latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 }
