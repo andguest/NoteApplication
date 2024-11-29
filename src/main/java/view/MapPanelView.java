@@ -50,7 +50,7 @@ public class MapPanelView extends JPanel implements ActionListener {
                 event -> {
                     // if the event is coming from cityinput field, execute weather controller, check if empty
                     if (event.getSource() == cityinputfield1 && cityinputfield1.getText().length() > 0) {
-                        weatherController.execute(cityinputfield1.getText());
+                        weatherController.execute(cityinputfield1.getText().toLowerCase());
                         cityinputfield1.setText("");
                     }
                     else {
@@ -62,7 +62,8 @@ public class MapPanelView extends JPanel implements ActionListener {
         cityinputfield2.addActionListener(
                 event -> {
                     if (cityinputfield1.getText().length() > 0 && cityinputfield2.getText().length() > 0) {
-                        compareCitiesController.execute(cityinputfield1.getText(), cityinputfield2.getText());
+                        compareCitiesController
+                                .execute(cityinputfield1.getText().toLowerCase(), cityinputfield2.getText());
                         final CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
                         new CompareCitiesView(compareCitiesViewModel);
                         cityinputfield1.setText("");
@@ -81,7 +82,8 @@ public class MapPanelView extends JPanel implements ActionListener {
                 // if this event is coming from dateinput field, execute searchresult contoller
                 event -> {
                     if (event.getSource() == dateinputfield) {
-                        searchResultController.execute(cityinputfield1.getText(), dateinputfield.getText());
+                        searchResultController
+                                .execute(cityinputfield1.getText().toLowerCase(), dateinputfield.getText());
                         cityinputfield1.setText("");
                         dateinputfield.setText("");
                     }
