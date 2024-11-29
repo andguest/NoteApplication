@@ -20,6 +20,8 @@ public class ConverterController {
      */
     public void execute(Weather weather) {
         final ConvertFarenheitInputData inputData = new ConvertFarenheitInputData(weather);
+        System.out.println("@ controller going to interactor");
         convertInteractor.executeConvert(inputData);
+
     }
 }
