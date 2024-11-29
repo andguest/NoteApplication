@@ -4,12 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import data_access.WeatherDataAccessObject;
 import entity.Weather;
 import interface_adapter.SearchResult.SearchResultViewModel;
 import interface_adapter.converter.ConverterController;
@@ -32,6 +34,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     private LabelTextPanel humiditypanel;
     private LabelTextPanel windspeedpanel;
     private LabelTextPanel visibilitypanel;
+    private Weather currentWeather;
 
     private final JLabel city = new JLabel("");
     private final JLabel temp = new JLabel("");
@@ -49,6 +52,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
                             PropertyChangeEvent evt) {
         this.weatherViewModel = weatherViewModel;
         this.weatherViewModel.addPropertyChangeListener(this);
+
         // Users can search for weather at a given time
         this.searchResultViewModel = searchResultViewModel;
         this.searchResultViewModel.addPropertyChangeListener(this);
@@ -66,14 +70,21 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
                 // the method execute in class ConverterController takes Weather object as input, need fix this.
                 // a potential solution is change evt.getSource() to city name, and in ConverterController, turn
                 // cityname into Weather(call DAO).
-                convertorController.execute((Weather) evt.getSource());
+                System.out.println(((WeatherState) evt.getNewValue()).getWeather());
+                if (city != null) {
+                    final Weather tempWeather = currentWeather;
+                    convertorController.execute(tempWeather);
+                    System.out.println("worked");
+                    System.out.println(tempWeather.getCityName());
+                }
+
             }
         });
 
-        skyconditionpanel = new LabelTextPanel(new JLabel("Sky"), skycondition);
-        humiditypanel = new LabelTextPanel(new JLabel("Humidity"), humidity);
-        windspeedpanel = new LabelTextPanel(new JLabel("Wind"), windspeed);
-        visibilitypanel = new LabelTextPanel(new JLabel("Visibility"), visibility);
+        skyconditionpanel = new LabelTextPanel(new JLabel("Sky: "), skycondition);
+        humiditypanel = new LabelTextPanel(new JLabel("Humidity: "), humidity);
+        windspeedpanel = new LabelTextPanel(new JLabel("Wind: "), windspeed);
+        visibilitypanel = new LabelTextPanel(new JLabel("Visibility: "), visibility);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(weatherincitypanel);
         this.add(temperaturepanel);
@@ -88,6 +99,8 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     public void propertyChange(PropertyChangeEvent evt) {
         final WeatherState weatherState = (WeatherState) evt.getNewValue();
         setfield(weatherState);
+        this.currentWeather = weatherState.getWeather();
+        System.out.println(weatherState.getWeather());
     }
 
     public void setfield(WeatherState weatherState) {
