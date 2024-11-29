@@ -17,6 +17,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class NearbyCitiesView extends JPanel implements PropertyChangeListener {
+    private final JLabel listInputPanel;
     private final JList<String> cities;
     private final NearbyListViewModel nearbyListViewModel;
     private final WeatherViewModel weatherViewModel;
@@ -30,8 +31,11 @@ public class NearbyCitiesView extends JPanel implements PropertyChangeListener {
         this.nearbyListViewModel.addPropertyChangeListener(this);
         this.weatherViewModel.addPropertyChangeListener(this);
 
-        final DefaultListModel<String> citiesModel = new DefaultListModel<>();
-        cities = new JList<>(citiesModel);
+        this.listInputPanel = new JLabel("Nearby cities (double click to select):");
+
+        this.add(this.listInputPanel);
+
+        cities = new JList<>();
 
         cities.addMouseListener(new MouseAdapter() {
             @Override
@@ -43,7 +47,6 @@ public class NearbyCitiesView extends JPanel implements PropertyChangeListener {
         });
 
         this.add(cities);
-        this.setVisible(true);
     }
 
     @Override
