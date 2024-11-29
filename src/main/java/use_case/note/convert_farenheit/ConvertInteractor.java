@@ -13,11 +13,13 @@ public class ConvertInteractor implements ConvertFarenheitInputBoundary {
 
     @Override
     public void executeConvert(ConvertFarenheitInputData cInputData) {
+
         if (cInputData.weather != null) {
 
             convert(cInputData);
+            System.out.println(" @ the interactor about to show view");
 
-            final ConvertFarenheitOutputData outputData = new ConvertFarenheitOutputData(cInputData.weather, true);
+            final ConvertFarenheitOutputData outputData = new ConvertFarenheitOutputData(cInputData.weather, false);
             oBounds.prepareSuccessView(outputData);
         }
         else {
