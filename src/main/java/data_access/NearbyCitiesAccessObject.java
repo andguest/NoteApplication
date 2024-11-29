@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * This class provides the service of getting nearby cities.
  */
-public abstract class NearbyCitiesAccessObject implements NearbyCitiesAccessInterface {
+public class NearbyCitiesAccessObject implements NearbyCitiesAccessInterface {
     private static final double LOWER_LAT = -90.0;
     private static final double UPPER_LAT = 90.0;
     private static final double LOWER_LON = -180.0;

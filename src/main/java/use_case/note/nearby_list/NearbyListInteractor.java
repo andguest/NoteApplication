@@ -20,7 +20,7 @@ public class NearbyListInteractor implements NearbyListInputBoundary {
         try {
             final double latitude = nearbyListInputData.getLatitude();
             final double longitude = nearbyListInputData.getLongitude();
-            final ArrayList<String> cities = (ArrayList<String>) cityDataAccess.getNearbyCities(latitude, longitude);
+            final String[] cities = cityDataAccess.getNearbyCities(latitude, longitude).toArray(new String[0]);
             final NearbyListOutputData outputData = new NearbyListOutputData(cities, false);
             outputBoundary.presentSuccessView(outputData);
         }

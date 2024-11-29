@@ -7,15 +7,15 @@ import java.util.List;
  * The state information for the nearby list view model.
  */
 public class NearbyListState {
-    private ArrayList<String> cities;
+    private String[] cities;
     private String error;
 
-    public List<String> getCities() {
+    public String[] getCities() {
         return cities;
     }
 
-    public void setCities(List<String> cities) {
-        this.cities = (ArrayList<String>) cities;
+    public void setCities(String[] cities) {
+        this.cities = cities;
     }
 
     public void setError(String error) {

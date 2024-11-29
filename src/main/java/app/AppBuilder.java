@@ -3,6 +3,7 @@ package app;
 import javax.swing.*;
 
 import data_access.HistoricalWeatherDataAccessObject;
+import data_access.NearbyCitiesAccessObject;
 import data_access.WeatherDataAccessObject;
 import entity.Weather;
 import interface_adapter.CompareCities.CompareCitiesController;
@@ -61,7 +62,7 @@ public class AppBuilder {
     private SearchResultViewModel searchResultViewModel = new SearchResultViewModel();
     private CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
     private NearbyListViewModel nearbyListViewModel = new NearbyListViewModel();
-    private MainView mainView = new MainView(weatherViewModel, searchResultViewModel,
+    private MainView mainView = new MainView(nearbyListViewModel, weatherViewModel, searchResultViewModel,
             new PropertyChangeEvent(weatherViewModel, "Weather", null, new WeatherState()));
     private PropertyChangeEvent evt;
 
@@ -167,12 +168,7 @@ public class AppBuilder {
 
     public AppBuilder addNearbyListUseCase() {
         final NearbyListOutputBoundary outputBoundary = new NearbyListPresenter(nearbyListViewModel);
-        final NearbyCitiesAccessInterface dai = new NearbyCitiesAccessInterface() {
-            @Override
-            public List<String> getNearbyCities(double latitude, double longitude) throws IOException {
-                return List.of();
-            }
-        };
+        final NearbyCitiesAccessInterface dai = new NearbyCitiesAccessObject();
 
         final NearbyListInteractor interactor = new NearbyListInteractor(outputBoundary, dai);
 
@@ -182,6 +178,7 @@ public class AppBuilder {
         }
 
         mainView.mapPanelView.setNearbyListController(controller);
+        mainView.nearbyCitiesView.setNearbyListController(controller);
         return this;
     }
     /**
@@ -200,6 +197,7 @@ public class AppBuilder {
             throw new RuntimeException("Error");
         }
         mainView.mapPanelView.setWeatherController(controller);
+        mainView.nearbyCitiesView.setWeatherController(controller);
         return this;
     }
     /**
@@ -231,7 +229,7 @@ public class AppBuilder {
         weatherViewModel = new WeatherViewModel();
         searchResultViewModel = new SearchResultViewModel();
         evt = new PropertyChangeEvent(weatherViewModel, "Weather", null, new WeatherState());
-        mainView = new MainView(weatherViewModel, searchResultViewModel, evt);
+        mainView = new MainView(nearbyListViewModel, weatherViewModel, searchResultViewModel, evt);
         //  mainView.mapPanelView.setSearchResultController(new SearchResultController(searchResultInputBoundary));
         //    mainView.mapPanealView.setWeatherController(new WeatherController(searchReturnInputBoundary));
         //    mainView.mapPanelView.setCompareCitiesController(new CompareCitiesController(compareCitiesInputBoundary));
