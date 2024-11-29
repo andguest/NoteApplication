@@ -39,8 +39,8 @@ public class MapPanelView extends JPanel implements ActionListener {
     private CompareCitiesController compareCitiesController;
     private NearbyListController nearbyListController;
     private AlertPopController alertPopController;
-    private final double torontoLatitude = 43.6532;
-    private final double torontoLongitude = -79.3832;
+    private final double torontoLatitude = 43.70011;
+    private final double torontoLongitude = -79.4163;
 
     public MapPanelView(WeatherViewModel weatherViewModel) {
         // by default set the map center be Toronto.
