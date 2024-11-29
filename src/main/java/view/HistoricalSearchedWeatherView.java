@@ -62,47 +62,70 @@ public class HistoricalSearchedWeatherView extends JPanel implements PropertyCha
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        final String propertyName = evt.getPropertyName();
-        final SearchResultState state = (SearchResultState) evt.getNewValue();
-        final Weather searchedWeather = state.getWeather();
-
-        SwingUtilities.invokeLater(() -> {
-            changeProperty(propertyName, searchedWeather);
-        });
-
-    }
-
-    private void changeProperty(String propertyName, Weather searchedWeather) {
-        switch (propertyName) {
-            case "city":
+//        final String propertyName = evt.getPropertyName();
+//        final SearchResultState state = (SearchResultState) evt.getNewValue();
+//        final Weather searchedWeather = state.getWeather();
+//        if (evt.getPropertyName().equals("searchedWeather")) {
+            final SearchResultState state = (SearchResultState) evt.getNewValue();
+            final Weather searchedWeather = state.getWeather();
+//            SwingUtilities.invokeLater(() -> {
                 weatherfincitypanel.setoutput(searchedWeather.getCityName());
-                break;
-            case "temperature":
-                final double temperature = searchedWeather.getTemperature();
-                final String temperatureString = String.valueOf(temperature);
-                temperaturepanel.setoutput(temperatureString);
-                break;
-            case "skyCondition":
+                temperaturepanel.setoutput(String.valueOf(searchedWeather.getTemperature()));
                 skyconditionpanel.setoutput(searchedWeather.getDescription());
-                break;
-            case "humidity":
-                final int humidity = searchedWeather.getHumidity();
-                final String humidityString = String.valueOf(humidity);
-                humiditypanel.setoutput(humidityString);
-                break;
-            case "windSpeed":
-                final double windSpeed = searchedWeather.getWindSpeed();
-                final String windSpeedString = String.valueOf(windSpeed);
-                windspeedpanel.setoutput(windSpeedString);
-                break;
-            case "visibility":
-                final int visibility = searchedWeather.getVisibility();
-                final String visibilityString = String.valueOf(visibility);
-                visibilitypanel.setoutput(visibilityString);
-                break;
-            default:
-                System.out.println("Unknown property: " + propertyName);
-                break;
-        }
+                humiditypanel.setoutput(String.valueOf(searchedWeather.getHumidity()));
+                windspeedpanel.setoutput(String.valueOf(searchedWeather.getWindSpeed()));
+                visibilitypanel.setoutput(String.valueOf(searchedWeather.getVisibility()));
+                citypanel.setoutput(searchedWeather.getCityName());
+//            });
+//        }
+
+//        SwingUtilities.invokeLater(() -> {
+//        changeProperty(propertyName, searchedWeather);
+//        });
+
     }
+
+//    private void changeProperty(String propertyName, Weather searchedWeather) {
+//        if (propertyName.equals("searchedWeather")) {
+//            weatherfincitypanel.setoutput(searchedWeather.getCityName());
+//            temperaturepanel.setoutput(String.valueOf(searchedWeather.getTemperature()));
+//            skyconditionpanel.setoutput(searchedWeather.getDescription());
+//            humiditypanel.setoutput(String.valueOf(searchedWeather.getHumidity()));
+//            windspeedpanel.setoutput(String.valueOf(searchedWeather.getWindSpeed()));
+//            visibilitypanel.setoutput(String.valueOf(searchedWeather.getVisibility()));
+//            citypanel.setoutput(searchedWeather.getCityName());
+//        }
+//    }
+//        switch (propertyName) {
+//            case "city":
+//                weatherfincitypanel.setoutput(searchedWeather.getCityName());
+//                break;
+//            case "temperature":
+//                final double temperature = searchedWeather.getTemperature();
+//                final String temperatureString = String.valueOf(temperature);
+//                temperaturepanel.setoutput(temperatureString);
+//                break;
+//            case "skyCondition":
+//                skyconditionpanel.setoutput(searchedWeather.getDescription());
+//                break;
+//            case "humidity":
+//                final int humidity = searchedWeather.getHumidity();
+//                final String humidityString = String.valueOf(humidity);
+//                humiditypanel.setoutput(humidityString);
+//                break;
+//            case "windSpeed":
+//                final double windSpeed = searchedWeather.getWindSpeed();
+//                final String windSpeedString = String.valueOf(windSpeed);
+//                windspeedpanel.setoutput(windSpeedString);
+//                break;
+//            case "visibility":
+//                final int visibility = searchedWeather.getVisibility();
+//                final String visibilityString = String.valueOf(visibility);
+//                visibilitypanel.setoutput(visibilityString);
+//                break;
+//            default:
+//                System.out.println("Unknown property: " + propertyName);
+//                break;
+//        }
+//    }
 }

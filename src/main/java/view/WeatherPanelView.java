@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import entity.Weather;
+import interface_adapter.SearchResult.SearchResultState;
 import interface_adapter.SearchResult.SearchResultViewModel;
 import interface_adapter.converter.ConverterController;
 //import interface_adapter.weather.WeatherController;
