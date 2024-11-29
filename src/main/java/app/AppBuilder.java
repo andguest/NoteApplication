@@ -169,7 +169,7 @@ public class AppBuilder {
         final NearbyListOutputBoundary outputBoundary = new NearbyListPresenter(nearbyListViewModel);
         final NearbyCitiesAccessInterface dai = new NearbyCitiesAccessInterface() {
             @Override
-            public List<String> getNearbyCities(Float latitude, Float longitude) throws IOException {
+            public List<String> getNearbyCities(double latitude, double longitude) throws IOException {
                 return List.of();
             }
         };

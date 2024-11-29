@@ -16,7 +16,7 @@ public class MainView extends JFrame {
     private final int frameHeight = 1000;
 
     public MainView(WeatherViewModel weatherViewModel, SearchResultViewModel searchResultViewModel, PropertyChangeEvent evt) {
-        mapPanelView = new MapPanelView();
+        mapPanelView = new MapPanelView(weatherViewModel);
         weatherPanelView = new WeatherPanelView(weatherViewModel, searchResultViewModel, evt);
         historicalSearchedWeatherView = new HistoricalSearchedWeatherView(searchResultViewModel, evt);
         this.setTitle("Weather Wizard");

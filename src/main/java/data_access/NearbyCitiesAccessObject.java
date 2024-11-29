@@ -17,16 +17,15 @@ import java.util.List;
  * This class provides the service of getting nearby cities.
  */
 public abstract class NearbyCitiesAccessObject implements NearbyCitiesAccessInterface {
-    private static final Float LOWER_LAT = -90.0f;
-    private static final Float UPPER_LAT = 90.0f;
-    private static final Float LOWER_LON = -180.0f;
-    private static final Float UPPER_LON = 180.0f;
-    private static final Float COMPARE_DIFF = 10.0f;
+    private static final double LOWER_LAT = -90.0;
+    private static final double UPPER_LAT = 90.0;
+    private static final double LOWER_LON = -180.0;
+    private static final double UPPER_LON = 180.0;
+    private static final double COMPARE_DIFF = 10.0;
 
     @Override
-    public List<String> getNearbyCities(Float latitude, Float longitude) throws IOException {
-        if (latitude == null || longitude == null || latitude < LOWER_LAT
-                || latitude > UPPER_LAT || longitude < LOWER_LON || longitude > UPPER_LON) {
+    public List<String> getNearbyCities(double latitude, double longitude) throws IOException {
+        if (latitude < LOWER_LAT || latitude > UPPER_LAT || longitude < LOWER_LON || longitude > UPPER_LON) {
             throw new IOException();
         }
         try {
@@ -40,7 +39,7 @@ public abstract class NearbyCitiesAccessObject implements NearbyCitiesAccessInte
     }
 
     @NotNull
-    private static ArrayList<String> getCityNames(Float latitude, Float longitude, String jsonString) {
+    private static ArrayList<String> getCityNames(double latitude, double longitude, String jsonString) {
         final JSONArray jsonArray = new JSONArray(jsonString);
 
         final ArrayList<String> nearbyCities = new ArrayList<>();
