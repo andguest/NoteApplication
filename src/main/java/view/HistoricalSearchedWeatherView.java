@@ -42,7 +42,7 @@ public class HistoricalSearchedWeatherView extends JPanel implements PropertyCha
         this.searchResultViewModel.addPropertyChangeListener(this);
 
         this.setSize(HISTORICALPANELWIDTH, HISTORICALPANELHEIGHT);
-        weatherfincitypanel = new LabelTextPanel(new JLabel("Weather in"), emptylabel);
+        weatherfincitypanel = new LabelTextPanel(new JLabel("Searched Weather"), emptylabel);
         temperaturepanel = new LabelTextPanel(new JLabel("Temperature"), emptylabel);
         // Note we  want to add a convertor here.The button needs an action listener.
         citypanel = new LabelTextPanel(new JLabel("City"), emptylabel);
