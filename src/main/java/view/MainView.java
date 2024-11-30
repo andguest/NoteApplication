@@ -20,7 +20,7 @@ public class MainView extends JFrame {
     public MainView(NearbyListViewModel nearbyListViewModel, WeatherViewModel weatherViewModel, SearchResultViewModel searchResultViewModel, PropertyChangeEvent evt) {
         nearbyCitiesView = new NearbyCitiesView(nearbyListViewModel, weatherViewModel);
         mapPanelView = new MapPanelView(weatherViewModel);
-        weatherPanelView = new WeatherPanelView(weatherViewModel, searchResultViewModel, evt);
+        weatherPanelView = new WeatherPanelView(weatherViewModel, evt);
         historicalSearchedWeatherView = new HistoricalSearchedWeatherView(searchResultViewModel, evt);
         this.setTitle("Weather Wizard");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
