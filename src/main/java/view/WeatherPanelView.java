@@ -53,14 +53,9 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     private static final int WEATHER_PANEL_WIDTH = 370;
     public static final int WEATHERPANELHEIGHT = 400;
 
-    public WeatherPanelView(WeatherViewModel weatherViewModel, SearchResultViewModel searchResultViewModel,
-                            PropertyChangeEvent evt) {
+    public WeatherPanelView(WeatherViewModel weatherViewModel, PropertyChangeEvent evt) {
         this.weatherViewModel = weatherViewModel;
         this.weatherViewModel.addPropertyChangeListener(this);
-
-        // Users can search for weather at a given time
-        this.searchResultViewModel = searchResultViewModel;
-        this.searchResultViewModel.addPropertyChangeListener(this);
 
         this.setSize(WEATHER_PANEL_WIDTH, WEATHERPANELHEIGHT);
         weatherincitypanel = new LabelTextPanel(new JLabel("Current Weather in"), city);
@@ -104,12 +99,10 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("Weather")) {
-            final WeatherState weatherState = (WeatherState) evt.getNewValue();
-            setfield(weatherState);
-            this.currentWeather = weatherState.getWeather();
-            System.out.println(weatherState.getWeather());
-        }
+        final WeatherState weatherState = (WeatherState) evt.getNewValue();
+        setfield(weatherState);
+        this.currentWeather = weatherState.getWeather();
+        System.out.println(weatherState.getWeather());
     }
 
     public void setfield(WeatherState weatherState) {

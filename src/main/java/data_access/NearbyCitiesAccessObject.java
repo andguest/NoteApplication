@@ -16,12 +16,13 @@ import java.util.List;
 /**
  * This class provides the service of getting nearby cities.
  */
-public abstract class NearbyCitiesAccessObject implements NearbyCitiesAccessInterface {
+public class NearbyCitiesAccessObject implements NearbyCitiesAccessInterface {
     private static final double LOWER_LAT = -90.0;
     private static final double UPPER_LAT = 90.0;
     private static final double LOWER_LON = -180.0;
     private static final double UPPER_LON = 180.0;
     private static final double COMPARE_DIFF = 10.0;
+    private static final double ERROR_DIFF = 0.015;
 
     @Override
     public List<String> getNearbyCities(double latitude, double longitude) throws IOException {
@@ -46,8 +47,9 @@ public abstract class NearbyCitiesAccessObject implements NearbyCitiesAccessInte
 
         for (int i = 0; i < jsonArray.length(); i++) {
             final JSONObject city = jsonArray.getJSONObject(i);
-            if (Math.abs(city.getInt("lat") - latitude) < COMPARE_DIFF
-                    && Math.abs(city.getInt("lon") - longitude) < COMPARE_DIFF) {
+            final double latDiff = Math.abs(latitude - city.getDouble("lat"));
+            final double lonDiff = Math.abs(longitude - city.getDouble("lon"));
+            if (latDiff < COMPARE_DIFF && lonDiff < COMPARE_DIFF && latDiff > ERROR_DIFF && lonDiff > ERROR_DIFF) {
                 nearbyCities.add(city.getString("name"));
             }
         }

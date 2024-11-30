@@ -22,7 +22,7 @@ public class NearbyListPresenter implements NearbyListOutputBoundary {
     public void presentSuccessView(NearbyListOutputData response) {
         nearbyListViewModel.getState().setCities(response.getCities());
         nearbyListViewModel.getState().setError(null);
-        nearbyListViewModel.firePropertyChanged();
+        nearbyListViewModel.firePropertyChanged("NearbyList");
     }
 
     /**

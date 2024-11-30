@@ -39,8 +39,8 @@ public class MapPanelView extends JPanel implements ActionListener {
     private CompareCitiesController compareCitiesController;
     private NearbyListController nearbyListController;
     private AlertPopController alertPopController;
-    private final double torontoLatitude = 43.6532;
-    private final double torontoLongitude = -79.3832;
+    private final double torontoLatitude = 43.70011;
+    private final double torontoLongitude = -79.4163;
 
     public MapPanelView(WeatherViewModel weatherViewModel) {
         // by default set the map center be Toronto.
@@ -50,7 +50,8 @@ public class MapPanelView extends JPanel implements ActionListener {
                 event -> {
                     // if the event is coming from cityinput field, execute weather controller, check if empty
                     if (event.getSource() == cityinputfield1 && cityinputfield1.getText().length() > 0) {
-                        weatherController.execute(cityinputfield1.getText());
+                        weatherController.execute(cityinputfield1.getText().toLowerCase());
+                        cityinputfield1.setText("");
                     }
                     else {
                         cityinputfield1.setText("can not return empty");
@@ -61,9 +62,12 @@ public class MapPanelView extends JPanel implements ActionListener {
         cityinputfield2.addActionListener(
                 event -> {
                     if (cityinputfield1.getText().length() > 0 && cityinputfield2.getText().length() > 0) {
-                        compareCitiesController.execute(cityinputfield1.getText(), cityinputfield2.getText());
+                        compareCitiesController
+                                .execute(cityinputfield1.getText().toLowerCase(), cityinputfield2.getText());
                         final CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
                         new CompareCitiesView(compareCitiesViewModel);
+                        cityinputfield1.setText("");
+                        cityinputfield2.setText("");
                     }
                     else {
                         cityinputfield2.setText("can not return empty");
@@ -78,7 +82,10 @@ public class MapPanelView extends JPanel implements ActionListener {
                 // if this event is coming from dateinput field, execute searchresult contoller
                 event -> {
                     if (event.getSource() == dateinputfield) {
-                        searchResultController.execute(cityinputfield1.getText(), dateinputfield.getText());
+                        searchResultController
+                                .execute(cityinputfield1.getText().toLowerCase(), dateinputfield.getText());
+                        cityinputfield1.setText("");
+                        dateinputfield.setText("");
                     }
                 });
         this.setPreferredSize(new java.awt.Dimension(mappanelwidth, mappanelheight));
