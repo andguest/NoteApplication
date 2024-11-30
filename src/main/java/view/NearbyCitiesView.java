@@ -52,7 +52,7 @@ public class NearbyCitiesView extends JPanel implements PropertyChangeListener {
             final WeatherState weatherState = (WeatherState) evt.getNewValue();
             nearbyListController.execute(weatherState.getWeather().getLon(), weatherState.getWeather().getLat());
         }
-        else {
+        else if (evt.getPropertyName().equals("NearbyList")) {
             final NearbyListState nearbyListState = (NearbyListState) evt.getNewValue();
             cities.setListData(nearbyListState.getCities());
         }
