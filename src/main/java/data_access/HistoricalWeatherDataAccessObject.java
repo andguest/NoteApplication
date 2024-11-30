@@ -26,40 +26,55 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
 
         // Save the weather data to the database
         // Convert the Weather object to JSON
-        final String nextLine = "\",\n";
-        final StringBuilder jsonBuilder = new StringBuilder();
-        jsonBuilder.append("{\n");
-        jsonBuilder.append("  \"timeStamp\": \"" + timeStamp + nextLine);
-        jsonBuilder.append("  \"city\": \"" + weather.getCityName() + nextLine);
-        jsonBuilder.append("  \"longitude\": " + weather.getLon() + nextLine);
-        jsonBuilder.append("  \"latitude\": ").append(weather.getLat()).append(nextLine);
-        jsonBuilder.append("  \"temperature\": ").append(weather.getTemperature()).append(nextLine);
-        jsonBuilder.append("  \"looks\": \"").append(weather.getWeather()).append(nextLine);
-        jsonBuilder.append("  \"alertDescription\": \"").append(weather.getDescription()).append(nextLine);
-        jsonBuilder.append("  \"humidity\": " + weather.getHumidity() + nextLine);
-        jsonBuilder.append("  \"windSpeed\": " + weather.getWindSpeed() + nextLine);
-        jsonBuilder.append("}");
+//        final String nextLine = "\",\n";
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder
+                .append("{\n")
+                .append("  \"timeStamp\": \"").append(timeStamp).append("\",\n")
+                .append("  \"city\": \"").append(weather.getCityName()).append("\",\n")
+                .append("  \"longitude\": ").append(weather.getLon()).append(",\n")
+                .append("  \"latitude\": ").append(weather.getLat()).append(",\n")
+                .append("  \"temperature\": ").append(weather.getTemperature()).append(",\n")
+                .append("  \"looks\": \"").append(weather.getWeather()).append("\",\n")
+                .append("  \"alertDescription\": \"").append(weather.getDescription()).append("\",\n")
+                .append("  \"humidity\": ").append(weather.getHumidity()).append(",\n")
+                .append("  \"windSpeed\": ").append(weather.getWindSpeed()).append("\n")
+                .append("}");
+
+        final String json = jsonBuilder.toString();
 
         // Convert StringBuilder to String
         final String weatherJson = jsonBuilder.toString();
 
         // Write JSON to a file
-//        final String weatherJson = jsonBuilder.toString();
 
         String relativePath = "src/main/resources/weather.json";
         File file = new File(relativePath);
 
-        // Convert StringBuilder to String (JSON data to write)
-//        final String weatherJson = jsonBuilder.toString();
+        try {
+            StringBuilder finalJson = new StringBuilder();
+            if (!file.exists() || file.length() == 0) {
+                // If file does not exist or is empty, create a new JSON array
+                finalJson.append("[\n").append(weatherJson).append("\n]");
+            } else {
+                // Read existing data from the file
+                String existingJson = Files.readString(file.toPath(), StandardCharsets.UTF_8);
 
-        try (FileWriter fileWriter = new FileWriter(file, true)) {
-            if (file.length() != 0) {
-                // Add a new line before appending a new object if the file is not empty
-                fileWriter.write(System.lineSeparator());
+                // Remove the closing bracket of the JSON array
+                existingJson = existingJson.trim();
+                if (existingJson.endsWith("]")) {
+                    existingJson = existingJson.substring(0, existingJson.length() - 1);
+                }
+
+                // Append the new object with a comma if there's existing data
+                finalJson.append(existingJson).append(",\n").append(weatherJson).append("\n]");
             }
-            // Write JSON data to the file
-            fileWriter.write(weatherJson);
-            System.out.println("Successfully appended weather data to weather.json");
+
+            // Write the updated JSON data to the file
+            try (FileWriter fileWriter = new FileWriter(file, false)) {
+                fileWriter.write(finalJson.toString());
+                System.out.println("Successfully appended weather data to weather.json");
+            }
         } catch (IOException excep) {
             excep.printStackTrace();
             System.out.println("Failed to append weather data to weather.json");
@@ -99,7 +114,7 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
                             cityNameCall,
                             weatherObject.getInt("temperature"),
                             weatherObject.getString("looks"),
-                            weatherObject.getString("description"),
+                            weatherObject.getString("alertDescription"),
                             weatherObject.getInt("windSpeed"),
                             weatherObject.getInt("longitude"),
                             weatherObject.getInt("humidity"),
