@@ -38,8 +38,10 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     private LabelTextPanel windspeedpanel;
     private LabelTextPanel visibilitypanel;
     private LabelTextPanel timepanel;
+    private LabelTextPanel unitpanel;
     private Weather currentWeather;
 
+    private final JLabel metric = new JLabel("Metric");
     private final JLabel city = new JLabel("");
     private final JLabel temp = new JLabel("");
     private final JLabel skycondition = new JLabel("");
@@ -51,7 +53,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
 
     private ConverterController convertorController;
     private static final int WEATHER_PANEL_WIDTH = 370;
-    public static final int WEATHERPANELHEIGHT = 400;
+    private static final int WEATHERPANELHEIGHT = 400;
 
     public WeatherPanelView(WeatherViewModel weatherViewModel, PropertyChangeEvent evt) {
         this.weatherViewModel = weatherViewModel;
@@ -67,11 +69,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         unitconverter.addActionListener(event -> {
             // if the event is coming from temperature converter button, execute convertor controller
             if (event.getSource() == unitconverter) {
-                // todo: right now evt.getSource() return String "Temperature Converter", which is not a weather. But
-                // the method execute in class ConverterController takes Weather object as input, need fix this.
-                // a potential solution is change evt.getSource() to city name, and in ConverterController, turn
-                // cityname into Weather(call DAO).
-                System.out.println(((WeatherState) evt.getNewValue()).getWeather());
+
                 if (city != null) {
                     final Weather tempWeather = currentWeather;
                     convertorController.execute(tempWeather);
@@ -82,6 +80,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
             }
         });
 
+        unitpanel = new LabelTextPanel(new JLabel("Unit"), metric);
         skyconditionpanel = new LabelTextPanel(new JLabel("Sky: "), skycondition);
         humiditypanel = new LabelTextPanel(new JLabel("Humidity: "), humidity);
         windspeedpanel = new LabelTextPanel(new JLabel("Wind: "), windspeed);
@@ -94,7 +93,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         this.add(windspeedpanel);
         this.add(visibilitypanel);
         this.add(unitconverter);
-        this.add(timepanel);
+        this.add(unitpanel);
     }
 
     @Override
@@ -106,6 +105,14 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     }
 
     public void setfield(WeatherState weatherState) {
+        final boolean metric1 = weatherState.getWeather().isMetric();
+        if (metric1) {
+            metric.setText("Metric");
+        }
+        else {
+            metric.setText("Imperial");
+        }
+
         city.setText(weatherState.getWeather().getCityName());
         temp.setText(String.valueOf(weatherState.getWeather().getTemperature()));
         skycondition.setText(weatherState.getWeather().getWeather());
