@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -33,6 +36,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     private LabelTextPanel humiditypanel;
     private LabelTextPanel windspeedpanel;
     private LabelTextPanel visibilitypanel;
+    private LabelTextPanel timepanel;
 
     private final JLabel city = new JLabel("");
     private final JLabel temp = new JLabel("");
@@ -40,6 +44,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     private final JLabel humidity = new JLabel("");
     private final JLabel windspeed = new JLabel("");
     private final JLabel visibility = new JLabel("");
+    private final JLabel time = new JLabel("");
     private final JButton unitconverter;
 
     private ConverterController convertorController;
@@ -75,6 +80,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         humiditypanel = new LabelTextPanel(new JLabel("Humidity"), humidity);
         windspeedpanel = new LabelTextPanel(new JLabel("Wind"), windspeed);
         visibilitypanel = new LabelTextPanel(new JLabel("Visibility"), visibility);
+        timepanel = new LabelTextPanel(new JLabel("Time"), time);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(weatherincitypanel);
         this.add(temperaturepanel);
@@ -82,6 +88,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         this.add(humiditypanel);
         this.add(windspeedpanel);
         this.add(visibilitypanel);
+        this.add(timepanel);
         this.add(unitconverter);
     }
 
@@ -100,6 +107,10 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         humidity.setText(String.valueOf(weatherState.getWeather().getHumidity()));
         windspeed.setText(String.valueOf(weatherState.getWeather().getWindSpeed()));
         visibility.setText(String.valueOf(weatherState.getWeather().getVisibility()));
+        final DateTimeFormatter formatter = DateTimeFormatter
+                .ofPattern("yyyy-MM-dd HH").withZone(ZoneOffset.UTC);
+        final String timestamp = formatter.format(Instant.now());
+        time.setText(timestamp);
     }
 
     public void actionPerformed(ActionEvent event) {

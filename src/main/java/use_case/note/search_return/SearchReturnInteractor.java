@@ -34,7 +34,7 @@ public class SearchReturnInteractor implements SearchReturnInputBoundary {
 
             // Store it in historical data
             final DateTimeFormatter formatter = DateTimeFormatter
-                    .ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneOffset.UTC);
+                    .ofPattern("yyyy-MM-dd HH").withZone(ZoneOffset.UTC);
             final String timestamp = formatter.format(Instant.now());
             historicalWeatherDataAccessInterface.saveWeather(weatherData, timestamp);
             // Send it to the output boundary

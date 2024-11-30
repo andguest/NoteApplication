@@ -28,14 +28,14 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
             final String city = searchReturnInputData.getCity();
             final String timestamp = searchReturnInputData.getDate();
             // Simulate reading weather data
-            final Weather weatherData = weatherDataAccess.getWeather(city);
+//            final Weather weatherData = weatherDataAccess.getWeather(city);
 
-            final Weather historicalWeather = historicalWeatherDataAccessInterface.getWeather(city, timestamp);
+            final Weather historicalWeather = historicalWeatherDataAccessInterface.getWeather(city.toLowerCase(), timestamp);
 
             // Send it to the output boundary
             final SearchResultOutputData outputData =
                     new SearchResultOutputData(historicalWeather, false);
-            historicalWeatherDataAccessInterface.saveWeather(weatherData, timestamp);
+            historicalWeatherDataAccessInterface.saveWeather(historicalWeather, timestamp);
             outputBoundary.presentSuccessView(outputData);
 
         }
