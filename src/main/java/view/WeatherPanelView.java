@@ -65,6 +65,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         this.setSize(WEATHER_PANEL_WIDTH, WEATHERPANELHEIGHT);
         weatherincitypanel = new LabelTextPanel(new JLabel("Current Weather in"), city);
         temperaturepanel = new LabelTextPanel(new JLabel("Temperature"), temp);
+        timepanel = new LabelTextPanel(new JLabel("Time"), time);
         // Note we  want to add a convertor that convert the weather information from degree celsius to fahrenheit,
         // or the opposite.The button needs an action listener that pass the change to a ConverterController.
         this.unitconverter = new JButton("Unit Converter");
