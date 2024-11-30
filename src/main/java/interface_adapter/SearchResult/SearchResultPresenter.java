@@ -16,7 +16,10 @@ public class SearchResultPresenter implements SearchResultOutputBoundary {
 
     @Override
     public void presentSuccessView(SearchResultOutputData searchResultOutputData) {
-        viewModel.getState().setWeather(searchResultOutputData.getWeather());
+        final SearchResultState state = new SearchResultState();
+        state.setWeather(searchResultOutputData.getWeather());
+        viewModel.setState(state);
+        viewModel.firePropertyChanged("searchResult");
     }
 
     @Override
