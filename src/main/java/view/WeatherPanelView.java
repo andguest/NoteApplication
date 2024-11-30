@@ -53,8 +53,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
     private static final int WEATHER_PANEL_WIDTH = 370;
     public static final int WEATHERPANELHEIGHT = 400;
 
-    public WeatherPanelView(WeatherViewModel weatherViewModel,
-                            PropertyChangeEvent evt) {
+    public WeatherPanelView(WeatherViewModel weatherViewModel, PropertyChangeEvent evt) {
         this.weatherViewModel = weatherViewModel;
         this.weatherViewModel.addPropertyChangeListener(this);
 
