@@ -5,11 +5,11 @@ import java.util.List;
 
 public class NearbyListOutputData {
 
-    private final ArrayList<String> cities;
+    private final String[] cities;
     private final boolean useCaseFailed;
 
-    public NearbyListOutputData(List<String> cities, boolean useCaseFailed) {
-        this.cities = (ArrayList<String>) cities;
+    public NearbyListOutputData(String[] cities, boolean useCaseFailed) {
+        this.cities = cities;
         this.useCaseFailed = useCaseFailed;
     }
 
@@ -17,7 +17,7 @@ public class NearbyListOutputData {
         return useCaseFailed;
     }
 
-    public List<String> getCities() {
+    public String[] getCities() {
         return cities;
     }
 }
