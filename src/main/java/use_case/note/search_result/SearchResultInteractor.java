@@ -27,8 +27,6 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
         try {
             final String city = searchReturnInputData.getCity();
             final String timestamp = searchReturnInputData.getDate();
-            // Simulate reading weather data
-//            final Weather weatherData = weatherDataAccess.getWeather(city);
 
             final Weather historicalWeather = historicalWeatherDataAccessInterface.getWeather(city.toLowerCase(), timestamp);
 
