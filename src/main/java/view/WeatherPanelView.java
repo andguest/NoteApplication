@@ -113,7 +113,7 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
             metric.setText("Imperial");
         }
 
-        city.setText(weatherState.getWeather().getCityName());
+        city.setText(capitalizeCity(weatherState.getWeather().getCityName()));
         skycondition.setText(weatherState.getWeather().getWeather());
         humidity.setText(weatherState.getWeather().getHumidity() + "%");
         visibility.setText(weatherState.getWeather().getVisibility() + "m");
@@ -129,6 +129,16 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
                 .ofPattern("yyyy-MM-dd HH").withZone(ZoneOffset.UTC);
         final String timestamp = formatter.format(Instant.now());
         time.setText(timestamp);
+    }
+
+    private String capitalizeCity(String cityName) {
+        final String[] split = cityName.split(" ");
+        final StringBuilder output = new StringBuilder();
+        for (String part : split) {
+            output.append(part.substring(0, 1).toUpperCase())
+                    .append(part.substring(1).toLowerCase()).append(" ");
+        }
+        return output.toString().trim();
     }
 
     public void actionPerformed(ActionEvent event) {
