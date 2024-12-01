@@ -5,6 +5,8 @@ package entity;
  */
 public class Weather {
 
+    private static final int ABSOLUTEZERO = -500;
+    private static final int IMPOSSIBLESPEED = 800;
     private double temperature;
     private String weather;
     private final String description;
@@ -12,24 +14,58 @@ public class Weather {
     private final int humidity;
     private final int visibility;
     private boolean metric;
-    private String cityName;
+    private final String cityName;
     private final double lon;
     private final double lat;
     private final String alertDescription;
+    private int farenheit = ABSOLUTEZERO;
+    private int miles = IMPOSSIBLESPEED;
+
+    private final int celcius;
+    private final int kilometers;
 
     public Weather(String city, double temperature, String weather, String description, double windSpeed,
                    int humidity, int visibility, double lon, double lat, String alertDescription) {
         this.temperature = temperature;
-        this.weather = weather;
-        this.description = description;
         this.windSpeed = windSpeed;
+        this.weather = weather;
+
+        // just for converter
+        this.celcius = (int) temperature;
+        this.kilometers = (int) windSpeed;
+
+        this.description = description;
         this.humidity = humidity;
         this.visibility = visibility;
         this.cityName = city;
-        this.metric = false;
+        this.metric = true;
         this.lon = lon;
         this.lat = lat;
         this.alertDescription = alertDescription;
+    }
+
+    public int getKilometers() {
+        return kilometers;
+    }
+
+    public int getMiles() {
+        return miles;
+    }
+
+    public void setMiles(int miles) {
+        this.miles = miles;
+    }
+
+    public int getCelcius() {
+        return celcius;
+    }
+
+    public int getfaren() {
+        return farenheit;
+    }
+
+    public void setfarenheit(int faren) {
+        this.farenheit = faren;
     }
 
     public void setWeather(String weather) {

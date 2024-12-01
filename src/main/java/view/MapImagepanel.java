@@ -11,6 +11,9 @@ import org.jxmapviewer.viewer.TileFactoryInfo;
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 /*
 * the MapImagePanel is responsible for displaying the map file.
@@ -47,6 +50,7 @@ public class MapImagepanel extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         final WeatherState weatherState = (WeatherState) evt.getNewValue();
         setPosition(weatherState.getWeather().getLat(), weatherState.getWeather().getLon());
+
     }
 
     private void setPosition(double latitude, double longitude) {
