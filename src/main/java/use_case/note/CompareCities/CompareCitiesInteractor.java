@@ -38,26 +38,20 @@ public class CompareCitiesInteractor implements CompareCitiesInputBoundary {
                 try {
                     final Weather firstweather = compareCitiesDataAccessInterface.getWeather(firstcityname);
                     compareCitiesDataAccessInterface.saveWeatherinfor(firstweather);
-                }
-                catch (IOException ioException) {
-                    comparecitiesPresenter.prepareFailView(ioException.getMessage());
-                }
 
-                try {
                     final Weather secondweather = compareCitiesDataAccessInterface.getWeather(secondcityname);
                     compareCitiesDataAccessInterface.saveWeatherinfor(secondweather);
+                    final CompareCitiesOutPutData compareCitiesOutPutData = new CompareCitiesOutPutData(firstcityname,
+                            (Weather) compareCitiesDataAccessInterface.getcitytoweather().get(firstcityname),
+                            secondcityname,
+                            (Weather) compareCitiesDataAccessInterface.getcitytoweather().get(secondcityname), false);
+                    comparecitiesPresenter.prepareSuccessView(compareCitiesOutPutData);
+                    // After each round of execution, clear map in DAO.
+                    compareCitiesDataAccessInterface.clearcitytoweather();
                 }
                 catch (IOException ioException) {
-                    comparecitiesPresenter.prepareFailView(ioException.getMessage());
+                    comparecitiesPresenter.prepareFailView("Network error while fetching weather data for " + firstcityname + secondcityname);
                 }
-
-                final CompareCitiesOutPutData compareCitiesOutPutData = new CompareCitiesOutPutData(firstcityname,
-                        (Weather) compareCitiesDataAccessInterface.getcitytoweather().get(firstcityname),
-                        secondcityname,
-                        (Weather) compareCitiesDataAccessInterface.getcitytoweather().get(secondcityname), false);
-                comparecitiesPresenter.prepareSuccessView(compareCitiesOutPutData);
-                // After each round of execution, clear map in DAO.
-                compareCitiesDataAccessInterface.clearcitytoweather();
             }
         }
     }

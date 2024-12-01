@@ -1,9 +1,11 @@
 package data_access;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import entity.Weather;
+import org.json.JSONException;
 import use_case.note.CompareCities.CompareCitiesDataAccessInterface;
 
 /**
@@ -14,27 +16,26 @@ public class InMemoryUserDataAccessObject implements CompareCitiesDataAccessInte
     private final Map<String, Weather> weathers = new HashMap<>();
 
     @Override
-    public boolean isCityExist(String identifier) {
-        return weathers.containsKey(identifier);
+    public Weather getWeather(String identifier) throws IOException {
+        if ("Toronto".equalsIgnoreCase(identifier)) {
+            final Weather torontoweather = new Weather("Toronto", 10.5, "rain",
+                    "first description", 0.0, 1, 2, 3.0, 4.0, "No alerts");
+            return torontoweather;
+        }
+        else if ("Tokyo".equalsIgnoreCase(identifier)) {
+            final Weather tokyoweather = new Weather("Tokyo", 1.0, "cloud", "second description",
+                    2.0, 2, 1000, 20.0, 25.0, "Alerts");
+            return tokyoweather;
+        }
+        throw new IOException("Failed to fetch weather data");
     }
 
     @Override
-    public Weather getWeather(String identifier) {
-        if (isCityExist(identifier)) {
-            if ("Toronto".equalsIgnoreCase(identifier)) {
-                final Weather torontoweather = new Weather("Toronto", 10.5, "rain",
-                        null, 0, 1, 1, 1, 1, null);
-                return torontoweather;
-            }
-            else {
-                final Weather tokyoweather = new Weather("Tokyo", 1.0, "cloud", null,
-                        2, 2, 2, 2, 2, null);
-                return tokyoweather;
-            }
+    public boolean isCityExist(String cityname){
+        if (cityname.equals("Toronto")||cityname.equals("Tokyo")){
+            return true;
         }
-        else {
-            return null;
-        }
+        return false;
     }
 
     @Override
