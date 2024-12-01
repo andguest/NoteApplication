@@ -31,14 +31,16 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
         jsonBuilder
                 .append("{\n")
                 .append("  \"timeStamp\": \"").append(timeStamp).append("\",\n")
+                .append("  \"description\": \"").append(weather.getDescription()).append("\",\n")
                 .append("  \"city\": \"").append(weather.getCityName()).append("\",\n")
                 .append("  \"longitude\": ").append(weather.getLon()).append(",\n")
                 .append("  \"latitude\": ").append(weather.getLat()).append(",\n")
                 .append("  \"temperature\": ").append(weather.getTemperature()).append(",\n")
                 .append("  \"looks\": \"").append(weather.getWeather()).append("\",\n")
-                .append("  \"alertDescription\": \"").append(weather.getDescription()).append("\",\n")
+                .append("  \"alertDescription\": \"").append(weather.getAlertDescription()).append("\",\n")
                 .append("  \"humidity\": ").append(weather.getHumidity()).append(",\n")
-                .append("  \"windSpeed\": ").append(weather.getWindSpeed()).append("\n")
+                .append("  \"windSpeed\": ").append(weather.getWindSpeed()).append(",\n")
+                .append("  \"visibility\": ").append(weather.getVisibility()).append("\n")
                 .append("}");
 
         final String json = jsonBuilder.toString();
@@ -48,15 +50,16 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
 
         // Write JSON to a file
 
-        String relativePath = "src/main/resources/weather.json";
-        File file = new File(relativePath);
+        final String relativePath = "src/main/resources/weather.json";
+        final File file = new File(relativePath);
 
         try {
             StringBuilder finalJson = new StringBuilder();
             if (!file.exists() || file.length() == 0) {
                 // If file does not exist or is empty, create a new JSON array
                 finalJson.append("[\n").append(weatherJson).append("\n]");
-            } else {
+            }
+            else {
                 // Read existing data from the file
                 String existingJson = Files.readString(file.toPath(), StandardCharsets.UTF_8);
 
@@ -87,7 +90,7 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
         // Read the JSON from the file
         final String filePath = "weather.json";
         try {
-            URL resource = getClass().getClassLoader().getResource("weather.json");
+            final URL resource = getClass().getClassLoader().getResource(filePath);
             if (resource == null) {
                 throw new FileNotFoundException("File not found: src/main/resources/weather.json");
             }
@@ -95,8 +98,6 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
             // Read the content of the JSON file as a String
             final String jsonString = Files.readString(Paths.get(resource.toURI()), StandardCharsets.UTF_8);
             final JSONArray weatherArray = new JSONArray(jsonString);
-
-//            final JSONArray weatherArray = weatherObject1.getJSONArray("weatherData");
 
             for (int i = 0; i < weatherArray.length(); i++) {
                 // Getting the JSONObject at the index i
@@ -108,16 +109,14 @@ public class HistoricalWeatherDataAccessObject implements HistoricalWeatherDataA
                 // Checking if the city and timestamp match the input
                 if (cityNameCall.equals(city) && timeStamp.equals(timestamp)) {
                     // Create weather object
-                    //TODO: Changed weather declaration, uncertain if it there is key "description" and
-                    // "alertDescription" for historical weather. If no we need to change Weather class.
                     final Weather weather = new Weather(
                             cityNameCall,
                             weatherObject.getInt("temperature"),
                             weatherObject.getString("looks"),
-                            weatherObject.getString("alertDescription"),
+                            weatherObject.getString("description"),
                             weatherObject.getInt("windSpeed"),
-                            weatherObject.getInt("longitude"),
                             weatherObject.getInt("humidity"),
+                            weatherObject.getInt("visibility"),
                             weatherObject.getInt("longitude"),
                             weatherObject.getInt("latitude"),
                             weatherObject.getString("alertDescription")
