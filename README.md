@@ -1,5 +1,5 @@
 # WeatherWizard
-Authors and Contributors: Sophie L., Linhao L., Harmanpreet S. and Ishayu S.
+Authors and Contributors: Annie B.,Sophie L., Linhao L., Harmanpreet S. and Ishayu S.
 
 WeatherWizard aims to provide users with a friendly accessible application to access Weather around the World. It can be used to plan trips, figure out historical weather data for projects and more. Many users have to use several tabs to compare weather in different destinations and this application aims to help users plan travel. 
 
@@ -22,13 +22,13 @@ As mentioned previously the broad overarching sense of purpose lays in the ease 
 * Weather Alerts: The Software displays Emergency Alerts regarding the weather including but not limited to Flooding, Tornado, Snow Storms and etc.
 * Nearby Cities: The Software displays a list of cities close to the main destination. 
 * Comparisons: The Software allows for users to select up to two cities at a time to compare weather.
-* Search History: The Software allows for the User to view their Search History.
+* Search Historic Weather: The Software allows for the User to search for historic weather.
 
 ## API.
 The OpenWeather 3.0 API is called by city name to recieve weather information regarding temperature, humidity, windspeed & etc. 
    https://openweathermap.org/api/one-call-3
    
-The JXMAP library is used to produce a map in which the user can drag and drop pins on cities.
+The JXMAP library is used to produce a map to aid in the accesability of the software.
 msteiger/jxmapviewer2: JXMapViewer2 
 
 ## Installation.
