@@ -220,10 +220,10 @@ public class MapPanelView extends JPanel implements ActionListener {
                     }
                 }
         );
-        cityinputpanel = new LabelTextPanel(new JLabel("search city"), cityinputfield1);
-        dateinputpanel = new LabelTextPanel(new JLabel("search time (YYYY-MM-DD hh"), dateinputfield);
+        cityinputpanel = new LabelTextPanel(new JLabel("City Name"), cityinputfield1);
+        dateinputpanel = new LabelTextPanel(new JLabel("Time (YYYY-MM-DD hh)"), dateinputfield);
         comparetopanel = new LabelTextPanel(new JLabel("Compare To"), cityinputfield2);
-        timepanel = new LabelTextPanel(new JLabel("Time"), time);
+        timepanel = new LabelTextPanel(new JLabel("Current Time"), time);
 
         dateinputfield.addActionListener(
                 // if this event is coming from dateinput field, execute searchresult contoller
