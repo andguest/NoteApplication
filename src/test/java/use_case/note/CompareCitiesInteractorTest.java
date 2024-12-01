@@ -12,34 +12,80 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class CompareCitiesInteractorTest {
+    private CompareCitiesOutputBoundary presenter;
+    private CompareCitiesDataAccessInterface compareCitiesDataAccessInterface;
 
     @Test
     public void successTest() {
         // this is the mock input data.
         final CompareCitiesInputData inputData = new CompareCitiesInputData("Toronto", "Tokyo");
 
-        final CompareCitiesDataAccessInterface compareCitiesDataAccessInterface = new InMemoryUserDataAccessObject();
+        compareCitiesDataAccessInterface = new InMemoryUserDataAccessObject();
 
-        CompareCitiesOutputBoundary SuccessPresenter = new CompareCitiesOutputBoundary() {
+        presenter = new CompareCitiesOutputBoundary() {
             // make a presenter
             @Override
             public void prepareSuccessView(CompareCitiesOutPutData outputData) {
                 Assertions.assertEquals("Toronto", outputData.getFirstCityname());
-                Assertions.assertEquals(10.5, outputData.getSecondWeather().getTemperature());
+                Assertions.assertEquals(1.0, outputData.getSecondWeather().getTemperature());
                 Assertions.assertEquals("Tokyo", outputData.getSecondCityname());
-                Assertions.assertEquals(0, outputData.getSecondWeather().getHumidity());
+                Assertions.assertEquals(2, outputData.getSecondWeather().getHumidity());
             }
 
             @Override
             public void prepareFailView(String errorMessage) {
-                Assertions.fail("Use case failure is unexpected.");
+                Assertions.fail("city not found");
             }
-        }
+        };
 
-        final CompareCitiesInputBoundary interactor = new CompareCitiesInteractor(compareCitiesDataAccessInterface, SuccessPresenter);
+        CompareCitiesInputBoundary interactor = new CompareCitiesInteractor(compareCitiesDataAccessInterface, presenter);
         interactor.execute(inputData);
     }
+    @Test
+    public void successexecuteTest () {
+        CompareCitiesInputData inputdata = new CompareCitiesInputData("Toronto", "Tokyo");
+        compareCitiesDataAccessInterface = new InMemoryUserDataAccessObject();
+        String firstcityName = "Toronto";
+        Double firsttemperature = 10.5;
+        String firstsky = "rain";
+        String firstdescription = "first description";
+        Double firstwindSpeed = 0.0;
+        int firsthumidity = 1;
+        int firstvisibility = 2;
+        Double firstlon = 3.0;
+        Double firstlat = 4.0;
+        String firstalertDescription = "No alerts";
+
+        Weather firstweather = new Weather(firstcityName, firsttemperature, firstsky,firstdescription, firstwindSpeed, firsthumidity, firstvisibility, firstlon, firstlat, firstalertDescription);
+        compareCitiesDataAccessInterface.saveWeatherinfor(firstweather);
+        String secondcityName = "Tokyo";
+        Double secondtemperature = 1.0;
+        String secondsky = "cloud";
+        String seconddescription = "second description";
+        Double secondwindSpeed = 2.0;
+        int secondhumidity = 2;
+        int secondvisibility = 1000;
+        Double secondlon = 20.0;
+        Double secondlat = 25.0;
+        String secondalertDescription = "Alerts";
+        Weather secondweather = new Weather(secondcityName, secondtemperature, secondsky, seconddescription, secondwindSpeed, secondhumidity, secondvisibility, secondlon, secondlat, secondalertDescription);
+        compareCitiesDataAccessInterface.saveWeatherinfor(secondweather);
+    }
+
+    @Test
+    public void testExecute_SameCityComparison() {
+        // Arrange
+        CompareCitiesInputData inputData = new CompareCitiesInputData("Toronto", "Toronto");
+
+        // Act
+        CompareCitiesInputBoundary interactor = new CompareCitiesInteractor(compareCitiesDataAccessInterface, presenter);
+        interactor.execute(inputData);
+
+        // Assert
+        presenter.prepareFailView("Cannot compare the same city");
+    }
 }
+
 //
 ////        Weather weather1 = compareCitiesDataAccessInterface.getWeather(inputData.getFirstcityname());
 ////        compareCitiesDataAccessInterface.saveWeatherinfor(weather1);
