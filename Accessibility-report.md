@@ -32,7 +32,7 @@ may use the application to find cities around you that may not be raining.
 The Weather Alerts feature is another one that may help travel planners plan for the weather as avoidng places with severe weather hazards is preferable. 
 
 ## Demographic Usage
-Since our UI only comes in smoall text on a default white background, the software is less likely to be used by those with visual impairments. Specifacally, people that are far sighted 
+Since our UI only comes in small text on a default white background, the software is less likely to be used by those with visual impairments. Specifacally, people that are far sighted 
 or those that struggle to concentrate in low contrast settings. A possible feature to add can be the use of another API to read out information and to implement a high contrast 
 background. Asides from that, our software is easy to use due to the use of buttons and simple instructions and the conversion buttons. Important information such as alerts are clearly 
 presented in a bold manner and unit conversion is implemented to allow users from all over the world to use our software. I dont see why any other demographics would be less likely to 
