@@ -16,7 +16,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 /*
-* the MapImagePanel is responsible for displaying the map file.
+ * the MapImagePanel is responsible for displaying the map file.
  */
 public class MapImagepanel extends JPanel implements PropertyChangeListener {
     private static final int ZOOM_VALUE = 13;
@@ -44,6 +44,7 @@ public class MapImagepanel extends JPanel implements PropertyChangeListener {
 
         this.mapViewer.setZoom(ZOOM_VALUE);
         mapViewer.setAddressLocation(position);
+
     }
 
     @Override
