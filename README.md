@@ -72,4 +72,4 @@ The project aims to be accessible to everyone as much as possible and thus has s
 
 ## Want to know more?
 If you would like to know more please check out our presentation.
-[Link to the Presentation](https://docs.google.com/presentation/d/1IjYeUM8Xk1bz7U48yP0Gn7wzcsYZ_4zVC14HXEVRnKU/edit?usp=sharing)
+[Link to the Presentation](https://docs.google.com/presentation/d/1UF4Ibt3WqdovrlT1XoJV6r2-A5ybwz8jJzVqMy94D5k/edit?usp=sharing)
