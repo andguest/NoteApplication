@@ -17,15 +17,7 @@ public class SearchReturnOutputData {
         this.useCaseFailed = useCaseFailed;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
     public Weather getWeather() {
         return weather;
-    }
-
-    public boolean isUseCaseFailed() {
-        return useCaseFailed;
     }
 }
