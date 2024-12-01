@@ -59,7 +59,6 @@ public class SearchResultInteractorTest {
     public void testExecuteSuccess() throws IOException {
         SearchResultInteractor interactor = new SearchResultInteractor(outputBoundary, weatherDataAccess, historicalWeatherDataAccess);
         interactor.execute(inputData);
-        interactor.execute(inputData);
     }
 
     @Test
