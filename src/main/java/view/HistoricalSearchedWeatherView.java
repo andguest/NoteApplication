@@ -39,8 +39,7 @@ public class HistoricalSearchedWeatherView extends JPanel implements PropertyCha
     private final JLabel windspeed = new JLabel("");
     private final JLabel visibility = new JLabel("");
 
-    public HistoricalSearchedWeatherView(SearchResultViewModel searchResultViewModel,
-                                         PropertyChangeEvent evt) {
+    public HistoricalSearchedWeatherView(SearchResultViewModel searchResultViewModel, PropertyChangeEvent evt) {
         this.searchResultViewModel = searchResultViewModel;
         // Users can search for weather at a given time
         this.searchResultViewModel.addPropertyChangeListener(this);

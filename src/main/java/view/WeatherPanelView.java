@@ -114,11 +114,17 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         }
 
         city.setText(weatherState.getWeather().getCityName());
-        temp.setText(String.valueOf(weatherState.getWeather().getTemperature()));
         skycondition.setText(weatherState.getWeather().getWeather());
-        humidity.setText(String.valueOf(weatherState.getWeather().getHumidity()));
-        windspeed.setText(String.valueOf(weatherState.getWeather().getWindSpeed()));
-        visibility.setText(String.valueOf(weatherState.getWeather().getVisibility()));
+        humidity.setText(weatherState.getWeather().getHumidity() + "%");
+        visibility.setText(weatherState.getWeather().getVisibility() + "m");
+        if (weatherState.getWeather().isMetric()) {
+            temp.setText(weatherState.getWeather().getTemperature() + "°C");
+            windspeed.setText(weatherState.getWeather().getWindSpeed() + "m/s");
+        }
+        else {
+            temp.setText(weatherState.getWeather().getTemperature() + "°F");
+            windspeed.setText(weatherState.getWeather().getWindSpeed() + "mph");
+        }
         final DateTimeFormatter formatter = DateTimeFormatter
                 .ofPattern("yyyy-MM-dd HH").withZone(ZoneOffset.UTC);
         final String timestamp = formatter.format(Instant.now());

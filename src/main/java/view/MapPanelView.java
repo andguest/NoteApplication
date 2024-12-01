@@ -221,7 +221,7 @@ public class MapPanelView extends JPanel implements ActionListener {
                 }
         );
         cityinputpanel = new LabelTextPanel(new JLabel("search city"), cityinputfield1);
-        dateinputpanel = new LabelTextPanel(new JLabel("date"), dateinputfield);
+        dateinputpanel = new LabelTextPanel(new JLabel("date (YYYY-MM-DD hh)"), dateinputfield);
         comparetopanel = new LabelTextPanel(new JLabel("Compare To"), cityinputfield2);
         timepanel = new LabelTextPanel(new JLabel("Time"), time);
 
