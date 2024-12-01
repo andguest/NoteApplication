@@ -45,14 +45,13 @@ public class HistoricalSearchedWeatherView extends JPanel implements PropertyCha
         this.searchResultViewModel.addPropertyChangeListener(this);
 
         this.setSize(HISTORICALPANELWIDTH, HISTORICALPANELHEIGHT);
-        weatherfincitypanel = new LabelTextPanel(new JLabel("Searched Weather"), emptylabel);
-        temperaturepanel = new LabelTextPanel(new JLabel("Temperature"), temp);
+        weatherfincitypanel = new LabelTextPanel(new JLabel("Historic Weather in: "), city);
+        temperaturepanel = new LabelTextPanel(new JLabel("Temperature: "), temp);
         // Note we  want to add a convertor here.The button needs an action listener.
-        citypanel = new LabelTextPanel(new JLabel("City"), city);
-        skyconditionpanel = new LabelTextPanel(new JLabel("Sky"), skycondition);
-        humiditypanel = new LabelTextPanel(new JLabel("Humidity"), humidity);
-        windspeedpanel = new LabelTextPanel(new JLabel("Wind"), windspeed);
-        visibilitypanel = new LabelTextPanel(new JLabel("Visibility"), visibility);
+        skyconditionpanel = new LabelTextPanel(new JLabel("Sky: "), skycondition);
+        humiditypanel = new LabelTextPanel(new JLabel("Humidity: "), humidity);
+        windspeedpanel = new LabelTextPanel(new JLabel("Wind: "), windspeed);
+        visibilitypanel = new LabelTextPanel(new JLabel("Visibility: "), visibility);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(weatherfincitypanel);
         this.add(temperaturepanel);
@@ -60,7 +59,6 @@ public class HistoricalSearchedWeatherView extends JPanel implements PropertyCha
         this.add(humiditypanel);
         this.add(windspeedpanel);
         this.add(visibilitypanel);
-        this.add(citypanel);
     }
 
     @Override
@@ -74,8 +72,8 @@ public class HistoricalSearchedWeatherView extends JPanel implements PropertyCha
             temp.setText(state.getWeather().getTemperature() + "°C");
             skycondition.setText(state.getWeather().getWeather());
             humidity.setText(Math.abs(state.getWeather().getHumidity()) + "%");
-            windspeed.setText(state.getWeather().getWindSpeed() + " m/s");
-            visibility.setText(state.getWeather().getVisibility() + " m");
+            windspeed.setText(state.getWeather().getWindSpeed() + "m/s");
+            visibility.setText(state.getWeather().getVisibility() + "m");
 
         }
 
