@@ -1,7 +1,7 @@
 package use_case.note.convert_farenheit;
 
 public class ConvertInteractor implements ConvertFarenheitInputBoundary {
-    public static final double KILOMETERS_MILE = 0.62;
+    public static final double MPS_MPH = 2.237;
     public static final double CELC_FAREN = 1.8;
     public static final double FAREN_ADD = 32;
     private static final int ABSOLUTEZERO = -500;
@@ -34,7 +34,7 @@ public class ConvertInteractor implements ConvertFarenheitInputBoundary {
 
         final int temp = (int) Math.floor(cInputData.weather.getTemperature() * CELC_FAREN + FAREN_ADD);
 
-        final int speed = (int) Math.floor(cInputData.weather.getWindSpeed() * KILOMETERS_MILE);
+        final int speed = (int) Math.floor(cInputData.weather.getWindSpeed() * MPS_MPH);
 
         if (cInputData.weather.getfaren() == ABSOLUTEZERO) {
             // set instance variables
