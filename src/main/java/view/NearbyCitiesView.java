@@ -38,7 +38,7 @@ public class NearbyCitiesView extends JPanel implements PropertyChangeListener {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 2) {
-                    weatherController.execute(cities.getSelectedValue().toLowerCase());
+                    weatherController.execute(cities.getSelectedValue());
                 }
             }
         });

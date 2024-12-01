@@ -193,7 +193,7 @@ public class MapPanelView extends JPanel implements ActionListener {
                 event -> {
                     // if the event is coming from cityinput field, execute weather controller, check if empty
                     if (event.getSource() == cityinputfield1 && cityinputfield1.getText().length() > 0) {
-                        weatherController.execute(cityinputfield1.getText().toLowerCase());
+                        weatherController.execute(capitalizeCity(cityinputfield1.getText()));
                         cityinputfield1.setText("");
                         final DateTimeFormatter formatter = DateTimeFormatter
                                 .ofPattern("yyyy-MM-dd HH").withZone(ZoneOffset.UTC);
@@ -211,7 +211,7 @@ public class MapPanelView extends JPanel implements ActionListener {
                     if (cityinputfield1.getText().length() > 0 && cityinputfield2.getText().length() > 0) {
 
                         // some how the view model doesn't get update
-                        compareCitiesController.execute(cityinputfield1.getText(), cityinputfield2.getText());
+                        compareCitiesController.execute(capitalizeCity(cityinputfield1.getText()), capitalizeCity(cityinputfield2.getText()));
 
                         new CompareCitiesView(this.compareCitiesViewModel);
                     }
@@ -230,7 +230,7 @@ public class MapPanelView extends JPanel implements ActionListener {
                 event -> {
                     if (event.getSource() == dateinputfield) {
                         searchResultController
-                                .execute(cityinputfield1.getText().toLowerCase(), dateinputfield.getText());
+                                .execute(capitalizeCity(cityinputfield1.getText()), dateinputfield.getText());
                         cityinputfield1.setText("");
                         dateinputfield.setText("");
                     }
@@ -244,6 +244,16 @@ public class MapPanelView extends JPanel implements ActionListener {
         // adding a Jlabel
         this.add(mapimagepanel.getDisplayfield());
 
+    }
+
+    private String capitalizeCity(String cityName) {
+        final String[] split = cityName.split(" ");
+        final StringBuilder output = new StringBuilder();
+        for (String part : split) {
+            output.append(part.substring(0, 1).toUpperCase())
+                    .append(part.substring(1).toLowerCase()).append(" ");
+        }
+        return output.toString().trim();
     }
 
     @Override
