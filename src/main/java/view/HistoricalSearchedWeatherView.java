@@ -71,11 +71,12 @@ public class HistoricalSearchedWeatherView extends JPanel implements PropertyCha
             final SearchResultState state = (SearchResultState) evt.getNewValue();
 
             city.setText(state.getWeather().getCityName());
-            temp.setText(String.valueOf(state.getWeather().getTemperature()));
+            temp.setText(state.getWeather().getTemperature() + "°C");
             skycondition.setText(state.getWeather().getWeather());
-            humidity.setText(String.valueOf(state.getWeather().getHumidity()));
-            windspeed.setText(String.valueOf(state.getWeather().getWindSpeed()));
-            visibility.setText(String.valueOf(state.getWeather().getVisibility()));
+            humidity.setText(Math.abs(state.getWeather().getHumidity()) + "%");
+            windspeed.setText(state.getWeather().getWindSpeed() + " m/s");
+            visibility.setText(state.getWeather().getVisibility() + " m");
+
         }
 
     }
