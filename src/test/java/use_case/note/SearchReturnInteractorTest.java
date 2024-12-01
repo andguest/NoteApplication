@@ -35,7 +35,7 @@ public class SearchReturnInteractorTest {
 
         weatherDataAccess = new WeatherDataAccessInterface() {
             @Override
-            public Weather getWeather(String city) {
+            public Weather getWeather(String city) throws IOException {
                 if (city.equals("Toronto")) {
                     String cityName = "Toronto";
                     Double temperature = 10.0;
@@ -49,7 +49,7 @@ public class SearchReturnInteractorTest {
                     String alertDescription = "No alerts";
                     return new Weather(cityName, temperature, weather1, description, windSpeed, humidity, visibility, lon, lat, alertDescription);
                 }
-                throw new RuntimeException("Failed to fetch weather data");
+                throw new IOException("Failed to fetch weather data");
             }
         };
 

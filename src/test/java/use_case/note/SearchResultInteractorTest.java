@@ -4,8 +4,6 @@ import entity.Weather;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.note.search_result.*;
-import use_case.note.HistoricalWeatherDataAccessInterface;
-import use_case.note.WeatherDataAccessInterface;
 
 import java.io.IOException;
 
@@ -66,10 +64,17 @@ public class SearchResultInteractorTest {
 
     @Test
     public void testExecuteFailure() throws IOException {
-        weatherDataAccess = new WeatherDataAccessInterface() {
+        historicalWeatherDataAccess = new HistoricalWeatherDataAccessInterface() {
+
             @Override
-            public Weather getWeather(String city) throws IOException {
+            public void saveWeather(Weather weather, String timestamp) throws IOException {
+                // No-op for testing
                 throw new IOException("Failed to retrieve weather data");
+            }
+
+            @Override
+            public Weather getWeather(String city, String timestamp) throws IOException {
+                return null;
             }
         };
 
@@ -81,11 +86,19 @@ public class SearchResultInteractorTest {
 
             @Override
             public void presentFailView(String errorMessage) {
+                assertNotNull(errorMessage);
                 assertEquals("Failed to retrieve weather data: Failed to retrieve weather data", errorMessage);
             }
         };
 
-        SearchResultInteractor interactor = new SearchResultInteractor(outputBoundary, weatherDataAccess, historicalWeatherDataAccess);}
+        SearchResultInteractor interactor = new SearchResultInteractor(outputBoundary,
+                weatherDataAccess, historicalWeatherDataAccess);
+        try {
+            interactor.execute(inputData);
+        } catch (RuntimeException e) {
+            assertEquals("Failed to retrieve weather data", e.getMessage());
+        }
+    }
 
     private Weather createMockWeather() {
         String cityName = "Toronto";
