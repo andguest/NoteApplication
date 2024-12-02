@@ -1,12 +1,12 @@
 package use_case.note;
 
 import org.junit.Test;
-import use_case.note.nearby_list.*;
+import use_case.note.nearby_cities.*;
 
 import java.io.IOException;
 import java.util.List;
 
-public class NearbyListInteractorTest {
+public class NearbyCitiesInteractorTest {
 
     @Test
     public void testOutput() {
@@ -17,9 +17,9 @@ public class NearbyListInteractorTest {
             }
         };
 
-        NearbyListOutputBoundary cityOB = new NearbyListOutputBoundary() {
+        NearbyCitiesOutputBoundary cityOB = new NearbyCitiesOutputBoundary() {
             @Override
-            public void presentSuccessView(NearbyListOutputData nearbyListOutputData) {
+            public void presentSuccessView(NearbyCitiesOutputData nearbyListOutputData) {
 
             }
 
@@ -29,8 +29,8 @@ public class NearbyListInteractorTest {
             }
         };
 
-        NearbyListInteractor cityInteractor = new NearbyListInteractor(cityOB, cityDAO);
-        NearbyListInputData input = new NearbyListInputData(0.0, 0.0);
+        NearbyCitiesInteractor cityInteractor = new NearbyCitiesInteractor(cityOB, cityDAO);
+        NearbyCitiesInputData input = new NearbyCitiesInputData(0.0, 0.0);
         cityInteractor.execute(input);
     }
 }

@@ -1,7 +1,7 @@
 package view;
 
 import interface_adapter.SearchResult.SearchResultViewModel;
-import interface_adapter.nearby_list.NearbyListViewModel;
+import interface_adapter.nearby_cities.NearbyCitiesViewModel;
 import interface_adapter.weather.WeatherViewModel;
 
 import javax.swing.JFrame;
@@ -17,8 +17,8 @@ public class MainView extends JFrame {
     private final int frameWidth = 1500;
     private final int frameHeight = 1000;
 
-    public MainView(NearbyListViewModel nearbyListViewModel, WeatherViewModel weatherViewModel, SearchResultViewModel searchResultViewModel, PropertyChangeEvent evt) {
-        nearbyCitiesView = new NearbyCitiesView(nearbyListViewModel, weatherViewModel);
+    public MainView(NearbyCitiesViewModel nearbyCitiesViewModel, WeatherViewModel weatherViewModel, SearchResultViewModel searchResultViewModel, PropertyChangeEvent evt) {
+        nearbyCitiesView = new NearbyCitiesView(nearbyCitiesViewModel, weatherViewModel);
         mapPanelView = new MapPanelView(weatherViewModel);
         weatherPanelView = new WeatherPanelView(weatherViewModel, evt);
         historicalSearchedWeatherView = new HistoricalSearchedWeatherView(searchResultViewModel, evt);

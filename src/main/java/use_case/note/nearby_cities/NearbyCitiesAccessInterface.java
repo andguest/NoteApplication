@@ -1,4 +1,4 @@
-package use_case.note.nearby_list;
+package use_case.note.nearby_cities;
 
 import java.io.IOException;
 import java.util.List;

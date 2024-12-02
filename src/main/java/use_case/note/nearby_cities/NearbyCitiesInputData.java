@@ -1,13 +1,13 @@
-package use_case.note.nearby_list;
+package use_case.note.nearby_cities;
 
 /**
  * An input is when the map moves.
  */
-public class NearbyListInputData {
+public class NearbyCitiesInputData {
     private final double longitude;
     private final double latitude;
 
-    public NearbyListInputData(double longitude, double latitude) {
+    public NearbyCitiesInputData(double longitude, double latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }
