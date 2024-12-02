@@ -22,7 +22,7 @@ public class NearbyCitiesAccessObject implements NearbyCitiesAccessInterface {
     private static final double LOWER_LON = -180.0;
     private static final double UPPER_LON = 180.0;
     private static final double COMPARE_DIFF = 10.0;
-    private static final double ERROR_DIFF = 0.02;
+    private static final double ERROR_DIFF = 0.025;
 
     @Override
     public List<String> getNearbyCities(double latitude, double longitude) throws IOException {
