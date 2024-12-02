@@ -9,7 +9,8 @@ public class NearbyCitiesInteractor implements NearbyCitiesInputBoundary {
     private final NearbyCitiesOutputBoundary outputBoundary;
     private final NearbyCitiesAccessInterface cityDataAccess;
 
-    public NearbyCitiesInteractor(NearbyCitiesOutputBoundary outputBoundary, NearbyCitiesAccessInterface cityDataAccess) {
+    public NearbyCitiesInteractor(NearbyCitiesOutputBoundary outputBoundary,
+                                  NearbyCitiesAccessInterface cityDataAccess) {
         this.outputBoundary = outputBoundary;
         this.cityDataAccess = cityDataAccess;
     }
