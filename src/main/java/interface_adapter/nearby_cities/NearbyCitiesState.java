@@ -1,12 +1,9 @@
-package interface_adapter.nearby_list;
-
-import java.util.ArrayList;
-import java.util.List;
+package interface_adapter.nearby_cities;
 
 /**
  * The state information for the nearby list view model.
  */
-public class NearbyListState {
+public class NearbyCitiesState {
     private String[] cities;
     private String error;
 

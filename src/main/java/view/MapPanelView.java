@@ -7,7 +7,7 @@
 //import interface_adapter.SearchResult.SearchResultController;
 //import interface_adapter.alert_pop.AlertPopController;
 //import interface_adapter.converter.ConverterController;
-//import interface_adapter.nearby_list.NearbyListController;
+//import interface_adapter.nearby_list.NearbyCitiesController;
 //import interface_adapter.weather.WeatherController;
 //import interface_adapter.weather.WeatherViewModel;
 //
@@ -40,7 +40,7 @@
 //    private SearchResultController searchResultController;
 //    private WeatherController weatherController;
 //    private CompareCitiesController compareCitiesController;
-//    private NearbyListController nearbyListController;
+//    private NearbyCitiesController nearbyCitiesController;
 //    private AlertPopController alertPopController;
 //    private final double torontoLatitude = 43.6532;
 //    private final double torontoLongitude = -79.3832;
@@ -118,8 +118,8 @@
 //        this.searchResultController = searchresultcontroller;
 //    }
 //
-//    public void setNearbyListController(NearbyListController nearbyListController) {
-//        this.nearbyListController = nearbyListController;
+//    public void setNearbyListController(NearbyCitiesController nearbyCitiesController) {
+//        this.nearbyCitiesController = nearbyCitiesController;
 //    }
 //
 //    public void setAlertPopController(AlertPopController alertPopController) {
@@ -137,15 +137,13 @@ import interface_adapter.CompareCities.CompareCitiesController;
 import interface_adapter.CompareCities.CompareCitiesViewModel;
 import interface_adapter.SearchResult.SearchResultController;
 import interface_adapter.alert_pop.AlertPopController;
-import interface_adapter.converter.ConverterController;
-import interface_adapter.nearby_list.NearbyListController;
+import interface_adapter.nearby_cities.NearbyCitiesController;
 import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherViewModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -177,7 +175,7 @@ public class MapPanelView extends JPanel implements ActionListener {
     private SearchResultController searchResultController;
     private WeatherController weatherController;
     private CompareCitiesController compareCitiesController;
-    private NearbyListController nearbyListController;
+    private NearbyCitiesController nearbyCitiesController;
     private AlertPopController alertPopController;
     private final double torontoLatitude = 43.70011;
     private final double torontoLongitude = -79.4163;
@@ -290,8 +288,8 @@ public class MapPanelView extends JPanel implements ActionListener {
         this.searchResultController = searchresultcontroller;
     }
 
-    public void setNearbyListController(NearbyListController nearbyListController) {
-        this.nearbyListController = nearbyListController;
+    public void setNearbyListController(NearbyCitiesController nearbyCitiesController) {
+        this.nearbyCitiesController = nearbyCitiesController;
     }
 
     public void setAlertPopController(AlertPopController alertPopController) {

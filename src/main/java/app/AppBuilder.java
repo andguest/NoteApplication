@@ -16,9 +16,9 @@ import interface_adapter.alert_pop.AlertPopController;
 import interface_adapter.alert_pop.AlertPopPresenter;
 import interface_adapter.converter.ConverterController;
 import interface_adapter.converter.ConverterPresenter;
-import interface_adapter.nearby_list.NearbyListController;
-import interface_adapter.nearby_list.NearbyListPresenter;
-import interface_adapter.nearby_list.NearbyListViewModel;
+import interface_adapter.nearby_cities.NearbyCitiesController;
+import interface_adapter.nearby_cities.NearbyCitiesPresenter;
+import interface_adapter.nearby_cities.NearbyCitiesViewModel;
 import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherPresenter;
 import interface_adapter.weather.WeatherState;
@@ -36,9 +36,9 @@ import use_case.note.alert_pop.AlertPopInteractor;
 import use_case.note.alert_pop.AlertPopOutputBoundary;
 import use_case.note.convert_farenheit.ConvertFarenheitOutputBoundary;
 import use_case.note.convert_farenheit.ConvertInteractor;
-import use_case.note.nearby_list.NearbyCitiesAccessInterface;
-import use_case.note.nearby_list.NearbyListInteractor;
-import use_case.note.nearby_list.NearbyListOutputBoundary;
+import use_case.note.nearby_cities.NearbyCitiesAccessInterface;
+import use_case.note.nearby_cities.NearbyCitiesInteractor;
+import use_case.note.nearby_cities.NearbyCitiesOutputBoundary;
 import use_case.note.search_result.SearchResultInputBoundary;
 import use_case.note.search_result.SearchResultOutputBoundary;
 import use_case.note.search_return.SearchReturnOutputBoundary;
@@ -46,7 +46,6 @@ import view.MainView;
 
 import java.beans.PropertyChangeEvent;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Builder for the Note Application.
@@ -61,8 +60,8 @@ public class AppBuilder {
     private WeatherViewModel weatherViewModel = new WeatherViewModel();
     private SearchResultViewModel searchResultViewModel = new SearchResultViewModel();
     private CompareCitiesViewModel compareCitiesViewModel = new CompareCitiesViewModel();
-    private NearbyListViewModel nearbyListViewModel = new NearbyListViewModel();
-    private MainView mainView = new MainView(nearbyListViewModel, weatherViewModel, searchResultViewModel,
+    private NearbyCitiesViewModel nearbyCitiesViewModel = new NearbyCitiesViewModel();
+    private MainView mainView = new MainView(nearbyCitiesViewModel, weatherViewModel, searchResultViewModel,
             new PropertyChangeEvent(weatherViewModel, "Weather", null, new WeatherState()));
     private PropertyChangeEvent evt;
 
@@ -168,12 +167,12 @@ public class AppBuilder {
      **/
 
     public AppBuilder addNearbyListUseCase() {
-        final NearbyListOutputBoundary outputBoundary = new NearbyListPresenter(nearbyListViewModel);
+        final NearbyCitiesOutputBoundary outputBoundary = new NearbyCitiesPresenter(nearbyCitiesViewModel);
         final NearbyCitiesAccessInterface dai = new NearbyCitiesAccessObject();
 
-        final NearbyListInteractor interactor = new NearbyListInteractor(outputBoundary, dai);
+        final NearbyCitiesInteractor interactor = new NearbyCitiesInteractor(outputBoundary, dai);
 
-        final NearbyListController controller = new NearbyListController(interactor);
+        final NearbyCitiesController controller = new NearbyCitiesController(interactor);
         if (mainView == null) {
             throw new RuntimeException("Error");
         }
@@ -230,7 +229,7 @@ public class AppBuilder {
         weatherViewModel = new WeatherViewModel();
         searchResultViewModel = new SearchResultViewModel();
         evt = new PropertyChangeEvent(weatherViewModel, "Weather", null, new WeatherState());
-        mainView = new MainView(nearbyListViewModel, weatherViewModel, searchResultViewModel, evt);
+        mainView = new MainView(nearbyCitiesViewModel, weatherViewModel, searchResultViewModel, evt);
         //  mainView.mapPanelView.setSearchResultController(new SearchResultController(searchResultInputBoundary));
         //    mainView.mapPanealView.setWeatherController(new WeatherController(searchReturnInputBoundary));
         //    mainView.mapPanelView.setCompareCitiesController(new CompareCitiesController(compareCitiesInputBoundary));

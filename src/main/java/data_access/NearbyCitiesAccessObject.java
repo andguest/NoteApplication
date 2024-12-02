@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import use_case.note.nearby_list.NearbyCitiesAccessInterface;
+import use_case.note.nearby_cities.NearbyCitiesAccessInterface;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -40,7 +40,7 @@ public class NearbyCitiesAccessObject implements NearbyCitiesAccessInterface {
     }
 
     @NotNull
-    private static ArrayList<String> getCityNames(double latitude, double longitude, String jsonString) {
+    private static List<String> getCityNames(double latitude, double longitude, String jsonString) {
         final JSONArray jsonArray = new JSONArray(jsonString);
 
         final ArrayList<String> nearbyCities = new ArrayList<>();

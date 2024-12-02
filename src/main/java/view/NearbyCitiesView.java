@@ -1,8 +1,8 @@
 package view;
 
-import interface_adapter.nearby_list.NearbyListController;
-import interface_adapter.nearby_list.NearbyListState;
-import interface_adapter.nearby_list.NearbyListViewModel;
+import interface_adapter.nearby_cities.NearbyCitiesController;
+import interface_adapter.nearby_cities.NearbyCitiesState;
+import interface_adapter.nearby_cities.NearbyCitiesViewModel;
 import interface_adapter.weather.WeatherController;
 import interface_adapter.weather.WeatherState;
 import interface_adapter.weather.WeatherViewModel;
@@ -16,16 +16,16 @@ import java.beans.PropertyChangeListener;
 public class NearbyCitiesView extends JPanel implements PropertyChangeListener {
     private final JLabel listInputPanel;
     private final JList<String> cities;
-    private final NearbyListViewModel nearbyListViewModel;
+    private final NearbyCitiesViewModel nearbyCitiesViewModel;
     private final WeatherViewModel weatherViewModel;
 
-    private NearbyListController nearbyListController;
+    private NearbyCitiesController nearbyCitiesController;
     private WeatherController weatherController;
 
-    public NearbyCitiesView(NearbyListViewModel nearbyListViewModel, WeatherViewModel weatherViewModel) {
-        this.nearbyListViewModel = nearbyListViewModel;
+    public NearbyCitiesView(NearbyCitiesViewModel nearbyCitiesViewModel, WeatherViewModel weatherViewModel) {
+        this.nearbyCitiesViewModel = nearbyCitiesViewModel;
         this.weatherViewModel = weatherViewModel;
-        this.nearbyListViewModel.addPropertyChangeListener(this);
+        this.nearbyCitiesViewModel.addPropertyChangeListener(this);
         this.weatherViewModel.addPropertyChangeListener(this);
 
         this.listInputPanel = new JLabel("Nearby cities (double click to select):");
@@ -50,16 +50,16 @@ public class NearbyCitiesView extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("Weather")) {
             final WeatherState weatherState = (WeatherState) evt.getNewValue();
-            nearbyListController.execute(weatherState.getWeather().getLon(), weatherState.getWeather().getLat());
+            nearbyCitiesController.execute(weatherState.getWeather().getLon(), weatherState.getWeather().getLat());
         }
         else if (evt.getPropertyName().equals("NearbyList")) {
-            final NearbyListState nearbyListState = (NearbyListState) evt.getNewValue();
-            cities.setListData(nearbyListState.getCities());
+            final NearbyCitiesState nearbyCitiesState = (NearbyCitiesState) evt.getNewValue();
+            cities.setListData(nearbyCitiesState.getCities());
         }
     }
 
-    public void setNearbyListController(NearbyListController nearbyListController) {
-        this.nearbyListController = nearbyListController;
+    public void setNearbyListController(NearbyCitiesController nearbyCitiesController) {
+        this.nearbyCitiesController = nearbyCitiesController;
     }
 
     public void setWeatherController(WeatherController weatherController) {
