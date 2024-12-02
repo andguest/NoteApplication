@@ -33,7 +33,6 @@ public class SearchResultInteractor implements SearchResultInputBoundary {
             // Send it to the output boundary
             final SearchResultOutputData outputData =
                     new SearchResultOutputData(historicalWeather, false);
-            historicalWeatherDataAccessInterface.saveWeather(historicalWeather, timestamp);
             outputBoundary.presentSuccessView(outputData);
 
         }
