@@ -18,13 +18,13 @@ public class AlertPopPresenter implements AlertPopOutputBoundary {
     public void prepareSuccessView(AlertPopOutputData alertPopOutputData) {
 
         viewModel.getState().setAlert(alertPopOutputData.getAlert());
-        viewModel.firePropertyChanged();
+        viewModel.firePropertyChanged("AlertPop");
     }
 
     @Override
     public void prepareFailView(String message) {
-        viewModel.getState().setAlert(message);
-        viewModel.firePropertyChanged();
+        viewModel.getState().setError(message);
+        viewModel.firePropertyChanged("AlertPop");
     }
 
 }
