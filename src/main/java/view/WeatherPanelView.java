@@ -9,10 +9,7 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import data_access.WeatherDataAccessObject;
 import entity.Weather;
@@ -102,6 +99,9 @@ public class WeatherPanelView extends JPanel implements PropertyChangeListener, 
         setfield(weatherState);
         this.currentWeather = weatherState.getWeather();
         System.out.println(weatherState.getWeather());
+        if (evt.getPropertyName().equals("AlertPop")) {
+            JOptionPane.showMessageDialog(null, currentWeather.getAlertDescription());
+        }
     }
 
     public void setfield(WeatherState weatherState) {

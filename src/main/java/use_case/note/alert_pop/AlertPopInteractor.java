@@ -17,18 +17,12 @@ public class AlertPopInteractor implements AlertPopInputBoundary {
         try {
             String cityName = alertPopInputData.getCityName();
             Weather weather = weatherAccess.getWeather(cityName);
-            String alert = weather.getDescription();
-            String noAlert = "no weather alert";
+            String alert = weather.getAlertDescription();
 
-            if (noAlert.equals(alert)) {
-                AlertPopOutputData outputData = new AlertPopOutputData(noAlert, false);
-                outputBoundary.prepareSuccessView(outputData);
-            } else {
-                AlertPopOutputData outputData = new AlertPopOutputData(alert, false);
-                outputBoundary.prepareSuccessView(outputData);
-            }
-        } catch (Exception e) {
-            outputBoundary.prepareFailView("Failed to retrieve weather data: " + e.getMessage());
+            AlertPopOutputData outputData = new AlertPopOutputData(alert, false);
+            outputBoundary.prepareSuccessView(outputData);
+        } catch (Exception ex) {
+            outputBoundary.prepareFailView("Failed to retrieve weather data: " + ex.getMessage());
         }
     }
 }

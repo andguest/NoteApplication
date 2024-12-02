@@ -183,6 +183,8 @@ public class MapPanelView extends JPanel implements ActionListener {
     private final double torontoLongitude = -79.4163;
     private CompareCitiesViewModel compareCitiesViewModel;
 
+    private final JButton alertPop;
+
     public MapPanelView(WeatherViewModel weatherViewModel) {
         // by default set the map center be Toronto.
 
@@ -235,12 +237,28 @@ public class MapPanelView extends JPanel implements ActionListener {
                         dateinputfield.setText("");
                     }
                 });
+
+        final JPanel buttons = new JPanel();
+        alertPop = new JButton("weather alert");
+        buttons.add(alertPop);
+
+        alertPop.addActionListener(
+                // Opens a window showing weather alerts.
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent id) {
+                        alertPopController.execute(cityinputfield1.getText());
+                    }
+                }
+        );
+
+//        this.setSize(mappanelwidth, mappanelheight);
         this.setPreferredSize(new java.awt.Dimension(mappanelwidth, mappanelheight));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(cityinputpanel);
         this.add(dateinputpanel);
         this.add(comparetopanel);
         this.add(timepanel);
+        this.add(buttons);
         // adding a Jlabel
         this.add(mapimagepanel.getDisplayfield());
 
