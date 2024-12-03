@@ -73,7 +73,7 @@ public class SearchResultInteractorTest {
 
             @Override
             public Weather getWeather(String city, String timestamp) throws IOException {
-                return null;
+                throw new IOException("Failed to retrieve weather data");
             }
         };
 
