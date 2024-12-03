@@ -1,36 +1,56 @@
 package use_case.note;
 
+import data_access.NearbyCitiesAccessObject;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import use_case.note.nearby_cities.*;
 
-import java.io.IOException;
-import java.util.List;
-
 public class NearbyCitiesInteractorTest {
+    private NearbyCitiesAccessInterface cityDAO;
+    private NearbyCitiesOutputBoundary cityOB;
 
     @Test
-    public void testOutput() {
-        NearbyCitiesAccessInterface cityDAO = new NearbyCitiesAccessInterface() {
-            @Override
-            public List<String> getNearbyCities(double latitude, double longitude) throws IOException {
-                return List.of();
-            }
-        };
+    public void testCorrectList() {
+        final NearbyCitiesInputData torontoInput = new NearbyCitiesInputData(-79.4163, 43.70011);
 
-        NearbyCitiesOutputBoundary cityOB = new NearbyCitiesOutputBoundary() {
+        cityDAO = new NearbyCitiesAccessObject();
+
+        cityOB = new NearbyCitiesOutputBoundary() {
             @Override
             public void presentSuccessView(NearbyCitiesOutputData nearbyListOutputData) {
-
+                String[] citiesNearToronto = {"Chicago", "Montreal", "New York", "Ottawa", "Philadelphia", "Washington"};
+                Assertions.assertArrayEquals(citiesNearToronto, nearbyListOutputData.getCities());
             }
 
             @Override
             public void prepareFailView(String errorMessage) {
-
+                Assertions.fail();
             }
         };
 
         NearbyCitiesInteractor cityInteractor = new NearbyCitiesInteractor(cityOB, cityDAO);
-        NearbyCitiesInputData input = new NearbyCitiesInputData(0.0, 0.0);
-        cityInteractor.execute(input);
+        cityInteractor.execute(torontoInput);
+    }
+
+    @Test
+    public void testInvalidInput () {
+        final NearbyCitiesInputData badInput  = new NearbyCitiesInputData(1000, 10);
+
+        cityDAO = new NearbyCitiesAccessObject();
+
+        cityOB = new NearbyCitiesOutputBoundary() {
+            @Override
+            public void presentSuccessView(NearbyCitiesOutputData nearbyListOutputData) {
+                Assertions.fail();
+            }
+
+            @Override
+            public void prepareFailView(String errorMessage) {
+                Assertions.assertEquals("Error: Invalid input", errorMessage);
+            }
+        };
+
+        NearbyCitiesInteractor cityInteractor = new NearbyCitiesInteractor(cityOB, cityDAO);
+        cityInteractor.execute(badInput);
     }
 }
