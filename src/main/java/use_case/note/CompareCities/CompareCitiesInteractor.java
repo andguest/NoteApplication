@@ -50,7 +50,8 @@ public class CompareCitiesInteractor implements CompareCitiesInputBoundary {
                     compareCitiesDataAccessInterface.clearcitytoweather();
                 }
                 catch (IOException ioException) {
-                    comparecitiesPresenter.prepareFailView("Network error while fetching weather data for " + firstcityname + secondcityname);
+                    comparecitiesPresenter.prepareFailView("Network error while fetching weather data for "
+                            + firstcityname + secondcityname);
                 }
             }
         }

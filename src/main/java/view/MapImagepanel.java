@@ -45,6 +45,7 @@ public class MapImagepanel extends JPanel implements PropertyChangeListener {
 
         this.mapViewer.setZoom(ZOOM_VALUE);
         mapViewer.setAddressLocation(position);
+        mapViewer.setPreferredSize(new Dimension(300, 350));
     }
 
     @Override
