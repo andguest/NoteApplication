@@ -22,12 +22,12 @@ public class NearbyCitiesAccessObject implements NearbyCitiesAccessInterface {
     private static final double LOWER_LON = -180.0;
     private static final double UPPER_LON = 180.0;
     private static final double COMPARE_DIFF = 10.0;
-    private static final double ERROR_DIFF = 0.015;
+    private static final double ERROR_DIFF = 0.025;
 
     @Override
     public List<String> getNearbyCities(double latitude, double longitude) throws IOException {
         if (latitude < LOWER_LAT || latitude > UPPER_LAT || longitude < LOWER_LON || longitude > UPPER_LON) {
-            throw new IOException();
+            throw new IOException("Invalid input");
         }
         try {
             final String jsonString = Files
@@ -35,7 +35,7 @@ public class NearbyCitiesAccessObject implements NearbyCitiesAccessInterface {
             return getCityNames(latitude, longitude, jsonString);
         }
         catch (IOException | URISyntaxException ex) {
-            throw new IOException();
+            throw new IOException("Data access error");
         }
     }
 
